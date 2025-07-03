@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ratio Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Ratio Calculator.">
+  <meta name="keywords" content="ratio calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Ratio Calculator</div>
+    <div class="sub-title">Calculate Ratio and Simplify</div>
+    <div class="input-row">
+      <input type="number" id="a1" placeholder="A" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="b1" placeholder="B" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcRatio()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result1"></div>
+    <div class="sub-title">Find Unknown Number by Proportion</div>
+    <div class="input-row">
+      <input type="number" id="a2" placeholder="A" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="b2" placeholder="B" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="c2" placeholder="C" step="any" data-i18n="auto" data-i18n="auto">
+      <select id="which">
+        <option value="d" data-i18n="auto" data-i18n="auto">A:B=C:D,求D</option>
+        <option value="a" data-i18n="auto" data-i18n="auto">A:B=C:D,求A</option>
+        <option value="b" data-i18n="auto" data-i18n="auto">A:B=C:D,求B</option>
+        <option value="c" data-i18n="auto" data-i18n="auto">A:B=C:D,求C</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calcProportion()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result2"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function gcd(a, b) { return b === 0 ? Math.abs(a) : gcd(b, a % b); }
+    function calcRatio() {
+      const a = parseFloat(document.getElementById('a1').value);
+      const b = parseFloat(document.getElementById('b1').value);
+      if (isNaN(a) || isNaN(b) || b === 0) {
+        document.getElementById('result1').textContent = 'Please enter valid A and B, and B≠0';
+        return;
+      }
+      const r = a / b;
+      const g = gcd(a, b);
+      const sa = a / g, sb = b / g;
+      document.getElementById('result1').innerHTML = `Ratio:<b>${r.toFixed(8)}</b><br>Simplified Ratio:<b>${sa}:${sb}</b>`;
+    }
+    function calcProportion() {
+      const a = parseFloat(document.getElementById('a2').value);
+      const b = parseFloat(document.getElementById('b2').value);
+      const c = parseFloat(document.getElementById('c2').value);
+      const which = document.getElementById('which').value;
+      let res = '';
+      if (which === 'd') {
+        if (isNaN(a) || isNaN(b) || isNaN(c) || b === 0) {
+          document.getElementById('result2').textContent = 'Please enter valid A, B and C, and B≠0';
+          return;
+        }
+        res = c * b / a;
+        document.getElementById('result2').innerHTML = `D = <b>${res.toFixed(8)}</b>`;
+      } else if (which === 'a') {
+        if (isNaN(b) || isNaN(c) || isNaN(a) || d === 0) {
+          document.getElementById('result2').textContent = 'Please enter valid B, C and D, and D≠0';
+          return;
+        }
+        res = b * c / d;
+        document.getElementById('result2').innerHTML = `A = <b>${res.toFixed(8)}</b>`;
+      } else if (which === 'b') {
+        if (isNaN(a) || isNaN(c) || isNaN(d) || c === 0) {
+          document.getElementById('result2').textContent = 'Please enter valid A, C and D, and C≠0';
+          return;
+        }
+        res = a * d / c;
+        document.getElementById('result2').innerHTML = `B = <b>${res.toFixed(8)}</b>`;
+      } else if (which === 'c') {
+        if (isNaN(a) || isNaN(b) || isNaN(d) || a === 0) {
+          document.getElementById('result2').textContent = 'Please enter valid A, B and D, and A≠0';
+          return;
+        }
+        res = a * d / b;
+        document.getElementById('result2').innerHTML = `C = <b>${res.toFixed(8)}</b>`;
+      }
+    }
+  </script>
+</body>
+</html> 
+

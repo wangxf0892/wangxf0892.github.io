@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sales Retail Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Sales Retail Calculator.">
+  <meta name="keywords" content="sales retail calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Sales Retail Calculator</div>
+    <div class="input-row">
+      <input type="number" id="cost" placeholder="Cost(per item)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="price" placeholder="Price(per item)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="qty" placeholder="Quantity" min="1" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcSales()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcSales() {
+      const cost = parseFloat(document.getElementById('cost').value);
+      const price = parseFloat(document.getElementById('price').value);
+      const qty = parseInt(document.getElementById('qty').value);
+      if (isNaN(cost) || isNaN(price) || isNaN(qty) || cost < 0 || price < 0 || qty < 1) {
+        document.getElementById('result').textContent = 'Please enter valid cost, price and quantity';
+        return;
+      }
+      const profit = (price - cost) * qty;
+      const profitRate = cost === 0 ? '∞' : ((price - cost) / cost * 100).toFixed(2) + '%';
+      const total = price * qty;
+      document.getElementById('result').innerHTML = `Total Sales:<b>${total.toFixed(2)}</b> yuan<br>Total Profit:<b>${profit.toFixed(2)}</b> yuan<br>Profit Rate:<b>${profitRate}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Appreciation Depreciation Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Currency Appreciation Depreciation Calculator.">
+  <meta name="keywords" content="currency appreciation depreciation calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Currency Appreciation/Depreciation Calculator</div>
+    <div class="input-row">
+      <input type="number" id="rate1" placeholder="Please enter initial exchange rate" step="any" min="0" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="rate2" placeholder="Please enter current exchange rate" step="any" min="0" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcCurrencyChange()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcCurrencyChange() {
+      const r1 = parseFloat(document.getElementById('rate1').value);
+      const r2 = parseFloat(document.getElementById('rate2').value);
+      if (isNaN(r1) || r1 <= 0 || isNaN(r2) || r2 <= 0) {
+        document.getElementById('result').textContent = 'Please enter valid initial exchange rate and current exchange rate (均>0)';
+        return;
+      }
+      const change = ((r2 - r1) / r1) * 100;
+      let msg = '';
+      if (change > 0) {
+        msg = `Currency depreciation:<b>${change.toFixed(4)}%</b>`;
+      } else if (change < 0) {
+        msg = `Currency appreciation:<b>${Math.abs(change).toFixed(4)}%</b>`;
+      } else {
+        msg = 'No change in exchange rate';
+      }
+      document.getElementById('result').innerHTML = msg;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concrete Volume Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Concrete Volume Calculator.">
+  <meta name="keywords" content="concrete volume calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Concrete Volume Calculator</div>
+    <div class="input-row">
+      <input type="number" id="length" placeholder="Please enter length (m)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="width" placeholder="Please enter width (m)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="height" placeholder="Please enter height (m)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcVolume()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcVolume() {
+      const l = parseFloat(document.getElementById('length').value);
+      const w = parseFloat(document.getElementById('width').value);
+      const h = parseFloat(document.getElementById('height').value);
+      if (isNaN(l) || l < 0 || isNaN(w) || w < 0 || isNaN(h) || h < 0) {
+        document.getElementById('result').textContent = 'Please enter valid length, width, and height (≥0)';
+        return;
+      }
+      const v = l * w * h;
+      document.getElementById('result').innerHTML = `Volume:<b>${v.toFixed(6)}</b> cubic meters`;
+    }
+  </script>
+</body>
+</html> 
+

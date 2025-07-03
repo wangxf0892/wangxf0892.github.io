@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Date Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Time Date Calculator.">
+  <meta name="keywords" content="time date calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Time Date Calculator</div>
+    <div class="tab-row">
+      <button class="tab-btn active" id="tab-diff" onclick="switchTab('diff')" data-i18n="auto" data-i18n="auto">Date Difference Calculate</button>
+      <button class="tab-btn" id="tab-addsub" onclick="switchTab('addsub')" data-i18n="auto" data-i18n="auto">Date Add/Subtract</button>
+    </div>
+    <div id="panel-diff">
+      <div class="input-row">
+        <input type="date" id="startDate" data-i18n="auto" data-i18n="auto">
+        <input type="date" id="endDate" data-i18n="auto" data-i18n="auto">
+      </div>
+      <button class="calc-btn" onclick="calcDateDiff()" data-i18n="auto" data-i18n="auto">Calculate Day Difference</button>
+      <div class="result" id="result-diff"></div>
+    </div>
+    <div id="panel-addsub" style="display:none;">
+      <div class="input-row">
+        <input type="date" id="baseDate" data-i18n="auto" data-i18n="auto">
+        <input type="number" id="days" placeholder="Days" step="1" data-i18n="auto" data-i18n="auto">
+        <select id="addOrSub">
+          <option value="add" data-i18n="auto" data-i18n="auto">Add</option>
+          <option value="sub" data-i18n="auto" data-i18n="auto">Subtract</option>
+        </select>
+      </div>
+      <button class="calc-btn" onclick="calcDateAddSub()" data-i18n="auto" data-i18n="auto">CalculateResultDate</button>
+      <div class="result" id="result-addsub"></div>
+    </div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function switchTab(tab) {
+      document.getElementById('panel-diff').style.display = tab === 'diff' ? '' : 'none';
+      document.getElementById('panel-addsub').style.display = tab === 'addsub' ? '' : 'none';
+      document.getElementById('tab-diff').classList.toggle('active', tab === 'diff');
+      document.getElementById('tab-addsub').classList.toggle('active', tab === 'addsub');
+    }
+    function calcDateDiff() {
+      const start = document.getElementById('startDate').value;
+      const end = document.getElementById('endDate').value;
+      const resultDiv = document.getElementById('result-diff');
+      if (!start || !end) {
+        resultDiv.textContent = 'Please enter start date and end date';
+        return;
+      }
+      const d1 = new Date(start);
+      const d2 = new Date(end);
+      const diff = Math.abs((d2 - d1) / (1000 * 60 * 60 * 24));
+      resultDiv.innerHTML = `Day Difference:<b>${diff}</b> day`;
+    }
+    function calcDateAddSub() {
+      const base = document.getElementById('baseDate').value;
+      const days = parseInt(document.getElementById('days').value);
+      const op = document.getElementById('addOrSub').value;
+      const resultDiv = document.getElementById('result-addsub');
+      if (!base || isNaN(days)) {
+        resultDiv.textContent = 'Please enter start date and day number';
+        return;
+      }
+      const baseDate = new Date(base);
+      let resultDate;
+      if (op === 'add') {
+        resultDate = new Date(baseDate.getTime() + days * 24 * 60 * 60 * 1000);
+      } else {
+        resultDate = new Date(baseDate.getTime() - days * 24 * 60 * 60 * 1000);
+      }
+      const y = resultDate.getFullYear();
+      const m = (resultDate.getMonth() + 1).toString().padStart(2, '0');
+      const d = resultDate.getDate().toString().padStart(2, '0');
+      resultDiv.innerHTML = `ResultDate:<b>${y}-${m}-${d}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

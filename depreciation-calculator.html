@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Depreciation Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Depreciation Calculator.">
+  <meta name="keywords" content="depreciation calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Depreciation Calculator</div>
+    <div class="input-row">
+      <input type="number" id="cost" placeholder="Original value" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="salvage" placeholder="Residual value" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="life" placeholder="Number of years" data-i18n="auto" data-i18n="auto">
+      <select id="type">
+        <option value="straight" data-i18n="auto" data-i18n="auto">Straight-line Depreciation</option>
+        <option value="double" data-i18n="auto" data-i18n="auto">Double-declining Balance Depreciation</option>
+        <option value="sum" data-i18n="auto" data-i18n="auto">Sum-of-the-years' digits Depreciation</option>
+      </select>
+      <input type="number" id="year" placeholder="Which year(1~n)" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcDepreciation()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcDepreciation() {
+      let cost = parseFloat(document.getElementById('cost').value);
+      let salvage = parseFloat(document.getElementById('salvage').value);
+      let life = parseInt(document.getElementById('life').value);
+      let type = document.getElementById('type').value;
+      let year = parseInt(document.getElementById('year').value);
+      if ([cost, salvage, life, year].some(x => isNaN(x)) || cost <= salvage || life <= 0 || year <= 0 || year > life) {
+        document.getElementById('result').textContent = 'Please enter valid parameters, and original value>residual value,year limit and year are valid';
+        return;
+      }
+      let dep = 0;
+      if (type === 'straight') {
+        dep = (cost - salvage) / life;
+      } else if (type === 'double') {
+        let book = cost;
+        for (let i = 1; i <= year; i++) {
+          dep = book * 2 / life;
+          if (i === year) break;
+          book -= dep;
+        }
+      } else if (type === 'sum') {
+        let sum = life * (life + 1) / 2;
+        dep = (cost - salvage) * (life - year + 1) / sum;
+      }
+      document.getElementById('result').textContent = `The ${year}th year depreciation:${dep.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html> 
+

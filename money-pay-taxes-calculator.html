@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Pay Taxes Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Money Pay Taxes Calculator.">
+  <meta name="keywords" content="money pay taxes calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Salary Tax Calculator</div>
+    <div class="input-row">
+      <input type="number" id="salary" placeholder="Salary Before Tax(yuan)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="insurance" placeholder="Insurance(yuan)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="deduct" placeholder="Special Deduction(yuan)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcTax()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcTax() {
+      const salary = parseFloat(document.getElementById('salary').value);
+      const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+      const deduct = parseFloat(document.getElementById('deduct').value) || 0;
+      if (isNaN(salary) || salary < 0 || insurance < 0 || deduct < 0) {
+        document.getElementById('result').textContent = 'Please enter valid salary, insurance and special deduction';
+        return;
+      }
+      const base = 5000;
+      const taxable = Math.max(0, salary - insurance - deduct - base);
+      let tax = 0;
+      if (taxable <= 0) tax = 0;
+      else if (taxable <= 3000) tax = taxable * 0.03;
+      else if (taxable <= 12000) tax = taxable * 0.1 - 210;
+      else if (taxable <= 25000) tax = taxable * 0.2 - 1410;
+      else if (taxable <= 35000) tax = taxable * 0.25 - 2660;
+      else if (taxable <= 55000) tax = taxable * 0.3 - 4410;
+      else if (taxable <= 80000) tax = taxable * 0.35 - 7160;
+      else tax = taxable * 0.45 - 15160;
+      tax = Math.max(0, tax);
+      const after = salary - insurance - tax;
+      document.getElementById('result').innerHTML = `Taxable Income:<b>${taxable.toFixed(2)}</b> yuan<br>Tax:<b>${tax.toFixed(2)}</b> yuan<br>Salary After Tax:<b>${after.toFixed(2)}</b> yuan`;
+    }
+  </script>
+</body>
+</html> 
+

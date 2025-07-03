@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bingo Number Generator</title>
+  <meta name="description" content="Bingo Number Generator,Supports customizing the number,and automatically generating unique BINGO numbers.">
+  <meta name="keywords" content="Bingo, BINGO Number, Generate, Random, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Bingo Number Generator</div>
+    <div class="input-row">
+      <input type="number" id="num" placeholder="Number of numbers(1-20)" min="1" max="20" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="gen-btn" onclick="genBingoNumbers()" data-i18n="auto" data-i18n="auto">Generate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function genBingoNumbers() {
+      const num = parseInt(document.getElementById('num').value);
+      const resultDiv = document.getElementById('result');
+      if (isNaN(num) || num < 1 || num > 20) {
+        resultDiv.textContent = 'Please enter valid number of numbers(1-20)';
+        return;
+      }
+      // GenerateBINGO号码池
+      const pool = [];
+      for (let i = 1; i <= 75; i++) {
+        let prefix = '';
+        if (i <= 15) prefix = 'B';
+        else if (i <= 30) prefix = 'I';
+        else if (i <= 45) prefix = 'N';
+        else if (i <= 60) prefix = 'G';
+        else prefix = 'O';
+        pool.push(prefix + i);
+      }
+      shuffle(pool);
+      const selected = pool.slice(0, num);
+      resultDiv.innerHTML = 'Generated numbers:<br>' + selected.map(x => `<b>${x}</b>`).join(' ');
+    }
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+  </script>
+</body>
+</html> 
+

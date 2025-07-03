@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integer Add Subtract Calculator</title>
+  <meta name="description" content="Integer Add/Subtract Calculator, support two Integer Addition and Subtraction, Result displayed immediately.">
+  <meta name="keywords" content="IntegerAddition, IntegerSubtraction, IntegerCalculator, Addition, Subtraction">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Integer Add/Subtract Calculator</div>
+    <div class="input-row">
+      <div class="op-row">
+        <input type="number" id="int1" placeholder="Integer1" step="1" data-i18n="auto" data-i18n="auto">
+        <select id="op">
+          <option value="+" data-i18n="auto" data-i18n="auto">+</option>
+          <option value="-" data-i18n="auto" data-i18n="auto">-</option>
+        </select>
+        <input type="number" id="int2" placeholder="Integer2" step="1" data-i18n="auto" data-i18n="auto">
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcInt()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcInt() {
+      const i1 = parseInt(document.getElementById('int1').value);
+      const i2 = parseInt(document.getElementById('int2').value);
+      const op = document.getElementById('op').value;
+      if (isNaN(i1) || isNaN(i2)) {
+        document.getElementById('result').textContent = 'Please enter两个Integer';
+        return;
+      }
+      let res = op === '+' ? i1 + i2 : i1 - i2;
+      document.getElementById('result').innerHTML = `Result: <b>${res}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>General Math Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly General Math Calculator.">
+  <meta name="keywords" content="general math calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">General Math Calculator</div>
+    <div class="input-row">
+      <div class="op-row">
+        <input type="number" id="num1" placeholder="Number1" step="any" data-i18n="auto" data-i18n="auto">
+        <select id="op">
+          <option value="+" data-i18n="auto" data-i18n="auto">+</option>
+          <option value="-" data-i18n="auto" data-i18n="auto">-</option>
+          <option value="*" data-i18n="auto" data-i18n="auto">×</option>
+          <option value="/" data-i18n="auto" data-i18n="auto">÷</option>
+          <option value="^" data-i18n="auto" data-i18n="auto">Power</option>
+          <option value="sqrt" data-i18n="auto" data-i18n="auto">Sqrt</option>
+        </select>
+        <input type="number" id="num2" placeholder="Number2 (optional for sqrt/power)" step="any" data-i18n="auto" data-i18n="auto">
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcGeneral()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcGeneral() {
+      const n1 = parseFloat(document.getElementById('num1').value);
+      const n2 = parseFloat(document.getElementById('num2').value);
+      const op = document.getElementById('op').value;
+      let res;
+      if (isNaN(n1) || (["+", "-", "*", "/", "^"].includes(op) && isNaN(n2))) {
+        document.getElementById('result').textContent = 'Please enter a valid number';
+        return;
+      }
+      switch(op) {
+        case '+': res = n1 + n2; break;
+        case '-': res = n1 - n2; break;
+        case '*': res = n1 * n2; break;
+        case '/':
+          if (n2 === 0) { document.getElementById('result').textContent = 'Divisor cannot be 0'; return; }
+          res = n1 / n2; break;
+        case '^': res = Math.pow(n1, n2); break;
+        case 'sqrt':
+          if (n1 < 0) { document.getElementById('result').textContent = 'Number for sqrt cannot be negative'; return; }
+          res = Math.sqrt(n1); break;
+      }
+      document.getElementById('result').innerHTML = `Result: <b>${res}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

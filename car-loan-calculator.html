@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta name="keywords" content="car loan calculator, online calculator">
+  <meta name="description" content="A simple and mobile-friendly Car Loan Calculator.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Loan Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="head-loader.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Car Loan Calculator</h1>
+            <p>Calculate the monthly payment, total interest, and repayment plan for car loans.</p>
+        </header>
+
+        <main>
+            <div class="calculator-section">
+                <div class="input-section">
+                    <h2>Loan information</h2>
+                    <div class="input-group">
+                        <label for="carPrice">Car price (yuan):</label>
+                        <input type="number" id="carPrice" placeholder="For example: 200000" step="1000" min="0" data-i18n="auto" data-i18n="auto">
+                    </div>
+                    <div class="input-group">
+                        <label for="downPayment">Down payment (yuan):</label>
+                        <input type="number" id="downPayment" placeholder="For example: 40000" step="1000" min="0" data-i18n="auto" data-i18n="auto">
+                    </div>
+                    <div class="input-group">
+                        <label for="loanAmount">Loan amount (yuan):</label>
+                        <input type="number" id="loanAmount" placeholder="Automatically Calculate" readonly data-i18n="auto" data-i18n="auto">
+                    </div>
+                    <div class="input-group">
+                        <label for="interestRate">yearInterest Rate (%):</label>
+                        <input type="number" id="interestRate" placeholder="For example: 4.5" step="0.1" min="0" max="20" data-i18n="auto" data-i18n="auto">
+                    </div>
+                    <div class="input-group">
+                        <label for="loanTerm">Loan term (year):</label>
+                        <select id="loanTerm">
+                            <option value="1" data-i18n="auto" data-i18n="auto">1year</option>
+                            <option value="2" data-i18n="auto" data-i18n="auto">2year</option>
+                            <option value="3" selected data-i18n="auto" data-i18n="auto">3year</option>
+                            <option value="4" data-i18n="auto" data-i18n="auto">4year</option>
+                            <option value="5" data-i18n="auto" data-i18n="auto">5year</option>
+                            <option value="6" data-i18n="auto" data-i18n="auto">6year</option>
+                            <option value="7" data-i18n="auto" data-i18n="auto">7year</option>
+                        </select>
+                    </div>
+                    <button onclick="calculateCarLoan()" class="calculate-btn" data-i18n="auto" data-i18n="auto">CalculateLoan</button>
+                </div>
+
+                <div class="result-section" id="resultSection" style="display: none;">
+                    <h2>CalculateResult</h2>
+                    <div class="result-item">
+                        <span class="label">month供:</span>
+                        <span class="value" id="monthlyPayment">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">total interest:</span>
+                        <span class="value" id="totalInterest">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">total repayment:</span>
+                        <span class="value" id="totalPayment">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Down payment ratio:</span>
+                        <span class="value" id="downPaymentRatio">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">monthInterest Rate:</span>
+                        <span class="value" id="monthlyRate">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>Car Loan explanation</h2>
+                <div class="info-content">
+                    <p><strong>Car Loan</strong> is a common financing method for purchasing cars, usually requiring a down payment, with the remaining amount repaid through loan installments.</p>
+                    
+                    <h3>Calculate formula</h3>
+                    <p><strong>Equal monthly payment:</strong> month payment = Loan amount × [month interest rate × (1+month interest rate)^repayment month number] / [(1+month interest rate)^repayment month number - 1]</p>
+                    
+                    <h3>Important parameters</h3>
+                    <ul>
+                        <li><strong>Down payment ratio:</strong> Usually 20%-30%, the higher the down payment, the lower the month payment</li>
+                        <li><strong>yearInterest Rate:</strong> Affects total interest, the lower the Interest Rate, the better</li>
+                        <li><strong>Loan term:</strong> The longer the term, the lower the month payment, but the higher the total interest</li>
+                        <li><strong>month payment:</strong> The amount to be repaid each month</li>
+                    </ul>
+
+                    <h3>Notes</h3>
+                    <ul>
+                        <li>Actual Interest Rate may vary depending on individual credit status</li>
+                        <li>Some banks may charge fees</li>
+                        <li>Early repayment may incur penalties</li>
+                        <li>It is recommended to compare loan options from multiple banks</li>
+                        <li>Consider insurance, taxes, and other additional fees</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+    <script>
+        // 自动CalculateLoan金额
+        function updateLoanAmount() {
+            const carPrice = parseFloat(document.getElementById('carPrice').value) || 0;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const loanAmount = carPrice - downPayment;
+            document.getElementById('loanAmount').value = loanAmount > 0 ? loanAmount.toFixed(2) : '0.00';
+        }
+
+        // 监听enter 变化
+        document.getElementById('carPrice').addEventListener('input', updateLoanAmount);
+        document.getElementById('downPayment').addEventListener('input', updateLoanAmount);
+
+        function calculateCarLoan() {
+            const carPrice = parseFloat(document.getElementById('carPrice').value);
+            const downPayment = parseFloat(document.getElementById('downPayment').value);
+            const loanAmount = carPrice - downPayment;
+            const annualRate = parseFloat(document.getElementById('interestRate').value);
+            const loanTerm = parseInt(document.getElementById('loanTerm').value);
+
+            if (!carPrice || !downPayment || !annualRate) {
+                alert('Please enter complete Loan information');
+                return;
+            }
+
+            if (carPrice <= 0 || downPayment < 0 || annualRate <= 0) {
+                alert('Please enter valid values');
+                return;
+            }
+
+            if (downPayment >= carPrice) {
+                alert('Down payment cannot be greater than or equal to the car price');
+                return;
+            }
+
+            // CalculatemonthInterest Rate
+            const monthlyRate = annualRate / 100 / 12;
+            const totalMonths = loanTerm * 12;
+
+            // Calculatemonth供(等额本息)
+            const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / 
+                                  (Math.pow(1 + monthlyRate, totalMonths) - 1);
+
+            // Calculatetotal interest和total repayment
+            const totalPayment = monthlyPayment * totalMonths;
+            const totalInterest = totalPayment - loanAmount;
+
+            // Calculate首付比例
+            const downPaymentRatio = (downPayment / carPrice) * 100;
+
+            // 显示Result
+            document.getElementById('monthlyPayment').textContent = `¥${monthlyPayment.toFixed(2)}`;
+            document.getElementById('totalInterest').textContent = `¥${totalInterest.toFixed(2)}`;
+            document.getElementById('totalPayment').textContent = `¥${totalPayment.toFixed(2)}`;
+            document.getElementById('downPaymentRatio').textContent = `${downPaymentRatio.toFixed(1)}%`;
+            document.getElementById('monthlyRate').textContent = `${(monthlyRate * 100).toFixed(4)}%`;
+
+            document.getElementById('resultSection').style.display = 'block';
+        }
+
+        // 回车键Calculate
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateCarLoan();
+            }
+        });
+    </script>
+</body>
+</html> 
+

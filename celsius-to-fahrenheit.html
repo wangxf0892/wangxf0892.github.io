@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celsius To Fahrenheit</title>
+  <meta name="description" content="A simple and mobile-friendly Celsius to Fahrenheit Calculator.">
+  <meta name="keywords" content="celsius to fahrenheit calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Celsius to Fahrenheit Calculator</div>
+    <div class="input-row">
+      <input type="number" id="celsius" placeholder="Celsius" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcF()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- 推荐区 --> <div class="recommend-area"></div>   </div>   
+  <script src="recommend-calculators.js">  </script> 
+  <!-- 加载页脚 --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcF() {
+      const c = parseFloat(document.getElementById('celsius').value);
+      if (isNaN(c)) {
+        document.getElementById('result').textContent = 'Please enter valid Celsius';
+        return;
+      }
+      const f = c * 9 / 5 + 32;
+      document.getElementById('result').textContent = `${c} ℃ = ${f.toFixed(2)} ℉`;
+    }
+  </script>
+</body>
+</html> 
+

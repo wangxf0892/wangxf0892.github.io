@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index</title>
+  <meta name="description" content="Rich collection of online calculators for math, finance, health, science, unit conversion and more. All pages are mobile-friendly, free and easy to use.">
+  <meta name="keywords" content="online calculator, CalculatorSoup, math, finance, health, science, unit conversion, clone">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="index-page.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">Calculator</div>
+    </div>
+  </header>
+  
+  <div class="main-container">
+    <!-- Left Scientific Calculator -->
+    <div class="left-panel">
+      <div class="calc-title">Scientific Calculator</div>
+      <input type="text" id="expression" class="calc-input" placeholder="Enter math expression, e.g.: 2+3*4" value="" data-i18n="auto" data-i18n="auto">
+      <div class="calc-buttons">
+        <button class="calc-btn-small" onclick="appendToExpression('(')" data-i18n="auto" data-i18n="auto">(</button>
+        <button class="calc-btn-small" onclick="appendToExpression(')')" data-i18n="auto" data-i18n="auto">)</button>
+        <button class="calc-btn-small" onclick="appendToExpression('+')" data-i18n="auto" data-i18n="auto">+</button>
+        <button class="calc-btn-small" onclick="appendToExpression('-')" data-i18n="auto" data-i18n="auto">-</button>
+        <button class="calc-btn-small" onclick="appendToExpression('*')" data-i18n="auto" data-i18n="auto">×</button>
+        <button class="calc-btn-small" onclick="appendToExpression('/')" data-i18n="auto" data-i18n="auto">÷</button>
+        <button class="calc-btn-small" onclick="appendToExpression('^')" data-i18n="auto" data-i18n="auto">^</button>
+        <button class="calc-btn-small" onclick="appendToExpression('sqrt(')" data-i18n="auto" data-i18n="auto">√</button>
+        <button class="calc-btn-small" onclick="appendToExpression('sin(')" data-i18n="auto" data-i18n="auto">sin</button>
+        <button class="calc-btn-small" onclick="appendToExpression('cos(')" data-i18n="auto" data-i18n="auto">cos</button>
+        <button class="calc-btn-small" onclick="appendToExpression('tan(')" data-i18n="auto" data-i18n="auto">tan</button>
+        <button class="calc-btn-small" onclick="appendToExpression('log(')" data-i18n="auto" data-i18n="auto">log</button>
+        <button class="calc-btn-small" onclick="appendToExpression('pi')" data-i18n="auto" data-i18n="auto">π</button>
+        <button class="calc-btn-small" onclick="appendToExpression('e')" data-i18n="auto" data-i18n="auto">e</button>
+        <button class="calc-btn-small" onclick="clearExpression()" data-i18n="auto" data-i18n="auto">C</button>
+        <button class="calc-btn-small" onclick="backspace()" data-i18n="auto" data-i18n="auto">←</button>
+      </div>
+      <button class="calc-btn" onclick="calculate()" data-i18n="auto" data-i18n="auto">Calculate</button>
+      <div class="calc-result" id="result"></div>
+    </div>
+    
+    <!-- Right Category Display -->
+    <div class="right-panel">
+      <div class="desc">
+        Rich collection of online calculator tools covering math, finance, health, science, unit conversion, date and time and more. All pages are mobile-friendly, free, simple and easy to use.
+      </div>
+      
+      <div class="category-grid">
+        <!-- Math Calculators -->
+        <div class="category-card">
+          <div class="category-name">Math Calculators</div>
+          <ul class="calc-list">
+            <li><a href="basic-calculator.html">Basic Calculator</a></li>
+            <li><a href="fraction-calculator.html">Fraction Calculator</a></li>
+            <li><a href="fraction-add-subtract-calculator.html">Fraction Add/Subtract Calculator</a></li>
+            <li><a href="mixed-fractions-calculator.html">Mixed Fractions Calculator</a></li>
+            <li><a href="simplify-fractions-calculator.html">Simplify Fractions</a></li>
+            <li><a href="comparing-fractions-calculator.html">Comparing Fractions Calculator</a></li>
+            <li><a href="decimal-to-fraction-calculator.html">Decimal to Fraction</a></li>
+            <li><a href="decimal-to-percent-calculator.html">Decimal to Percent</a></li>
+            <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+            <li><a href="algebra-calculator.html">Algebra Calculator</a></li>
+            <li><a href="algebra-word-age.html">Algebra Word Problems - Age</a></li>
+            <li><a href="algebra-word-coins.html">Algebra Word Problems - Coins</a></li>
+            <li><a href="completing-the-square-calculator.html">Completing the Square Calculator</a></li>
+            <li><a href="combinations-calculator.html">Combinations Calculator</a></li>
+            <li><a href="combination-with-replacement-calculator.html">Combinations with Replacement</a></li>
+            <li><a href="circular-permutation-calculator.html">Circular Permutation Calculator</a></li>
+            <li><a href="common-factor-calculator.html">Greatest Common Factor Calculator</a></li>
+            <li><a href="integer-add-subtract-calculator.html">Integer Add/Subtract Calculator</a></li>
+            <li><a href="general-math-calculator.html">General Math Calculator</a></li>
+          </ul>
+        </div>
+        
+        <!-- Geometry Calculators -->
+        <div class="category-card">
+          <div class="category-name">Geometry Calculators</div>
+          <ul class="calc-list">
+            <li><a href="geometry-calculator.html">Geometry Calculator</a></li>
+            <li><a href="plane-geometry-calculator.html">Plane Geometry Calculator</a></li>
+            <li><a href="solid-geometry-calculator.html">Solid Geometry Calculator</a></li>
+            <li><a href="circle-calculator.html">Circle Calculator</a></li>
+            <li><a href="cube-calculator.html">Cube Calculator</a></li>
+            <li><a href="circular-cylinder-calculator.html">Cylinder Calculator</a></li>
+            <li><a href="cone-calculator.html">Cone Calculator</a></li>
+            <li><a href="conical-frustum-calculator.html">Conical Frustum Calculator</a></li>
+            <li><a href="capsule-calculator.html">Capsule Volume Calculator</a></li>
+            <li><a href="annulus-calculator.html">Annulus Calculator</a></li>
+            <li><a href="trigonometry-calculator.html">Trigonometry Calculator</a></li>
+            <li><a href="aspect-ratio-calculator.html">Aspect Ratio Calculator</a></li>
+          </ul>
+        </div>
+        
+        <!-- Finance Calculators -->
+        <div class="category-card">
+          <div class="category-name">Finance Calculators</div>
+          <ul class="calc-list">
+            <li><a href="loan-calculator.html">Loan Calculator</a></li>
+            <li><a href="car-loan-calculator.html">Car Loan Calculator</a></li>
+            <li><a href="car-loan-payment-calculator.html">Car Loan Payment Calculator</a></li>
+            <li><a href="compound-interest-calculator.html">Compound Interest Calculator</a></li>
+            <li><a href="simple-interest-calculator.html">Simple Interest Calculator</a></li>
+            <li><a href="apr-calculator.html">APR Calculator</a></li>
+            <li><a href="apr-calculator-basic.html">Basic APR Calculator</a></li>
+            <li><a href="interest-apr-calculator.html">Interest and APR Calculator</a></li>
+            <li><a href="cagr-calculator.html">CAGR Calculator</a></li>
+            <li><a href="amortization-schedule-calculator.html">Equal Payment Amortization Schedule</a></li>
+            <li><a href="amortization-schedule-equal-principal.html">Equal Principal Amortization Schedule</a></li>
+            <li><a href="annuity-on-loan-table.html">Annuity Loan Table</a></li>
+            <li><a href="cd-calculator.html">CD Calculator</a></li>
+            <li><a href="financial-ratios-calculator.html">Financial Ratios Calculator</a></li>
+            <li><a href="debt-ratios-calculator.html">Debt Ratios Calculator</a></li>
+            <li><a href="personal-finance-calculator.html">Personal Finance Calculator</a></li>
+            <li><a href="saving-investing-calculator.html">Investment Return Calculator</a></li>
+            <li><a href="money-pay-taxes-calculator.html">Salary Tax Calculator</a></li>
+            <li><a href="currency-converter.html">Currency Converter</a></li>
+            <li><a href="currency-appreciation-depreciation-calculator.html">Currency Appreciation/Depreciation Calculator</a></li>
+            <li><a href="bid-ask-calculator.html">Bid-Ask Spread Calculator</a></li>
+            <li><a href="sales-retail-calculator.html">Sales Retail Calculator</a></li>
+            <li><a href="ratio-calculator.html">Ratio Calculator</a></li>
+            <li><a href="time-value-money-calculator.html">Time Value of Money Calculator</a></li>
+          </ul>
+        </div>
+        
+        <!-- Science Calculators -->
+        <div class="category-card">
+          <div class="category-name">Science Calculators</div>
+          <ul class="calc-list">
+            <li><a href="physics-calculator.html">Physics Calculator</a></li>
+            <li><a href="chemistry-calculator.html">Chemistry Calculator</a></li>
+            <li><a href="statistics-calculator.html">Statistics Calculator</a></li>
+            <li><a href="discrete-math-calculator.html">Discrete Math Set Operations</a></li>
+            <li><a href="average-calculator.html">Average Calculator</a></li>
+            <li><a href="average-velocity-calculator.html">Average Velocity Calculator</a></li>
+            <li><a href="technology-calculator.html">Technology Calculator</a></li>
+            <li><a href="computer-storage-units-conversion-calculator.html">Computer Storage Units Conversion</a></li>
+          </ul>
+        </div>
+        
+        <!-- Health Calculators -->
+        <div class="category-card">
+          <div class="category-name">Health Calculators</div>
+          <ul class="calc-list">
+            <li><a href="health-calculator.html">Health Calculator</a></li>
+            <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+            <li><a href="bmi-calculator-women.html">Women BMI Calculator</a></li>
+            <li><a href="age-calculator.html">Age Calculator</a></li>
+            <li><a href="age-checker.html">Age Checker</a></li>
+          </ul>
+        </div>
+        
+        <!-- Unit Conversion -->
+        <div class="category-card">
+          <div class="category-name">Unit Conversion</div>
+          <ul class="calc-list">
+            <li><a href="unit-converter.html">Universal Unit Converter</a></li>
+            <li><a href="conversions-calculator.html">Universal Conversion Calculator</a></li>
+            <li><a href="area-conversion-calculator.html">Area Unit Converter</a></li>
+            <li><a href="avoirdupois-weight-conversion-calculator.html">Avoirdupois Weight Converter</a></li>
+            <li><a href="celsius-to-fahrenheit.html">Celsius to Fahrenheit</a></li>
+            <li><a href="celsius-to-kelvin.html">Celsius to Kelvin</a></li>
+            <li><a href="celsius-to-rankine.html">Celsius to Rankine</a></li>
+            <li><a href="centimeters-to-inches.html">Centimeters to Inches</a></li>
+            <li><a href="decimal-degrees-to-dms.html">Decimal Degrees to DMS</a></li>
+            <li><a href="decimal-to-time-calculator.html">Decimal to Time Calculator</a></li>
+          </ul>
+        </div>
+        
+        <!-- Time Date Tools -->
+        <div class="category-card">
+          <div class="category-name">Time Date Tools</div>
+          <ul class="calc-list">
+            <li><a href="time-date-calculator.html">Time Date Calculator</a></li>
+            <li><a href="date-difference-calculator.html">Date Difference Calculator</a></li>
+            <li><a href="date-days-calculator.html">Date Plus Days Calculator</a></li>
+            <li><a href="date-plus-minus-calendar-units-calculator.html">Date Plus/Minus Calendar Units</a></li>
+            <li><a href="countdown-timer.html">Countdown Timer</a></li>
+          </ul>
+        </div>
+        
+        <!-- Utility Tools -->
+        <div class="category-card">
+          <div class="category-name">Utility Tools</div>
+          <ul class="calc-list">
+            <li><a href="word-calculator.html">Word Counter Tool</a></li>
+            <li><a href="character-counter.html">Character Counter</a></li>
+            <li><a href="numbers-to-words-converter.html">Numbers to Words Converter</a></li>
+            <li><a href="check-writing-numbers-to-words.html">Check Writing Numbers to Words</a></li>
+            <li><a href="checkbook-calculator.html">Checkbook Calculator</a></li>
+            <li><a href="checkbook-balance-calculator.html">Checkbook Balance Calculator</a></li>
+            <li><a href="coin-flipper.html">Coin Flipper</a></li>
+            <li><a href="bingo-card-generator.html">Bingo Card Generator</a></li>
+            <li><a href="bingo-number-generator.html">Bingo Number Generator</a></li>
+            <li><a href="games-sports-calculator.html">Game and Sports Calculator</a></li>
+            <li><a href="misc-calculator.html">Miscellaneous Calculator</a></li>
+          </ul>
+        </div>
+        
+        <!-- Construction -->
+        <div class="category-card">
+          <div class="category-name">Construction</div>
+          <ul class="calc-list">
+            <li><a href="construction-calculator.html">Construction Calculator</a></li>
+            <li><a href="concrete-volume-calculator.html">Concrete Volume Calculator</a></li>
+            <li><a href="cubic-yards-calculator.html">Cubic Yards Calculator</a></li>
+            <li><a href="depreciation-calculator.html">Depreciation Calculator</a></li>
+            <li><a href="declining-balance-depreciation-calculator.html">Declining Balance Depreciation</a></li>
+            <li><a href="activity-depreciation-calculator.html">Activity-Based Depreciation</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Load Footer -->
+  <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script src="recommend-calculators.js"></script>
+  <script src="i18n.js"></script>
+
+  <script>
+    // 科学Calculate器功能
+    function appendToExpression(value) {
+      const expr = document.getElementById('expression');
+      expr.value += value;
+    }
+    
+    function clearExpression() {
+      document.getElementById('expression').value = '';
+      document.getElementById('result').textContent = '';
+    }
+    
+    function backspace() {
+      const expr = document.getElementById('expression');
+      expr.value = expr.value.slice(0, -1);
+    }
+    
+    function calculate() {
+      const expression = document.getElementById('expression').value;
+      if (!expression.trim()) {
+        document.getElementById('result').textContent = 'Please enter an expression';
+        return;
+      }
+      
+      try {
+        // 替换特殊函数和常量
+        let processedExpr = expression
+          .replace(/pi/g, Math.PI)
+          .replace(/e/g, Math.E)
+          .replace(/sqrt\(/g, 'Math.sqrt(')
+          .replace(/sin\(/g, 'Math.sin(')
+          .replace(/cos\(/g, 'Math.cos(')
+          .replace(/tan\(/g, 'Math.tan(')
+          .replace(/log\(/g, 'Math.log10(')
+          .replace(/\^/g, '**');
+        
+        // 安全Calculate
+        if (!/^[-+*/().\d\s]+$/.test(processedExpr.replace(/Math\.\w+\(/g, '').replace(/pi|e/g, ''))) {
+          throw new Error('Expression contains unsafe characters');
+        }
+        
+        // eslint-disable-next-line no-eval
+        const result = eval(processedExpr);
+        
+        if (typeof result !== 'number' || !isFinite(result)) {
+          throw new Error('Invalid calculation result');
+        }
+        
+        document.getElementById('result').innerHTML = `Result: <b>${result}</b>`;
+      } catch (error) {
+        document.getElementById('result').textContent = 'Calculation error, please check the expression';
+      }
+    }
+    
+    // 回车键Calculate
+    document.getElementById('expression').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        calculate();
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.renderLangSelector) {
+        window.renderLangSelector();
+      } else if (window.I18N && window.I18N.renderLangSelector) {
+        window.I18N.renderLangSelector();
+      } else if (typeof renderLangSelector === 'function') {
+        renderLangSelector();
+      }
+    });
+  </script>
+</body>
+</html> 

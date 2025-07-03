@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Plus Minus Calendar Units Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Date Plus/Minus Calendar Units Calculator.">
+  <meta name="keywords" content="date plus minus calendar units calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Date Plus/Minus Calendar Units Calculator</div>
+    <div class="input-row">
+      <input type="date" id="date" placeholder="Please select start date" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="years" placeholder="Add/subtract year (can be negative)" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="months" placeholder="Add/subtract month (can be negative)" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="days" placeholder="Add/subtract day (can be negative)" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcDatePlusMinus()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcDatePlusMinus() {
+      const dateStr = document.getElementById('date').value;
+      const years = parseInt(document.getElementById('years').value) || 0;
+      const months = parseInt(document.getElementById('months').value) || 0;
+      const days = parseInt(document.getElementById('days').value) || 0;
+      if (!dateStr) {
+        document.getElementById('result').textContent = 'Please enter起始Date';
+        return;
+      }
+      const date = new Date(dateStr);
+      date.setFullYear(date.getFullYear() + years);
+      date.setMonth(date.getMonth() + months);
+      date.setDate(date.getDate() + days);
+      const y = date.getFullYear();
+      const m = (date.getMonth() + 1).toString().padStart(2, '0');
+      const d = date.getDate().toString().padStart(2, '0');
+      document.getElementById('result').innerHTML = `ResultDate:<b>${y}-${m}-${d}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

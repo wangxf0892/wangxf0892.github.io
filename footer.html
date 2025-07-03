@@ -1,0 +1,63 @@
+<!-- Footer Component -->
+<footer class="footer" id="footer-i18n"></footer>
+<script>
+function renderFooterI18n() {
+  if (!window.I18N) return;
+  const t = window.I18N.t;
+  document.getElementById('footer-about').textContent = t('footer.about');
+  document.getElementById('footer-about-desc').textContent = t('footer.aboutDesc');
+  document.getElementById('footer-quick').textContent = t('footer.quick');
+  document.getElementById('footer-home').textContent = t('footer.home');
+  document.getElementById('footer-math').textContent = t('footer.math');
+  document.getElementById('footer-finance').textContent = t('footer.finance');
+  document.getElementById('footer-science').textContent = t('footer.science');
+  document.getElementById('footer-utility').textContent = t('footer.utility');
+  document.getElementById('footer-help-support').textContent = t('footer.help') + ' & ' + t('footer.support', 'Support');
+  document.getElementById('footer-help').textContent = t('footer.help');
+  document.getElementById('footer-contact').textContent = t('footer.contact');
+  document.getElementById('footer-privacy').textContent = t('footer.privacy');
+  document.getElementById('footer-terms').textContent = t('footer.terms');
+  document.getElementById('footer-popular').textContent = t('footer.popular');
+  document.getElementById('footer-copyright').textContent = t('footer.copyright');
+  document.getElementById('footer-share').textContent = t('footer.share');
+  // Modals
+  document.getElementById('footer-privacy-title').textContent = t('footer.modal.privacyTitle');
+  document.getElementById('footer-privacy-1').textContent = t('footer.modal.privacy1');
+  document.getElementById('footer-privacy-2').textContent = t('footer.modal.privacy2');
+  document.getElementById('footer-privacy-3').textContent = t('footer.modal.privacy3');
+  document.getElementById('footer-privacy-4').textContent = t('footer.modal.privacy4');
+  document.getElementById('footer-privacy-5').textContent = t('footer.modal.privacy5');
+  document.getElementById('footer-terms-title').textContent = t('footer.modal.termsTitle');
+  document.getElementById('footer-terms-1').textContent = t('footer.modal.terms1');
+  document.getElementById('footer-terms-2').textContent = t('footer.modal.terms2');
+  document.getElementById('footer-terms-3').textContent = t('footer.modal.terms3');
+  document.getElementById('footer-terms-4').textContent = t('footer.modal.terms4');
+  document.getElementById('footer-terms-5').textContent = t('footer.modal.terms5');
+}
+document.addEventListener('DOMContentLoaded', renderFooterI18n);
+
+// Show Privacy Policy
+function showPrivacyPolicy() {
+  document.getElementById('privacyModal').style.display = 'block';
+}
+
+// Show Terms of Service
+function showTermsOfService() {
+  document.getElementById('termsModal').style.display = 'block';
+}
+
+// Close Modal
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = 'none';
+}
+
+// Click outside modal to close
+window.onclick = function(event) {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+}
+</script> 

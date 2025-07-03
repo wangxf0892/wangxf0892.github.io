@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta name="keywords" content="capsule calculator, online calculator">
+  <meta name="description" content="A simple and mobile-friendly Capsule Calculator.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capsule Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="head-loader.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Capsule Calculator</h1>
+            <p>Calculate the volume, surface area, and other geometric parameters of the capsule.</p>
+        </header>
+
+        <main>
+            <div class="calculator-section">
+                <div class="input-section">
+                    <h2>enter parameters</h2>
+                    <div class="input-group">
+                        <label for="radius">Radius (r):</label>
+                        <input type="number" id="radius" placeholder="For example: 5" step="0.1" min="0" data-i18n="auto" data-i18n="auto">
+                    </div>
+                    <div class="input-group">
+                        <label for="height">Cylinder height (h):</label>
+                        <input type="number" id="height" placeholder="For example: 10" step="0.1" min="0" data-i18n="auto" data-i18n="auto">
+                    </div>
+                    <button onclick="calculateCapsule()" class="calculate-btn" data-i18n="auto" data-i18n="auto">Calculate Capsule</button>
+                </div>
+
+                <div class="result-section" id="resultSection" style="display: none;">
+                    <h2>CalculateResult</h2>
+                    <div class="result-item">
+                        <span class="label">Volume:</span>
+                        <span class="value" id="volume">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Surface Area:</span>
+                        <span class="value" id="surfaceArea">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">total height:</span>
+                        <span class="value" id="totalHeight">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Cylinder volume:</span>
+                        <span class="value" id="cylinderVolume">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Hemisphere volume:</span>
+                        <span class="value" id="hemisphereVolume">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>Capsule explanation</h2>
+                <div class="info-content">
+                    <p><strong>Capsule</strong> is a geometric body composed of a cylinder and two hemispheres, similar to the shape of a capsule.</p>
+                    
+                    <h3>Calculate formula</h3>
+                    <ul>
+                        <li><strong>Volume:</strong> V = πr²h + (4/3)πr³</li>
+                        <li><strong>Surface Area:</strong> A = 2πrh + 4πr²</li>
+                        <li><strong>total height:</strong> H = h + 2r</li>
+                        <li><strong>Cylinder volume:</strong> V₁ = πr²h</li>
+                        <li><strong>Hemisphere volume:</strong> V₂ = (4/3)πr³</li>
+                    </ul>
+                    
+                    <h3>参数说明</h3>
+                    <ul>
+                        <li><strong>r:</strong> Radius (the radius of the cylinder and hemisphere is the same)</li>
+                        <li><strong>h:</strong> Cylinder height</li>
+                        <li><strong>π:</strong> Pi (approximately 3.14159)</li>
+                    </ul>
+
+                    <h3>Usage scenarios</h3>
+                    <ul>
+                        <li>Design of pills and capsules</li>
+                        <li>Container volume Calculate</li>
+                        <li>Construction structure design</li>
+                        <li>Industrial equipment design</li>
+                        <li>3D modeling and printing</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+    <script>
+        function calculateCapsule() {
+            const radius = parseFloat(document.getElementById('radius').value);
+            const height = parseFloat(document.getElementById('height').value);
+
+            if (!radius || !height) {
+                alert('Please enter radius and height');
+                return;
+            }
+
+            if (radius <= 0 || height <= 0) {
+                alert('Please enter valid positive values');
+                return;
+            }
+
+            const PI = Math.PI;
+
+            // Calculate各部分体积
+            const cylinderVolume = PI * radius * radius * height;
+            const hemisphereVolume = (4/3) * PI * radius * radius * radius;
+            const totalVolume = cylinderVolume + hemisphereVolume;
+
+            // Calculate表Area
+            const cylinderSurfaceArea = 2 * PI * radius * height;
+            const hemisphereSurfaceArea = 4 * PI * radius * radius;
+            const totalSurfaceArea = cylinderSurfaceArea + hemisphereSurfaceArea;
+
+            // Calculatetotal 高度
+            const totalHeight = height + 2 * radius;
+
+            // 显示Result
+            document.getElementById('volume').textContent = `${totalVolume.toFixed(2)} cubic units`;
+            document.getElementById('surfaceArea').textContent = `${totalSurfaceArea.toFixed(2)} square units`;
+            document.getElementById('totalHeight').textContent = `${totalHeight.toFixed(2)} units`;
+            document.getElementById('cylinderVolume').textContent = `${cylinderVolume.toFixed(2)} cubic units`;
+            document.getElementById('hemisphereVolume').textContent = `${hemisphereVolume.toFixed(2)} cubic units`;
+
+            document.getElementById('resultSection').style.display = 'block';
+        }
+
+        // 回车键Calculate
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateCapsule();
+            }
+        });
+    </script>
+</body>
+</html> 
+

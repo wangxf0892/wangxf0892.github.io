@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Calculator</title>
+  <meta name="description" content="Word Count & Text Analysis Tool, support counting words, characters, sentences, paragraphs.">
+  <meta name="keywords" content="word count, text analysis, character count, word count, sentence count, paragraph count, calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Word Count & Text Analysis Tool</div>
+    <div class="input-row">
+      <textarea id="text" placeholder="Please enter text"></textarea>
+    </div>
+    <button class="calc-btn" onclick="analyzeText()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>  <script src="recommend-calculators.js">  </script>
+    <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function analyzeText() {
+      const text = document.getElementById('text').value;
+      const resultDiv = document.getElementById('result');
+      if (!text.trim()) {
+        resultDiv.textContent = window.I18N ? window.I18N.t('auto', 'Please enter text') : 'Please enter text';
+        return;
+      }
+      // 字符数(含空格)
+      const charCount = text.length;
+      // 字数(中文/英文/Number混合,按Unicode字母Number汉字统计)
+      const wordCount = (text.match(/[\w\u4e00-\u9fa5]/g) || []).length;
+      // 单词数(英文单词)
+      const enWordCount = (text.match(/[a-zA-Z]+/g) || []).length;
+      // 句子数(以.?!。？！结尾)
+      const sentenceCount = (text.match(/[\.!?。？！]+/g) || []).length;
+      // 段落数(按换行分割,非空)
+      const paragraphCount = text.split(/\n+/).filter(p => p.trim()).length;
+      resultDiv.innerHTML = `
+        Character Count:<b>${charCount}</b><br>
+        Word Count:<b>${wordCount}</b><br>
+        English Word Count:<b>${enWordCount}</b><br>
+        Sentence Count:<b>${sentenceCount}</b><br>
+        Paragraph Count:<b>${paragraphCount}</b>
+      `;
+    }
+  </script>
+</body>
+</html> 
+

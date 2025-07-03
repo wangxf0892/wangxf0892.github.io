@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plane Geometry Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Plane Geometry Calculator.">
+  <meta name="keywords" content="plane geometry calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Plane Geometry Calculator</div>
+    <div class="input-row">
+      <select id="shape" onchange="renderInputs()">
+        <option value="square" data-i18n="auto" data-i18n="auto">Square</option>
+        <option value="parallelogram" data-i18n="auto" data-i18n="auto">Parallelogram</option>
+        <option value="trapezoid" data-i18n="auto" data-i18n="auto">Trapezoid</option>
+        <option value="ellipse" data-i18n="auto" data-i18n="auto">Ellipse</option>
+      </select>
+      <div id="inputs" class="input-group"></div>
+    </div>
+    <button class="calc-btn" onclick="calcPlaneGeometry()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function renderInputs() {
+      const shape = document.getElementById('shape').value;
+      let html = '';
+      if (shape === 'square') {
+        html += '<input type="number" id="square_a" placeholder="Side Length a" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+      } else if (shape === 'parallelogram') {
+        html += '<input type="number" id="para_a" placeholder="Base a" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="para_h" placeholder="Height h" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="para_b" placeholder="Another side b(Optional)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+      } else if (shape === 'trapezoid') {
+        html += '<input type="number" id="trap_a" placeholder="Top Base a" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="trap_b" placeholder="Bottom Base b" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="trap_h" placeholder="Height h" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="trap_c" placeholder="Slant Side c(Optional)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="trap_d" placeholder="Slant Side d(Optional)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+      } else if (shape === 'ellipse') {
+        html += '<input type="number" id="ell_a" placeholder="Long Semi-Axis a" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="ell_b" placeholder="Short Semi-Axis b" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+      }
+      document.getElementById('inputs').innerHTML = html;
+    }
+    renderInputs();
+    function calcPlaneGeometry() {
+      const shape = document.getElementById('shape').value;
+      let area = 0, peri = 0, msg = '';
+      if (shape === 'square') {
+        const a = parseFloat(document.getElementById('square_a').value);
+        if (isNaN(a) || a <= 0) {
+          document.getElementById('result').textContent = 'Please enter valid side length';
+          return;
+        }
+        area = a * a;
+        peri = 4 * a;
+        msg = `Area:<b>${area}</b>,Perimeter:<b>${peri}</b>`;
+      } else if (shape === 'parallelogram') {
+        const a = parseFloat(document.getElementById('para_a').value);
+        const h = parseFloat(document.getElementById('para_h').value);
+        const b = parseFloat(document.getElementById('para_b').value);
+        if (isNaN(a) || isNaN(h) || a <= 0 || h <= 0) {
+          document.getElementById('result').textContent = 'Please enter valid base and height';
+          return;
+        }
+        area = a * h;
+        peri = 2 * (a + (isNaN(b) || b <= 0 ? a : b));
+        msg = `Area:<b>${area}</b>,周长:<b>${peri}</b>`;
+      } else if (shape === 'trapezoid') {
+        const a = parseFloat(document.getElementById('trap_a').value);
+        const b = parseFloat(document.getElementById('trap_b').value);
+        const h = parseFloat(document.getElementById('trap_h').value);
+        const c = parseFloat(document.getElementById('trap_c').value);
+        const d = parseFloat(document.getElementById('trap_d').value);
+        if (isNaN(a) || isNaN(b) || isNaN(h) || a <= 0 || b <= 0 || h <= 0) {
+          document.getElementById('result').textContent = 'Please enter valid top base, bottom base and height';
+          return;
+        }
+        area = (a + b) * h / 2;
+        if (!isNaN(c) && c > 0 && !isNaN(d) && d > 0) peri = a + b + c + d;
+        else peri = a + b + 2 * h;
+        msg = `Area:<b>${area}</b>,周长:<b>${peri}</b>`;
+      } else if (shape === 'ellipse') {
+        const a = parseFloat(document.getElementById('ell_a').value);
+        const b = parseFloat(document.getElementById('ell_b').value);
+        if (isNaN(a) || isNaN(b) || a <= 0 || b <= 0) {
+          document.getElementById('result').textContent = 'Please enter valid long semi-axis and short semi-axis';
+          return;
+        }
+        area = Math.PI * a * b;
+        peri = Math.PI * (3 * (a + b) - Math.sqrt((3 * a + b) * (a + 3 * b))); // Ramanujan approximation
+        msg = `Area:<b>${area}</b>,Perimeter(Approximate):<b>${peri}</b>`;
+      }
+      document.getElementById('result').innerHTML = msg;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Acceleration Conversion Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="acc.title">Acceleration Conversion Calculator</title>
+  <meta name="description" content="Acceleration conversion calculator, supports common acceleration unit conversion.">
+  <meta name="keywords" content="acceleration conversion, unit conversion, m/s², g, cm/s², ft/s²">
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js"></script>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="acc.back" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="acc.title" data-i18n="auto" data-i18n="auto">Acceleration Conversion Calculator</div>
+    <div class="input-row">
+      <input type="number" id="value" placeholder="Value" data-i18n="acc.value_ph" data-i18n="auto" data-i18n="auto">
+      <select id="from">
+        <option value="mps2" data-i18n="acc.mps2" data-i18n="auto" data-i18n="auto">m/s² (meter/second²)</option>
+        <option value="g" data-i18n="acc.g" data-i18n="auto" data-i18n="auto">g (gravity)</option>
+        <option value="cmps2" data-i18n="acc.cmps2" data-i18n="auto" data-i18n="auto">cm/s² (centimeter/second²)</option>
+        <option value="ftps2" data-i18n="acc.ftps2" data-i18n="auto" data-i18n="auto">ft/s² (foot/second²)</option>
+      </select>
+      <span style="font-size:1.2em;">→</span>
+      <select id="to">
+        <option value="mps2" data-i18n="acc.mps2" data-i18n="auto" data-i18n="auto">m/s² (meter/second²)</option>
+        <option value="g" data-i18n="acc.g" data-i18n="auto" data-i18n="auto">g (gravity)</option>
+        <option value="cmps2" data-i18n="acc.cmps2" data-i18n="auto" data-i18n="auto">cm/s² (centimeter/second²)</option>
+        <option value="ftps2" data-i18n="acc.ftps2" data-i18n="auto" data-i18n="auto">ft/s² (foot/second²)</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calcAcc()" data-i18n="acc.calc" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+    <div class="recommend-area"></div>
+  </div>
+  <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script src="recommend-calculators.js"></script>
+  <script>
+    function calcAcc() {
+      const t = window.I18N ? window.I18N.t : (k, f) => f || k;
+      let v = parseFloat(document.getElementById('value').value);
+      let from = document.getElementById('from').value;
+      let to = document.getElementById('to').value;
+      if (isNaN(v)) {
+        document.getElementById('result').textContent = t('acc.err','Please enter a value'); return;
+      }
+      // 先转为m/s²
+      let mps2 = v;
+      if (from === 'g') mps2 = v * 9.80665;
+      else if (from === 'cmps2') mps2 = v / 100;
+      else if (from === 'ftps2') mps2 = v * 0.3048;
+      // 再转为目标单位
+      let res = mps2;
+      if (to === 'g') res = mps2 / 9.80665;
+      else if (to === 'cmps2') res = mps2 * 100;
+      else if (to === 'ftps2') res = mps2 / 0.3048;
+      document.getElementById('result').textContent = t('acc.result','Result:') + res.toFixed(6);
+    }
+    function renderAccI18n() {
+      if (!window.I18N) return;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (key && window.I18N.t(key)) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = window.I18N.t(key);
+          } else if (el.tagName === 'BUTTON') {
+            el.textContent = window.I18N.t(key);
+          } else {
+            el.innerHTML = window.I18N.t(key);
+          }
+        }
+      });
+      // 下拉选项
+      const fromSel = document.getElementById('from');
+      const toSel = document.getElementById('to');
+      if (fromSel && toSel) {
+        fromSel.options[0].textContent = window.I18N.t('acc.mps2','m/s² (meter/second²)');
+        fromSel.options[1].textContent = window.I18N.t('acc.g','g (gravity)');
+        fromSel.options[2].textContent = window.I18N.t('acc.cmps2','cm/s² (centimeter/second²)');
+        fromSel.options[3].textContent = window.I18N.t('acc.ftps2','ft/s² (foot/second²)');
+        toSel.options[0].textContent = window.I18N.t('acc.mps2','m/s² (meter/second²)');
+        toSel.options[1].textContent = window.I18N.t('acc.g','g (gravity)');
+        toSel.options[2].textContent = window.I18N.t('acc.cmps2','cm/s² (centimeter/second²)');
+        toSel.options[3].textContent = window.I18N.t('acc.ftps2','ft/s² (foot/second²)');
+      }
+    }
+    document.addEventListener('DOMContentLoaded', renderAccI18n);
+    if (window.I18N && typeof window.I18N.onLangChange === 'function') {
+      window.I18N.onLangChange(renderAccI18n);
+    }
+  </script>
+</body>
+</html> 
+

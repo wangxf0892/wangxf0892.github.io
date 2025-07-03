@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celsius To Rankine</title>
+  <meta name="description" content="A simple and mobile-friendly Celsius to Rankine Calculator.">
+  <meta name="keywords" content="celsius to rankine calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Celsius to Rankine Calculator</div>
+    <div class="input-row">
+      <input type="number" id="celsius" placeholder="Celsius" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcR()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   
+  <script src="recommend-calculators.js">  </script>
+  <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcR() {
+      const c = parseFloat(document.getElementById('celsius').value);
+      if (isNaN(c)) {
+        document.getElementById('result').textContent = 'Please enter valid Celsius';
+        return;
+      }
+      const r = (c + 273.15) * 9 / 5;
+      document.getElementById('result').textContent = `${c} ℃ = ${r.toFixed(2)} °R`;
+    }
+  </script>
+</body>
+</html> 
+

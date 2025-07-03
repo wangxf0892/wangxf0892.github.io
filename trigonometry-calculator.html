@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trigonometry Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Trigonometry Calculator.">
+  <meta name="keywords" content="trigonometry calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Trigonometry Calculator</div>
+    <div class="input-row">
+      <input type="number" id="angle" placeholder="Angle(°)" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcTrig()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcTrig() {
+      const deg = parseFloat(document.getElementById('angle').value);
+      const resultDiv = document.getElementById('result');
+      if (isNaN(deg)) {
+        resultDiv.textContent = 'Please enter valid Angle value';
+        return;
+      }
+      const rad = deg * Math.PI / 180;
+      const sin = Math.sin(rad);
+      const cos = Math.cos(rad);
+      const tan = Math.tan(rad);
+      let cot, sec, csc;
+      cot = (Math.abs(tan) < 1e-12) ? 'Infinity' : (1 / tan);
+      sec = (Math.abs(cos) < 1e-12) ? 'Infinity' : (1 / cos);
+      csc = (Math.abs(sin) < 1e-12) ? 'Infinity' : (1 / sin);
+      resultDiv.innerHTML = `
+        sin:<b>${sin.toFixed(8)}</b><br>
+        cos:<b>${cos.toFixed(8)}</b><br>
+        tan:<b>${Math.abs(cos) < 1e-12 ? 'Infinity' : tan.toFixed(8)}</b><br>
+        cot:<b>${cot === 'Infinity' ? 'Infinity' : cot.toFixed(8)}</b><br>
+        sec:<b>${sec === 'Infinity' ? 'Infinity' : sec.toFixed(8)}</b><br>
+        csc:<b>${csc === 'Infinity' ? 'Infinity' : csc.toFixed(8)}</b>
+      `;
+    }
+  </script>
+</body>
+</html> 
+

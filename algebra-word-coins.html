@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algebra Word Coins</title>
+  <meta name="description" content="Algebra Word Problems - Coins Problem Calculator, support enter two types of coin values and quantities, automatically calculate total amount.">
+  <meta name="keywords" content="Algebra, Coin Problem, Word Problem, Amount Calculator, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Algebra Word Problems - Coins Problem Calculator</div>
+    <div class="input-row">
+      <input type="number" id="valueA" placeholder="CoinA value" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="countA" placeholder="CoinA quantity" min="0" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="valueB" placeholder="Coin B value" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="countB" placeholder="CoinB quantity" min="0" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcCoins()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js"></script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcCoins() {
+      const valueA = parseFloat(document.getElementById('valueA').value);
+      const countA = parseInt(document.getElementById('countA').value);
+      const valueB = parseFloat(document.getElementById('valueB').value);
+      const countB = parseInt(document.getElementById('countB').value);
+      const resultDiv = document.getElementById('result');
+      if ([valueA, countA, valueB, countB].some(x => isNaN(x) || x < 0)) {
+        resultDiv.textContent = 'Please enter valid value and quantity';
+        return;
+      }
+      const total = valueA * countA + valueB * countB;
+      resultDiv.innerHTML = `total amount:<b>${total.toFixed(2)}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algebra Word Age</title>
+  <meta name="description" content="Algebra Word Problem-Age Problem Calculator, support enter father and son's current age, n years later age difference, automatically calculate n years later father and son's age.">
+  <meta name="keywords" content="Algebra, Age Problem, Word Problem, Age Calculator, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Algebra Word Problem-Age Problem Calculator</div>
+    <div class="input-row">
+      <input type="number" id="father" placeholder="Current year father's age" min="0" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="son" placeholder="Current year son's age" min="0" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="n" placeholder="n year later" min="1" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcAgeWord()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- 推荐区 --> <div class="recommend-area"></div>   </div>  <script src="recommend-calculators.js"></script>
+    <!-- 加载页脚 --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcAgeWord() {
+      const father = parseInt(document.getElementById('father').value);
+      const son = parseInt(document.getElementById('son').value);
+      const n = parseInt(document.getElementById('n').value);
+      const resultDiv = document.getElementById('result');
+      if (isNaN(father) || isNaN(son) || isNaN(n) || father < 0 || son < 0 || n < 1) {
+        resultDiv.textContent = 'Please enter valid father\'s age, son\'s age and n years';
+        return;
+      }
+      const fatherN = father + n;
+      const sonN = son + n;
+      const diff = fatherN - sonN;
+      resultDiv.innerHTML = `${n}year later father's age:<b>${fatherN}</b> years<br>${n}year later son's age:<b>${sonN}</b> years<br>Age difference:<b>${diff}</b> years`;
+    }
+  </script>
+</body>
+</html> 
+

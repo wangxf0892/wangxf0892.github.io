@@ -1,0 +1,24 @@
+<!-- 通用head片段,供各页面动态引入 -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 页面标题、描述、关键词请在各页面单独设置 -->
+  <!-- <title>Common Head</title> -->
+  <!-- <meta name="description" content="页面描述"> -->
+  <!-- <meta name="keywords" content="关键词1, 关键词2"> -->
+  <link rel="stylesheet" href="style.css">
+  <!-- 如需页面专用样式,请在各页面单独引入 -->
+  <script src="i18n.js"></script>
+  <script src="site-search.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.renderLangSelector) {
+        window.renderLangSelector();
+      } else if (window.I18N && window.I18N.renderLangSelector) {
+        window.I18N.renderLangSelector();
+      } else if (typeof renderLangSelector === 'function') {
+        renderLangSelector();
+      }
+    });
+  </script>
+</head> 

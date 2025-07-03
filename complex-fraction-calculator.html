@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complex Fraction Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Complex Fraction Calculator.">
+  <meta name="keywords" content="complex fraction calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Complex Fraction Calculator</div>
+    <div class="input-row">
+      <input type="text" id="expr" placeholder="Please enter a complex fraction expression like (a/b)/(c/d)" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcComplexFraction()" data-i18n="auto" data-i18n="auto">Simplify</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function gcd(a, b) {
+      while (b !== 0) {
+        let t = b;
+        b = a % b;
+        a = t;
+      }
+      return a;
+    }
+    function simplifyFraction(n, d) {
+      const g = gcd(Math.abs(n), Math.abs(d));
+      n /= g; d /= g;
+      if (d < 0) { n = -n; d = -d; }
+      return {n, d};
+    }
+    function calcComplexFraction() {
+      const expr = document.getElementById('expr').value.trim();
+      // 匹配 (a/b)/(c/d)
+      const match = expr.match(/^\(?\s*(-?\d+)\s*\/\s*(-?\d+)\s*\)?\s*\/\s*\(?\s*(-?\d+)\s*\/\s*(-?\d+)\s*\)?$/);
+      if (!match) {
+        document.getElementById('result').textContent = 'Please enter a valid complex fraction expression (e.g. (3/4)/(2/5))';
+        return;
+      }
+      const a = parseInt(match[1], 10);
+      const b = parseInt(match[2], 10);
+      const c = parseInt(match[3], 10);
+      const d = parseInt(match[4], 10);
+      if (b === 0 || d === 0) {
+        document.getElementById('result').textContent = 'Denominator cannot be 0';
+        return;
+      }
+      // (a/b)/(c/d) = (a*d)/(b*c)
+      let num = a * d;
+      let den = b * c;
+      const simp = simplifyFraction(num, den);
+      document.getElementById('result').innerHTML = `Simplified Result: <b>${simp.n}/${simp.d}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

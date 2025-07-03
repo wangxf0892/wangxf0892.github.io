@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bingo Card Generator</title>
+  <meta name="description" content="Bingo Card Generator,Supports customizing card number and size,and automatically generating Bingo cards.">
+  <meta name="keywords" content="Bingo, Card Generator, Random, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Bingo Card Generator</div>
+    <div class="input-row">
+      <input type="number" id="cardNum" placeholder="Card number(1-10)" min="1" max="10" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="cardSize" placeholder="Card size(e.g. 5 means 5x5)" min="3" max="7" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="gen-btn" onclick="genBingoCards()" data-i18n="auto" data-i18n="auto">Generate</button>
+    <div class="result" id="result"></div>
+    <div class="cards-wrap" id="cards-wrap"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function genBingoCards() {
+      const num = parseInt(document.getElementById('cardNum').value);
+      const size = parseInt(document.getElementById('cardSize').value);
+      const resultDiv = document.getElementById('result');
+      const cardsWrap = document.getElementById('cards-wrap');
+      if (isNaN(num) || isNaN(size) || num < 1 || num > 10 || size < 3 || size > 7) {
+        resultDiv.textContent = 'Please enter valid card number(1-10)and card size(3-7)';
+        cardsWrap.innerHTML = '';
+        return;
+      }
+      resultDiv.textContent = '';
+      let html = '';
+      for (let i = 0; i < num; i++) {
+        html += genBingoCard(size);
+      }
+      cardsWrap.innerHTML = html;
+    }
+    function genBingoCard(size) {
+      // BINGO列头
+      const heads = ['B','I','N','G','O','F','U'];
+      let ths = '';
+      for (let i = 0; i < size; i++) ths += `<th>${heads[i] || ''}</th>`;
+      // 每列Number范围
+      const ranges = [];
+      for (let i = 0; i < size; i++) {
+        const min = Math.floor(i * 75 / size) + 1;
+        const max = Math.floor((i + 1) * 75 / size);
+        ranges.push([min, max]);
+      }
+      // Generate每列Number
+      const cols = [];
+      for (let i = 0; i < size; i++) {
+        const [min, max] = ranges[i];
+        const arr = [];
+        for (let n = min; n <= max; n++) arr.push(n);
+        shuffle(arr);
+        cols.push(arr.slice(0, size));
+      }
+      // 组装Table
+      let trs = '';
+      for (let r = 0; r < size; r++) {
+        trs += '<tr>';
+        for (let c = 0; c < size; c++) {
+          if (size % 2 === 1 && r === c && r === Math.floor(size/2)) {
+            trs += '<td class="free">FREE</td>';
+          } else {
+            trs += `<td>${cols[c][r]}</td>`;
+          }
+        }
+        trs += '</tr>';
+      }
+      return `<table class="bingo-card"><tr>${ths}</tr>${trs}</table>`;
+    }
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+  </script>
+</body>
+</html> 
+

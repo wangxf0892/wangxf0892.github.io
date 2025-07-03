@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cd Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly CD Calculator.">
+  <meta name="keywords" content="cd calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+  <script src="head-loader.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>CD Calculator</h1>
+      <p>Calculate the interest earned and maturity amount for CD.</p>
+    </header>
+
+    <main>
+      <div class="calculator-section">
+        <div class="input-section">
+          <h2>Deposit information</h2>
+          <div class="input-group">
+            <label for="principal">Principal (yuan):</label>
+            <input type="number" id="principal" placeholder="For example: 100000" step="1000" min="0" data-i18n="auto" data-i18n="auto">
+          </div>
+          <div class="input-group">
+            <label for="interestRate">yearInterest Rate (%):</label>
+            <input type="number" id="interestRate" placeholder="For example: 2.5" step="0.01" min="0" max="10" data-i18n="auto" data-i18n="auto">
+          </div>
+          <div class="input-group">
+            <label for="term">Deposit term:</label>
+            <select id="term">
+              <option value="3" data-i18n="auto" data-i18n="auto">3 months</option>
+              <option value="6" data-i18n="auto" data-i18n="auto">6 months</option>
+              <option value="12" selected data-i18n="auto" data-i18n="auto">12 months</option>
+              <option value="24" data-i18n="auto" data-i18n="auto">24 months</option>
+              <option value="36" data-i18n="auto" data-i18n="auto">36 months</option>
+              <option value="60" data-i18n="auto" data-i18n="auto">60 months</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="interestType">Interest type:</label>
+            <select id="interestType">
+              <option value="simple" data-i18n="auto" data-i18n="auto">Simple Interest</option>
+              <option value="compound" selected data-i18n="auto" data-i18n="auto">Compound Interest</option>
+            </select>
+          </div>
+          <button onclick="calculateCD()" class="calculate-btn" data-i18n="auto" data-i18n="auto">Calculate interest</button>
+        </div>
+
+        <div class="result-section" id="resultSection" style="display: none;">
+          <h2>CalculateResult</h2>
+          <div class="result-item">
+            <span class="label">Maturity amount:</span>
+            <span class="value" id="maturityAmount">-</span>
+          </div>
+          <div class="result-item">
+            <span class="label">Interest earned:</span>
+            <span class="value" id="interestEarned">-</span>
+          </div>
+          <div class="result-item">
+            <span class="label">year return:</span>
+            <span class="value" id="annualReturn">-</span>
+          </div>
+          <div class="result-item">
+            <span class="label">monthInterest Rate:</span>
+            <span class="value" id="monthlyRate">-</span>
+          </div>
+          <div class="result-item">
+            <span class="label">Return rating:</span>
+            <span class="value" id="returnRating">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h2>CD explanation</h2>
+        <div class="info-content">
+          <p><strong>CD</strong> is a type of saving product offered by banks, where the depositor deposits funds into the bank for a fixed period, earning interest at a fixed Interest Rate.</p>
+          
+          <h3>Interest type</h3>
+          <p><strong>Simple Interest:</strong> Interest = Principal × yearInterest Rate × Deposit year number</p>
+          <p><strong>Compound Interest:</strong> Maturity amount = Principal × (1 + yearInterest Rate)^Deposit year number</p>
+          
+          <h3>Advantages</h3>
+          <ul>
+            <li>Interest Rate is relatively high, stable income</li>
+            <li>Low risk, safe principal</li>
+            <li>Suitable for conservative investors</li>
+            <li>Can be withdrawn in advance (may lose some interest)</li>
+          </ul>
+
+          <h3>Notes</h3>
+          <ul>
+            <li>Withdrawal in advance may be calculated at the current Interest Rate</li>
+            <li>Different banks may have different Interest Rates</li>
+            <li>Large deposits may have a higher Interest Rate</li>
+            <li>Consider the impact of inflation on actual income</li>
+            <li>It is recommended to compare the deposit products of multiple banks</li>
+          </ul>
+
+          <h3>Return rating standard</h3>
+          <ul>
+            <li><strong>Excellent:</strong> year return > 3%</li>
+            <li><strong>Good:</strong> year return 2-3%</li>
+            <li><strong>Average:</strong> year return 1-2%</li>
+            <li><strong>Low:</strong> year return < 1%</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calculateCD() {
+      const principal = parseFloat(document.getElementById('principal').value);
+      const annualRate = parseFloat(document.getElementById('interestRate').value);
+      const term = parseInt(document.getElementById('term').value);
+      const interestType = document.getElementById('interestType').value;
+
+      if (!principal || !annualRate) {
+        alert('Please enter principal and yearInterest Rate');
+        return;
+      }
+
+      if (principal <= 0 || annualRate <= 0) {
+        alert('Please enter valid values');
+        return;
+      }
+
+      const years = term / 12;
+      const monthlyRate = annualRate / 100 / 12;
+      let maturityAmount, interestEarned;
+
+      if (interestType === 'simple') {
+        // 单利Calculate
+        interestEarned = principal * (annualRate / 100) * years;
+        maturityAmount = principal + interestEarned;
+      } else {
+        // 复利Calculate
+        maturityAmount = principal * Math.pow(1 + annualRate / 100, years);
+        interestEarned = maturityAmount - principal;
+      }
+
+      // Calculateyear化收益率
+      const annualReturn = (interestEarned / principal) * 100;
+
+      // 评估收益评级
+      let returnRating;
+      if (annualReturn > 3) {
+        returnRating = 'Excellent';
+      } else if (annualReturn > 2) {
+        returnRating = 'Good';
+      } else if (annualReturn > 1) {
+        returnRating = 'Average';
+      } else {
+        returnRating = 'Low';
+      }
+
+      // 显示Result
+      document.getElementById('maturityAmount').textContent = `¥${maturityAmount.toFixed(2)}`;
+      document.getElementById('interestEarned').textContent = `¥${interestEarned.toFixed(2)}`;
+      document.getElementById('annualReturn').textContent = `${annualReturn.toFixed(2)}%`;
+      document.getElementById('monthlyRate').textContent = `${(monthlyRate * 100).toFixed(4)}%`;
+      document.getElementById('returnRating').textContent = returnRating;
+
+      document.getElementById('resultSection').style.display = 'block';
+    }
+
+    // 回车键Calculate
+    document.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        calculateCD();
+      }
+    });
+  </script>
+</body>
+</html> 
+

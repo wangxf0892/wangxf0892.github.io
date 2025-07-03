@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Ratios Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Financial Ratios Calculator.">
+  <meta name="keywords" content="financial ratios calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Financial Ratios Calculator</div>
+    <div class="input-row">
+      <input type="number" id="currentAssets" placeholder="Current Assets" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="currentLiabilities" placeholder="Current Liabilities" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="quickAssets" placeholder="Quick Assets (Current Assets - Inventory)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="totalAssets" placeholder="Total Assets" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="totalLiabilities" placeholder="Total Liabilities" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="grossProfit" placeholder="Gross Profit" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="revenue" placeholder="Revenue" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="netProfit" placeholder="Net Profit" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="averageAssets" placeholder="Average Assets" min="0" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcRatios()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function safeDiv(a, b) {
+      if (b === 0 || isNaN(a) || isNaN(b)) return '—';
+      return (a / b).toFixed(4);
+    }
+    function safePercent(a, b) {
+      if (b === 0 || isNaN(a) || isNaN(b)) return '—';
+      return ((a / b) * 100).toFixed(2) + '%';
+    }
+    function calcRatios() {
+      const currentAssets = parseFloat(document.getElementById('currentAssets').value);
+      const currentLiabilities = parseFloat(document.getElementById('currentLiabilities').value);
+      const quickAssets = parseFloat(document.getElementById('quickAssets').value);
+      const totalAssets = parseFloat(document.getElementById('totalAssets').value);
+      const totalLiabilities = parseFloat(document.getElementById('totalLiabilities').value);
+      const grossProfit = parseFloat(document.getElementById('grossProfit').value);
+      const revenue = parseFloat(document.getElementById('revenue').value);
+      const netProfit = parseFloat(document.getElementById('netProfit').value);
+      const averageAssets = parseFloat(document.getElementById('averageAssets').value);
+      let html = '<ul class="ratios-list">';
+      html += `<li>Current Ratio = Current Assets / Current Liabilities = <b>${safeDiv(currentAssets, currentLiabilities)}</b></li>`;
+      html += `<li>Quick Ratio = Quick Assets / Current Liabilities = <b>${safeDiv(quickAssets, currentLiabilities)}</b></li>`;
+      html += `<li>Debt Ratio = Total Liabilities / Total Assets = <b>${safePercent(totalLiabilities, totalAssets)}</b></li>`;
+      html += `<li>Gross Profit Rate = Gross Profit / Revenue = <b>${safePercent(grossProfit, revenue)}</b></li>`;
+      html += `<li>Net Interest Rate = Net Profit / Revenue = <b>${safePercent(netProfit, revenue)}</b></li>`;
+      html += `<li>Asset Turnover = Revenue / Average Assets = <b>${safeDiv(revenue, averageAssets)}</b></li>`;
+      html += '</ul>';
+      document.getElementById('result').innerHTML = html;
+    }
+  </script>
+</body>
+</html> 
+

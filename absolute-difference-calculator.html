@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Absolute Difference Calculator</title>
+  <meta name="description" content="Absolute DifferenceCalculate,Enter two numbers,Calculate,Absolute Difference。">
+  <meta name="keywords" content="Absolute Difference, Absolute Value, Difference, Online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Absolute Difference Calculator</div>
+    <div class="input-row">
+      <input type="number" id="a" placeholder="First Number" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="b" placeholder="Second Number" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcAbsDiff()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <!-- Load Footer -->
+  <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script src="recommend-calculators.js"></script>
+  <script>
+    function calcAbsDiff() {
+      let a = parseFloat(document.getElementById('a').value);
+      let b = parseFloat(document.getElementById('b').value);
+      if (isNaN(a) || isNaN(b)) {
+        document.getElementById('result').textContent = window.I18N ? window.I18N.t('auto', 'Please enter two valid numbers') : 'Please enter two valid numbers'; return;
+      }
+      document.getElementById('result').textContent = `Absolute Difference:${Math.abs(a-b)}`;
+    }
+  </script>
+</body>
+</html> 

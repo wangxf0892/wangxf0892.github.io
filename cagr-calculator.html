@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta name="keywords" content="cagr calculator, online calculator">
+  <meta name="description" content="A simple and mobile-friendly Cagr Calculator.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cagr Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="head-loader.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CAGR Calculator</h1>
+            <p>Compound year growth rate Calculate tool - Evaluate Investment return</p>
+        </header>
+
+        <main>
+            <div class="calculator-section">
+                <div class="input-section">
+                    <h2>enter data</h2>
+                    <div class="input-group">
+                        <label for="initialValue">Initial Value:</label>
+                        <input type="number" id="initialValue" placeholder="For example: 10000" step="0.01" min="0" data-i18n="auto" data-i18n="auto">
+                    </div>
+                    <div class="input-group">
+                        <label for="finalValue">Final Value:</label>
+                        <input type="number" id="finalValue" placeholder="For example: 15000" step="0.01" min="0" data-i18n="auto" data-i18n="auto">
+                    </div>
+                    <div class="input-group">
+                        <label for="years">year number:</label>
+                        <input type="number" id="years" placeholder="For example: 5" step="0.1" min="0.1" max="100" data-i18n="auto" data-i18n="auto">
+                    </div>
+                    <button onclick="calculateCAGR()" class="calculate-btn" data-i18n="auto" data-i18n="auto">CalculateCAGR</button>
+                </div>
+
+                <div class="result-section" id="resultSection" style="display: none;">
+                    <h2>CalculateResult</h2>
+                    <div class="result-item">
+                        <span class="label">CAGR:</span>
+                        <span class="value" id="cagrResult">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">year return:</span>
+                        <span class="value" id="annualReturn">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">total growth:</span>
+                        <span class="value" id="totalGrowth">-</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Investment performance:</span>
+                        <span class="value" id="performance">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>CAGR explanation</h2>
+                <div class="info-content">
+                    <p><strong>CAGR(Compound year growth rate)</strong> is an important indicator of Investment return, it shows the average year growth rate of Investment within a specific time period.</p>
+                    
+                    <h3>Calculate formula</h3>
+                    <p>CAGR = (Final Value / Initial Value)^(1/year number) - 1</p>
+                    
+                    <h3>Usage scenarios</h3>
+                    <ul>
+                        <li>Stock Investment return analysis</li>
+                        <li>Fund performance evaluation</li>
+                        <li>Enterprise income growth analysis</li>
+                        <li>Real Estate Investment return Calculate</li>
+                        <li>Project Investment return evaluation</li>
+                    </ul>
+
+                    <h3>Notes</h3> 
+                    <ul>
+                        <li>CAGR assumes Investment return is evenly distributed</li>
+                        <li>Does not consider intermediate fluctuations and risk factors</li>
+                        <li>Applicable to long-term Investment analysis</li>
+                        <li>Need to be evaluated comprehensively with other indicators</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+    <script>
+        function calculateCAGR() {
+            const initialValue = parseFloat(document.getElementById('initialValue').value);
+            const finalValue = parseFloat(document.getElementById('finalValue').value);
+            const years = parseFloat(document.getElementById('years').value);
+
+            if (!initialValue || !finalValue || !years) {
+                alert('Please enter complete data');
+                return;
+            }
+
+            if (initialValue <= 0 || finalValue <= 0 || years <= 0) {
+                alert('Please enter valid values');
+                return;
+            }
+
+            if (initialValue >= finalValue) {
+                alert('Final value should be greater than initial value');
+                return;
+            }
+
+            // CalculateCAGR
+            const cagr = Math.pow(finalValue / initialValue, 1 / years) - 1;
+            
+            // Calculateyear化收益率(百分比)
+            const annualReturnPercent = cagr * 100;
+            
+            // Calculatetotal 增长率
+            const totalGrowth = (finalValue - initialValue) / initialValue * 100;
+            
+            // 评估Investment表现
+            let performance;
+            if (cagr > 0.15) {
+                performance = 'Excellent';
+            } else if (cagr > 0.10) {
+                performance = 'Good';
+            } else if (cagr > 0.05) {
+                performance = 'Average';
+            } else if (cagr > 0) {
+                performance = 'Low';
+            } else {
+                performance = 'Loss';
+            }
+
+            // 显示Result
+            document.getElementById('cagrResult').textContent = `${(cagr * 100).toFixed(2)}%`;
+            document.getElementById('annualReturn').textContent = `${annualReturnPercent.toFixed(2)}%`;
+            document.getElementById('totalGrowth').textContent = `${totalGrowth.toFixed(2)}%`;
+            document.getElementById('performance').textContent = performance;
+
+            document.getElementById('resultSection').style.display = 'block';
+        }
+
+        // 回车键Calculate
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateCAGR();
+            }
+        });
+    </script>
+</body>
+</html> 
+

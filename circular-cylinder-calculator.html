@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circular Cylinder Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Circular Cylinder Calculator.">
+  <meta name="keywords" content="circular cylinder calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Cylinder Calculator</div>
+    <div class="input-row">
+      <input type="number" id="radius" placeholder="Please enter radius (e.g. 5)" step="any" min="0" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="height" placeholder="Please enter height (e.g. 10)" step="any" min="0" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcCylinder()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <!-- Load Footer -->
+  <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script src="recommend-calculators.js"></script>
+ 
+
+  <script>
+    function calcCylinder() {
+      const r = parseFloat(document.getElementById('radius').value);
+      const h = parseFloat(document.getElementById('height').value);
+      if (isNaN(r) || r < 0 || isNaN(h) || h < 0) {
+        document.getElementById('result').textContent = 'Please enter a valid radius and height (≥0)';
+        return;
+      }
+      const volume = Math.PI * r * r * h;
+      const lateral = 2 * Math.PI * r * h;
+      document.getElementById('result').innerHTML =
+        `Volume:<b>${volume.toFixed(6)}</b> <br>Lateral Area:<b>${lateral.toFixed(6)}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

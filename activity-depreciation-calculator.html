@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Depreciation Calculator</title>
+  <meta name="description" content="ActivityDepreciation Calculator,enter Yield、total Yield、total cost、residual value,Calculate This issue Depreciation。">
+  <meta name="keywords" content="ActivityDepreciation, Depreciation Calculator, YieldDepreciation, Online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">ActivityDepreciation Calculator</div>
+    <div class="input-row">
+      <input type="number" id="output" placeholder=" This issue Yield" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="totalOutput" placeholder="Estimated total Yield" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="cost" placeholder="total cost" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="salvage" placeholder="residual value" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcDep()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   
+  <script src="recommend-calculators.js"></script>
+  <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcDep() {
+      let output = parseFloat(document.getElementById('output').value);
+      let total = parseFloat(document.getElementById('totalOutput').value);
+      let cost = parseFloat(document.getElementById('cost').value);
+      let salvage = parseFloat(document.getElementById('salvage').value);
+      if ([output, total, cost, salvage].some(x => isNaN(x)) || total <= 0 || cost <= salvage) {
+        document.getElementById('result').textContent = '请填写有效参数,且total Yield>0,total cost>residual value'; return;
+      }
+      let dep = (cost - salvage) * output / total;
+      document.getElementById('result').textContent = ` This issue Depreciation:${dep.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html> 
+

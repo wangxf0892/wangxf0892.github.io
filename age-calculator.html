@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <meta name="description" content="Age Calculator,Enter birth date,Calculate current age (year, month, day).">
+  <meta name="keywords" content="AgeCalculate, Birth date, Age, Online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Age Calculator</div>
+    <div class="input-row">
+      <input type="date" id="birthdate" onchange="calcAge()" data-i18n="auto" data-i18n="auto">
+    </div>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js"></script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcAge() {
+      const input = document.getElementById('birthdate').value;
+      if (!input) {
+        document.getElementById('result').textContent = '';
+        return;
+      }
+      const birth = new Date(input);
+      const now = new Date();
+      if (birth > now) {
+        document.getElementById('result').textContent = 'Birth date cannot be later than today';
+        return;
+      }
+      let y = now.getFullYear() - birth.getFullYear();
+      let m = now.getMonth() - birth.getMonth();
+      let d = now.getDate() - birth.getDate();
+      if (d < 0) {
+        m--;
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        d += prevMonth.getDate();
+      }
+      if (m < 0) {
+        y--;
+        m += 12;
+      }
+      document.getElementById('result').textContent = `Age:${y} year ${m} month ${d} day`;
+    }
+  </script>
+</body>
+</html> 
+

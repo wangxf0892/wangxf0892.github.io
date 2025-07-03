@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Loan Calculator</title>
+  <meta name="description" content="AdvancedLoanCalculate, enter Principal, Interest Rate, number of installments, repayment method, output repayment per installment, total interest">
+  <meta name="keywords" content="AdvancedLoanCalculate, Loan, Equal Payment, Equal Principal, Online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Advanced Loan Calculator</div>
+    <div class="input-row">
+      <input type="number" id="principal" placeholder="Principal" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="rate" placeholder="yearInterest Rate(%)" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="months" placeholder="Number of installments(month)" data-i18n="auto" data-i18n="auto">
+      <select id="type">
+        <option value="equal" data-i18n="auto" data-i18n="auto">Equal Payment</option>
+        <option value="principal" data-i18n="auto" data-i18n="auto">Equal Principal</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calcLoan()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- 推荐区 --> <div class="recommend-area"></div>   </div>   
+  <script src="recommend-calculators.js"></script>
+  <!-- 加载页脚 --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcLoan() {
+      let p = parseFloat(document.getElementById('principal').value);
+      let r = parseFloat(document.getElementById('rate').value) / 100 / 12;
+      let n = parseInt(document.getElementById('months').value);
+      let type = document.getElementById('type').value;
+      if (isNaN(p) || isNaN(r) || isNaN(n) || p <= 0 || n <= 0) {
+        document.getElementById('result').textContent = 'Please enter valid Principal, Interest Rate and number of installments'; return;
+      }
+      let res = '';
+      if (type === 'equal') {
+        let m = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+        let total = m * n;
+        let interest = total - p;
+        res = `每monthrepayment:${m.toFixed(2)}<br>total interest:${interest.toFixed(2)}<br>total repayment:${total.toFixed(2)}`;
+      } else {
+        let m1 = p / n + p * r;
+        let total = 0;
+        for (let i = 0; i < n; i++) {
+          total += p / n + (p - i * p / n) * r;
+        }
+        let interest = total - p;
+        res = `首monthrepayment:${m1.toFixed(2)}<br>total interest:${interest.toFixed(2)}<br>total repayment:${total.toFixed(2)}`;
+      }
+      document.getElementById('result').innerHTML = res;
+    }
+  </script>
+</body>
+</html> 
+

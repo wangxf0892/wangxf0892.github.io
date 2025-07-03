@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1000 Primes</title>
+  <meta name="description" content="前1000个Prime,支持一键复制。">
+  <meta name="keywords" content="Prime, 1000个Prime, 素数, Prime Numbers">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">First 1000 Primes</div>
+    <button class="copy-btn" onclick="copyPrimes()" data-i18n="auto" data-i18n="auto">One-click copy</button>
+    <div class="prime-box" id="primeBox"></div>
+    <div class="result" id="result"></div>
+  </div>
+    <!-- Load Footer -->
+    <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function getPrimes(n) {
+      let primes = [], num = 2;
+      while (primes.length < n) {
+        let isPrime = true;
+        for (let i = 2; i * i <= num; i++) {
+          if (num % i === 0) { isPrime = false; break; }
+        }
+        if (isPrime) primes.push(num);
+        num++;
+      }
+      return primes;
+    }
+    const primes = getPrimes(1000);
+    document.getElementById('primeBox').textContent = primes.join(', ');
+    function copyPrimes() {
+      navigator.clipboard.writeText(primes.join(', '));
+      document.getElementById('result').textContent = 'Copied to clipboard！';
+      setTimeout(()=>{document.getElementById('result').textContent='';}, 1500);
+    }
+  </script>
+</body>
+</html> 

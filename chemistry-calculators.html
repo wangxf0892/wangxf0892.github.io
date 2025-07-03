@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chemistry Calculators</title>
+  <meta name="description" content="A simple and mobile-friendly Chemistry Calculator.">
+  <meta name="keywords" content="chemistry calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Chemistry Calculator</div>
+    <div class="input-row">
+      <input type="number" id="h_conc" placeholder="Hydrogen Ion Concentration (mol/L)" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcPH()" data-i18n="auto" data-i18n="auto">Calculate pH</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcPH() {
+      let h_conc = parseFloat(document.getElementById('h_conc').value);
+      if (isNaN(h_conc) || h_conc <= 0) {
+        document.getElementById('result').textContent = 'Please enter valid concentration'; return;
+      }
+      let ph = -Math.log10(h_conc);
+      document.getElementById('result').textContent = `pH: ${ph.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html> 
+

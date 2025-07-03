@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Completing The Square Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Completing the Square Calculator.">
+  <meta name="keywords" content="completing the square calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Completing the Square Calculator</div>
+    <div class="input-row">
+      <input type="number" id="a" placeholder="Please enter a(x² coefficient)" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="b" placeholder="Please enter b(x coefficient)" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="c" placeholder="Please enter c(constant term)" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="completeSquare()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function completeSquare() {
+      const a = parseFloat(document.getElementById('a').value);
+      const b = parseFloat(document.getElementById('b').value);
+      const c = parseFloat(document.getElementById('c').value);
+      if (isNaN(a) || isNaN(b) || isNaN(c) || a === 0) {
+        document.getElementById('result').textContent = 'Please enter有效的a(≠0)、b、c';
+        return;
+      }
+      let steps = '';
+      steps += `original equation:<b>${a !== 1 ? a : ''}x²${b >= 0 ? '+' : ''}${b}x${c >= 0 ? '+' : ''}${c}=0</b><br>`;
+      // 移项
+      steps += `Both sides minus ${c}:<br>`;
+      steps += `${a !== 1 ? a : ''}x²${b >= 0 ? '+' : ''}${b}x = ${-c}<br>`;
+      // 提取a
+      if (a !== 1) {
+        steps += `Both sides divided by ${a}:<br>`;
+        steps += `x²${(b/a)>=0?'+':''}${(b/a)}x = ${(-c/a)}<br>`;
+      }
+      // 配方
+      const h = b/(2*a);
+      const h2 = h*h;
+      steps += `Completing the square:x²${(b/a)>=0?'+':''}${(b/a)}x + (${h.toFixed(6)})² - (${h.toFixed(6)})² = ${(-c/a)}<br>`;
+      steps += `So:(x${h>=0?'+':''}${h.toFixed(6)})² - ${(h2).toFixed(6)} = ${(-c/a)}<br>`;
+      steps += `Move:(x${h>=0?'+':''}${h.toFixed(6)})² = ${(h2 - c/a).toFixed(6)}<br>`;
+      // 求根
+      if (h2 - c/a < 0) {
+        steps += `Since the right side is negative, there are no real solutions.<br>`;
+      } else {
+        const sqrtVal = Math.sqrt(h2 - c/a);
+        const x1 = -h + sqrtVal;
+        const x2 = -h - sqrtVal;
+        steps += `Square root:x${h>=0?'+':''}${h.toFixed(6)} = ±√${(h2 - c/a).toFixed(6)}<br>`;
+        steps += `So:x₁ = ${(x1).toFixed(6)},x₂ = ${(x2).toFixed(6)}<br>`;
+      }
+      document.getElementById('result').innerHTML = steps;
+    }
+  </script>
+</body>
+</html> 
+

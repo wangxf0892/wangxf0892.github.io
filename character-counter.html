@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Character Counter</title>
+  <meta name="description" content="A simple and mobile-friendly Character Counter.">
+  <meta name="keywords" content="character counter, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Character Counter</div>
+    <div class="input-row">
+      <textarea id="textInput" placeholder="Please enter or paste text..." oninput="updateStats()"></textarea>
+    </div>
+    <div class="result" id="result">
+      <table class="stats-table">
+        <tr><td>字符数:</td><td id="charCount">0</td></tr>
+        <tr><td>字数:</td><td id="wordCount">0</td></tr>
+        <tr><td>空格数:</td><td id="spaceCount">0</td></tr>
+        <tr><td>换行数:</td><td id="lineCount">0</td></tr>
+      </table>
+    </div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function updateStats() {
+      const text = document.getElementById('textInput').value;
+      const chars = text.length;
+      const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+      const spaces = (text.match(/ /g) || []).length;
+      const lines = text.split(/\r?\n/).length;
+      document.getElementById('charCount').textContent = chars;
+      document.getElementById('wordCount').textContent = words;
+      document.getElementById('spaceCount').textContent = spaces;
+      document.getElementById('lineCount').textContent = lines;
+    }
+    updateStats();
+  </script>
+</body>
+</html> 
+

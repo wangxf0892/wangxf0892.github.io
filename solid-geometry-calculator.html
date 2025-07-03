@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solid Geometry Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Solid Geometry Calculator.">
+  <meta name="keywords" content="solid geometry calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Solid Geometry Calculator</div>
+    <div class="input-row">
+      <select id="solidType" onchange="renderInputs()">
+        <option value="cuboid" data-i18n="auto" data-i18n="auto">Cuboid</option>
+        <option value="cube" data-i18n="auto" data-i18n="auto">Cube</option>
+        <option value="sphere" data-i18n="auto" data-i18n="auto">Sphere</option>
+        <option value="cylinder" data-i18n="auto" data-i18n="auto">Cylinder</option>
+        <option value="cone" data-i18n="auto" data-i18n="auto">Cone</option>
+      </select>
+      <div id="inputsArea"></div>
+    </div>
+    <button class="calc-btn" onclick="calcSolid()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function renderInputs() {
+      const type = document.getElementById('solidType').value;
+      let html = '';
+      if (type === 'cuboid') {
+        html = '<input type="number" id="cuboid_l" placeholder="长(l)" min="0" step="any" data-i18n="auto" data-i18n="auto">' +
+               '<input type="number" id="cuboid_w" placeholder="宽(w)" min="0" step="any" data-i18n="auto" data-i18n="auto">' +
+               '<input type="number" id="cuboid_h" placeholder="高(h)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+      } else if (type === 'cube') {
+        html = '<input type="number" id="cube_a" placeholder="棱长(a)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+      } else if (type === 'sphere') {
+        html = '<input type="number" id="sphere_r" placeholder="半径(r)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+      } else if (type === 'cylinder') {
+        html = '<input type="number" id="cylinder_r" placeholder="底面半径(r)" min="0" step="any" data-i18n="auto" data-i18n="auto">' +
+               '<input type="number" id="cylinder_h" placeholder="高(h)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+      } else if (type === 'cone') {
+        html = '<input type="number" id="cone_r" placeholder="底面半径(r)" min="0" step="any" data-i18n="auto" data-i18n="auto">' +
+               '<input type="number" id="cone_h" placeholder="高(h)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+      }
+      document.getElementById('inputsArea').innerHTML = html;
+    }
+    function calcSolid() {
+      const type = document.getElementById('solidType').value;
+      let V = 0, S = 0, pi = Math.PI;
+      let valid = true, msg = '';
+      if (type === 'cuboid') {
+        const l = parseFloat(document.getElementById('cuboid_l').value);
+        const w = parseFloat(document.getElementById('cuboid_w').value);
+        const h = parseFloat(document.getElementById('cuboid_h').value);
+        if ([l, w, h].some(x => isNaN(x) || x <= 0)) valid = false;
+        else {
+          V = l * w * h;
+          S = 2 * (l * w + l * h + w * h);
+        }
+      } else if (type === 'cube') {
+        const a = parseFloat(document.getElementById('cube_a').value);
+        if (isNaN(a) || a <= 0) valid = false;
+        else {
+          V = Math.pow(a, 3);
+          S = 6 * a * a;
+        }
+      } else if (type === 'sphere') {
+        const r = parseFloat(document.getElementById('sphere_r').value);
+        if (isNaN(r) || r <= 0) valid = false;
+        else {
+          V = (4 / 3) * pi * Math.pow(r, 3);
+          S = 4 * pi * r * r;
+        }
+      } else if (type === 'cylinder') {
+        const r = parseFloat(document.getElementById('cylinder_r').value);
+        const h = parseFloat(document.getElementById('cylinder_h').value);
+        if (isNaN(r) || isNaN(h) || r <= 0 || h <= 0) valid = false;
+        else {
+          V = pi * r * r * h;
+          S = 2 * pi * r * (r + h);
+        }
+      } else if (type === 'cone') {
+        const r = parseFloat(document.getElementById('cone_r').value);
+        const h = parseFloat(document.getElementById('cone_h').value);
+        if (isNaN(r) || isNaN(h) || r <= 0 || h <= 0) valid = false;
+        else {
+          const l = Math.sqrt(r * r + h * h); // 母线长
+          V = (1 / 3) * pi * r * r * h;
+          S = pi * r * (r + l);
+        }
+      }
+      if (!valid) {
+        msg = 'Please enter valid parameters';
+      } else {
+        msg = `Volume:<b>${V.toFixed(4)}</b><br>Surface Area:<b>${S.toFixed(4)}</b>`;
+      }
+      document.getElementById('result').innerHTML = msg;
+    }
+    // 初始化
+    renderInputs();
+  </script>
+</body>
+</html> 
+

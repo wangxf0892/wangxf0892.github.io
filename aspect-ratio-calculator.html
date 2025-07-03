@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aspect Ratio Calculator</title>
+  <meta name="description" content="Aspect RatioCalculate,Supports entering width and height, automatically Calculate simplest aspect ratio。">
+  <meta name="keywords" content="Aspect Ratio, Ratio, Calculate, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Aspect RatioCalculate</div>
+    <div class="input-row">
+      <input type="number" id="width" placeholder="Width" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="height" placeholder="Height" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcAspectRatio()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function gcd(a, b) {
+      return b === 0 ? a : gcd(b, a % b);
+    }
+    function calcAspectRatio() {
+      const w = parseFloat(document.getElementById('width').value);
+      const h = parseFloat(document.getElementById('height').value);
+      if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
+        document.getElementById('result').textContent = 'Please enter valid width and height';
+        return;
+      }
+      const iw = Math.round(w * 10000);
+      const ih = Math.round(h * 10000);
+      const d = gcd(iw, ih);
+      const rw = iw / d;
+      const rh = ih / d;
+      document.getElementById('result').textContent = `Aspect Ratio:${rw}:${rh}`;
+    }
+  </script>
+</body>
+</html> 
+

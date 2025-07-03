@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkbook Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Checkbook Calculator.">
+  <meta name="keywords" content="checkbook calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Checkbook Calculator</div>
+    <div class="input-row">
+      <input type="number" id="initial" placeholder="Initial Balance" data-i18n="auto" data-i18n="auto">
+      <input type="text" id="transactions" placeholder="Transactions (comma separated, positive for deposits, negative for withdrawals)" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcCheckbook()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcCheckbook() {
+      let initial = parseFloat(document.getElementById('initial').value) || 0;
+      let transactions = document.getElementById('transactions').value.split(',').map(x=>parseFloat(x.trim())).filter(x=>!isNaN(x));
+      let total = initial + transactions.reduce((a,b)=>a+b,0);
+      document.getElementById('result').textContent = `Current balance: ${total.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html> 
+

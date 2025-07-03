@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conical Frustum Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Conical Frustum Calculator.">
+  <meta name="keywords" content="conical frustum calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Conical Frustum Calculator</div>
+    <div class="input-row">
+      <input type="number" id="r1" placeholder="Please enter top radius (e.g. 3)" step="any" min="0" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="r2" placeholder="Please enter bottom radius (e.g. 5)" step="any" min="0" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="h" placeholder="Please enter height (e.g. 10)" step="any" min="0" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcFrustum()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcFrustum() {
+      const r1 = parseFloat(document.getElementById('r1').value);
+      const r2 = parseFloat(document.getElementById('r2').value);
+      const h = parseFloat(document.getElementById('h').value);
+      if (isNaN(r1) || r1 < 0 || isNaN(r2) || r2 < 0 || isNaN(h) || h < 0) {
+        document.getElementById('result').textContent = 'Please enter valid top radius, bottom radius, and height (≥0)';
+        return;
+      }
+      const volume = Math.PI * h * (r1*r1 + r1*r2 + r2*r2) / 3;
+      const slant = Math.sqrt((r2 - r1)*(r2 - r1) + h*h);
+      const lateral = Math.PI * (r1 + r2) * slant;
+      document.getElementById('result').innerHTML =
+        `Volume:<b>${volume.toFixed(6)}</b> <br>Lateral Area:<b>${lateral.toFixed(6)}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

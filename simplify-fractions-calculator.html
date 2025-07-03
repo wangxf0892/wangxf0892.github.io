@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simplify Fractions Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Simplify Fractions Calculator.">
+  <meta name="keywords" content="simplify fractions calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Simplify Fractions Calculator</div>
+    <div class="input-row">
+      <input type="number" id="numerator" placeholder="Numerator" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="denominator" placeholder="Denominator" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="simplifyFraction()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function gcd(a, b) {
+      return b === 0 ? Math.abs(a) : gcd(b, a % b);
+    }
+    function simplifyFraction() {
+      const n = parseInt(document.getElementById('numerator').value);
+      const d = parseInt(document.getElementById('denominator').value);
+      const resultDiv = document.getElementById('result');
+      if (isNaN(n) || isNaN(d) || d === 0) {
+        resultDiv.textContent = 'Please enter valid numerator and denominator(denominator cannot be 0)';
+        return;
+      }
+      let sign = (n * d < 0) ? '-' : '';
+      let num = Math.abs(n);
+      let den = Math.abs(d);
+      const g = gcd(num, den);
+      num = num / g;
+      den = den / g;
+      // 带Fraction
+      let mixed = '';
+      if (num >= den) {
+        const integer = Math.floor(num / den);
+        const remain = num % den;
+        if (remain === 0) {
+          mixed = sign + integer;
+        } else {
+          mixed = sign + integer + ' <sup>' + remain + '</sup>&frasl;<sub>' + den + '</sub>';
+        }
+      } else {
+        mixed = sign + '<sup>' + num + '</sup>&frasl;<sub>' + den + '</sub>';
+      }
+      // 真Fraction
+      const proper = sign + '<sup>' + num + '</sup>&frasl;<sub>' + den + '</sub>';
+      resultDiv.innerHTML = `Simplified Fraction:<br>${proper}<br>Mixed Fraction:<br>${mixed}`;
+    }
+  </script>
+</body>
+</html> 
+

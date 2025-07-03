@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparing Fractions Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Comparing Fractions Calculator.">
+  <meta name="keywords" content="comparing fractions calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Comparing Fractions Calculator</div>
+    <div class="input-row">
+      <input type="text" id="frac1" placeholder="Please enter first fraction (e.g. 3/4)" data-i18n="auto" data-i18n="auto">
+      <input type="text" id="frac2" placeholder="Please enter second fraction (e.g. 2/3)" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="compareFractions()" data-i18n="auto" data-i18n="auto">比较</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function parseFraction(str) {
+      const parts = str.split('/').map(s => s.trim());
+      if (parts.length !== 2) return NaN;
+      const num = parseFloat(parts[0]);
+      const den = parseFloat(parts[1]);
+      if (isNaN(num) || isNaN(den) || den === 0) return NaN;
+      return num / den;
+    }
+    function compareFractions() {
+      const f1 = document.getElementById('frac1').value;
+      const f2 = document.getElementById('frac2').value;
+      const v1 = parseFraction(f1);
+      const v2 = parseFraction(f2);
+      if (isNaN(v1) || isNaN(v2)) {
+        document.getElementById('result').textContent = 'Please enter valid fractions (e.g. 3/4 and 2/3)';
+        return;
+      }
+      let res = '';
+      if (Math.abs(v1 - v2) < 1e-12) {
+        res = `Two Fractions are equal:${f1} = ${f2}`;
+      } else if (v1 > v2) {
+        res = `${f1} > ${f2}`;
+      } else {
+        res = `${f1} < ${f2}`;
+      }
+      document.getElementById('result').innerHTML = res;
+    }
+  </script>
+</body>
+</html> 
+

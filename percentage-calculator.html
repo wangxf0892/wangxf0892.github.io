@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Percentage Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Percentage Calculator.">
+  <meta name="keywords" content="percentage calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Percentage Calculator</div>
+    <div class="sub-title">A is what percentage of B?</div>
+    <div class="input-row">
+      <input type="number" id="a1" placeholder="A" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="b1" placeholder="B" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcPercent1()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result1"></div>
+    <div class="sub-title">A increase/decrease B% is how much?</div>
+    <div class="input-row">
+      <input type="number" id="a2" placeholder="A" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="b2" placeholder="B(percentage%)" step="any" data-i18n="auto" data-i18n="auto">
+      <select id="op2">
+        <option value="+" data-i18n="auto" data-i18n="auto">Increase</option>
+        <option value="-" data-i18n="auto" data-i18n="auto">Decrease</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calcPercent2()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result2"></div>
+    <div class="sub-title">A is how many percent more/less than B?</div>
+    <div class="input-row">
+      <input type="number" id="a3" placeholder="A" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="b3" placeholder="B" step="any" data-i18n="auto" data-i18n="auto">
+      <select id="op3">
+        <option value="+" data-i18n="auto" data-i18n="auto">More</option>
+        <option value="-" data-i18n="auto" data-i18n="auto">Less</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calcPercent3()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result3"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>  <script src="recommend-calculators.js">  </script>
+    <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcPercent1() {
+      const a = parseFloat(document.getElementById('a1').value);
+      const b = parseFloat(document.getElementById('b1').value);
+      if (isNaN(a) || isNaN(b) || b === 0) {
+        document.getElementById('result1').textContent = 'Please enter valid A and B, and B≠0';
+        return;
+      }
+      const p = (a / b * 100).toFixed(4);
+      document.getElementById('result1').innerHTML = `A is what percentage of B?<b>${p}%</b>`;
+    }
+    function calcPercent2() {
+      const a = parseFloat(document.getElementById('a2').value);
+      const b = parseFloat(document.getElementById('b2').value);
+      const op = document.getElementById('op2').value;
+      if (isNaN(a) || isNaN(b)) {
+        document.getElementById('result2').textContent = 'Please enter valid A and B';
+        return;
+      }
+      let res = op === '+' ? a * (1 + b / 100) : a * (1 - b / 100);
+      document.getElementById('result2').innerHTML = `Result: <b>${res.toFixed(4)}</b>`;
+    }
+    function calcPercent3() {
+      const a = parseFloat(document.getElementById('a3').value);
+      const b = parseFloat(document.getElementById('b3').value);
+      const op = document.getElementById('op3').value;
+      if (isNaN(a) || isNaN(b) || b === 0) {
+        document.getElementById('result3').textContent = 'Please enter valid A and B, and B≠0';
+        return;
+      }
+      let p = op === '+' ? ((a - b) / b * 100) : ((b - a) / b * 100);
+      document.getElementById('result3').innerHTML = `A is how many percent more/less than B?<b>${p.toFixed(4)}%</b>`;
+    }
+  </script>
+</body>
+</html> 
+

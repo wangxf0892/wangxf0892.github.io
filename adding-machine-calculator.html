@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adding Machine Calculator</title>
+  <meta name="description" content="AdditionCalculate,Enter multiple numbers,accumulate and sum。">
+  <meta name="keywords" content="AdditionCalculate, Addition, Sum, Online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">AdditionCalculate</div>
+    <div class="input-row">
+      <textarea id="nums" placeholder="Please enter multiple numbers,separated by commas, spaces, or newlines"></textarea>
+    </div>
+    <button class="calc-btn" onclick="calcSum()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   
+  <script src="recommend-calculators.js"></script>
+  <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcSum() {
+      let txt = document.getElementById('nums').value;
+      let arr = txt.split(/[,\s]+/).map(Number).filter(x=>!isNaN(x));
+      if (arr.length === 0) {
+        document.getElementById('result').textContent = 'Please enter at least one Number'; return;
+      }
+      let sum = arr.reduce((a,b)=>a+b,0);
+      document.getElementById('result').textContent = `Sum:${sum}`;
+    }
+  </script>
+</body>
+</html> 
+

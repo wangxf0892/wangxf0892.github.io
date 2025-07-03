@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misc Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Miscellaneous Calculator.">
+  <meta name="keywords" content="misc calculator, random number, timer, temperature conversion, small tool">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Miscellaneous Calculator</div>
+    <div class="sub-title">Random Number Generate</div>
+    <div class="input-row">
+      <input type="number" id="rand_min" placeholder="Minimum Value" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="rand_max" placeholder="Maximum Value" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="genRandom()" data-i18n="auto" data-i18n="auto">Generate Random Number</button>
+    <div class="result" id="result1"></div>
+    <div class="sub-title">Simple Timer</div>
+    <div class="input-row">
+      <input type="number" id="timer_sec" placeholder="Seconds" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="startTimer()" data-i18n="auto" data-i18n="auto">Start countdown</button>
+    <div class="result" id="result2"></div>
+    <div class="sub-title">Temperature Conversion</div>
+    <div class="input-row">
+      <input type="number" id="temp_val" placeholder="Temperature Value" step="any" data-i18n="auto" data-i18n="auto">
+      <select id="temp_from">
+        <option value="C" data-i18n="auto" data-i18n="auto">Celsius(℃)</option>
+        <option value="F" data-i18n="auto" data-i18n="auto">Fahrenheit(℉)</option>
+        <option value="K" data-i18n="auto" data-i18n="auto">Kelvin(K)</option>
+      </select>
+      <select id="temp_to">
+        <option value="C" data-i18n="auto" data-i18n="auto">Celsius(℃)</option>
+        <option value="F" data-i18n="auto" data-i18n="auto">Fahrenheit(℉)</option>
+        <option value="K" data-i18n="auto" data-i18n="auto">Kelvin(K)</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="convertTemp()" data-i18n="auto" data-i18n="auto">Convert</button>
+    <div class="result" id="result3"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="recommend-calculators.js"></script>
+   <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function genRandom() {
+      const min = parseInt(document.getElementById('rand_min').value);
+      const max = parseInt(document.getElementById('rand_max').value);
+      if (isNaN(min) || isNaN(max) || min > max) {
+        document.getElementById('result1').textContent = 'Please enter valid minimum and maximum values';
+        return;
+      }
+      const rand = Math.floor(Math.random() * (max - min + 1)) + min;
+      document.getElementById('result1').innerHTML = `Random Number:<b>${rand}</b>`;
+    }
+    let timer = null;
+    function startTimer() {
+      const sec = parseInt(document.getElementById('timer_sec').value);
+      if (isNaN(sec) || sec <= 0) {
+        document.getElementById('result2').textContent = 'Please enter valid seconds';
+        return;
+      }
+      clearInterval(timer);
+      let left = sec;
+      document.getElementById('result2').innerHTML = `Remaining:<b>${left}</b> seconds`;
+      timer = setInterval(() => {
+        left--;
+        if (left > 0) {
+          document.getElementById('result2').innerHTML = `Remaining:<b>${left}</b> seconds`;
+        } else {
+          document.getElementById('result2').innerHTML = 'Countdown finished!';
+          clearInterval(timer);
+        }
+      }, 1000);
+    }
+    function convertTemp() {
+      const val = parseFloat(document.getElementById('temp_val').value);
+      const from = document.getElementById('temp_from').value;
+      const to = document.getElementById('temp_to').value;
+      if (isNaN(val)) {
+        document.getElementById('result3').textContent = 'Please enter temperature value';
+        return;
+      }
+      let res = val;
+      // 转为摄氏度
+      if (from === 'F') res = (val - 32) * 5 / 9;
+      else if (from === 'K') res = val - 273.15;
+      // 摄氏度转目标
+      if (to === 'F') res = res * 9 / 5 + 32;
+      else if (to === 'K') res = res + 273.15;
+      document.getElementById('result3').innerHTML = `换算Result: <b>${res.toFixed(4)}</b> ${to}`;
+    }
+  </script>
+</body>
+</html> 
+

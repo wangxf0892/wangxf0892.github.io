@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistics Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Statistics Calculator.">
+  <meta name="keywords" content="statistics calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Statistics Calculator</div>
+    <div class="input-row">
+      <textarea id="numbers" placeholder="Please enter a list of numbers, separated by commas, spaces or newlines"></textarea>
+    </div>
+    <button class="calc-btn" onclick="calcStats()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function parseNumbers(str) {
+      return str.split(/[,\s]+/).map(Number).filter(x => !isNaN(x));
+    }
+    function mean(arr) {
+      return arr.reduce((a, b) => a + b, 0) / arr.length;
+    }
+    function median(arr) {
+      const s = [...arr].sort((a, b) => a - b);
+      const mid = Math.floor(s.length / 2);
+      return s.length % 2 === 0 ? (s[mid - 1] + s[mid]) / 2 : s[mid];
+    }
+    function mode(arr) {
+      const freq = {};
+      arr.forEach(x => freq[x] = (freq[x] || 0) + 1);
+      const max = Math.max(...Object.values(freq));
+      const modes = Object.keys(freq).filter(k => freq[k] === max);
+      return modes.length === arr.length ? '无' : modes.join(',');
+    }
+    function range(arr) {
+      return Math.max(...arr) - Math.min(...arr);
+    }
+    function variance(arr) {
+      const m = mean(arr);
+      return arr.reduce((sum, x) => sum + Math.pow(x - m, 2), 0) / arr.length;
+    }
+    function stddev(arr) {
+      return Math.sqrt(variance(arr));
+    }
+    function calcStats() {
+      const arr = parseNumbers(document.getElementById('numbers').value);
+      const resultDiv = document.getElementById('result');
+      if (arr.length === 0) {
+        resultDiv.textContent = 'Please enter valid number data';
+        return;
+      }
+      const avg = mean(arr);
+      const med = median(arr);
+      const mod = mode(arr);
+      const ran = range(arr);
+      const varr = variance(arr);
+      const std = stddev(arr);
+          resultDiv.innerHTML = `Average:<b>${avg.toFixed(4)}</b><br>Median:<b>${med}</b><br>Mode:<b>${mod}</b><br>Range:<b>${ran}</b><br>Variance:<b>${varr.toFixed(4)}</b><br>Standard Deviation:<b>${std.toFixed(4)}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

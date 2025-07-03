@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Loan Calculator.">
+  <meta name="keywords" content="loan calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Loan Calculator</div>
+    <div class="input-row">
+      <input type="number" id="amount" placeholder="Loan Amount" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="rate" placeholder="Year Interest Rate(%)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="years" placeholder="Number of Periods (year)" min="1" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcLoan()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcLoan() {
+      const a = parseFloat(document.getElementById('amount').value);
+      const r = parseFloat(document.getElementById('rate').value);
+      const y = parseInt(document.getElementById('years').value);
+      if (isNaN(a) || isNaN(r) || isNaN(y) || a <= 0 || r < 0 || y < 1) {
+        document.getElementById('result').textContent = 'Please enter valid loan amount, year interest rate and number of periods';
+        return;
+      }
+      const m = y * 12;
+      const monthlyRate = r / 100 / 12;
+      // 等额本息
+      let mp1 = 0, total1 = 0, interest1 = 0;
+      if (monthlyRate === 0) {
+        mp1 = a / m;
+        total1 = a;
+        interest1 = 0;
+      } else {
+        mp1 = a * monthlyRate * Math.pow(1 + monthlyRate, m) / (Math.pow(1 + monthlyRate, m) - 1);
+        total1 = mp1 * m;
+        interest1 = total1 - a;
+      }
+      // Equal Principal
+      let mp2 = a / m;
+      let interest2 = 0;
+      for (let i = 0; i < m; i++) {
+        interest2 += (a - i * a / m) * monthlyRate;
+      }
+      let total2 = a + interest2;
+      let mp2_first = mp2 + a * monthlyRate;
+      let mp2_last = mp2 + (a - (m - 1) * a / m) * monthlyRate;
+      let html = '<ul class="loan-list">';
+      html += `<li><b>Equal principal and interest:</b>Each month repayment <b>${mp1.toFixed(2)}</b>,total interest <b>${interest1.toFixed(2)}</b>,total repayment <b>${total1.toFixed(2)}</b></li>`;
+      html += `<li><b>Equal Principal:</b>First month repayment <b>${mp2_first.toFixed(2)}</b>,last month repayment <b>${mp2_last.toFixed(2)}</b>,total interest <b>${interest2.toFixed(2)}</b>,total repayment <b>${total2.toFixed(2)}</b></li>`;
+      html += '</ul>';
+      document.getElementById('result').innerHTML = html;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bid Ask Calculator</title>
+  <meta name="description" content="Bid-Ask Spread Calculator,Supports entering buy price, sell price, buy quantity, sell quantity, and automatically calculating total amount, difference, and percentage.">
+  <meta name="keywords" content="Bid-Ask Spread, Buy Price, Sell Price, Difference, Percentage, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Bid-Ask Spread Calculator</div>
+    <div class="input-row">
+      <input type="number" id="buyPrice" placeholder="Buy Price" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="buyQty" placeholder="Buy Quantity" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="sellPrice" placeholder="Sell Price" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="sellQty" placeholder="Sell Quantity" min="0" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcBidAsk()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcBidAsk() {
+      const buyPrice = parseFloat(document.getElementById('buyPrice').value);
+      const buyQty = parseFloat(document.getElementById('buyQty').value);
+      const sellPrice = parseFloat(document.getElementById('sellPrice').value);
+      const sellQty = parseFloat(document.getElementById('sellQty').value);
+      const resultDiv = document.getElementById('result');
+      if ([buyPrice, buyQty, sellPrice, sellQty].some(x => isNaN(x) || x < 0)) {
+        resultDiv.textContent = 'Please enter valid buy/sell price and quantity';
+        return;
+      }
+      const buyTotal = buyPrice * buyQty;
+      const sellTotal = sellPrice * sellQty;
+      const diff = sellTotal - buyTotal;
+      const percent = buyTotal === 0 ? '—' : ((diff / buyTotal) * 100).toFixed(4) + '%';
+      resultDiv.innerHTML = `Buy total amount:<b>${buyTotal.toFixed(2)}</b><br>Sell total amount:<b>${sellTotal.toFixed(2)}</b><br>Difference:<b>${diff.toFixed(2)}</b><br>Difference percentage:<b>${percent}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

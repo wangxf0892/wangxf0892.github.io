@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Construction Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Construction Calculator.">
+  <meta name="keywords" content="construction calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Construction Calculator</div>
+    <div class="input-row">
+      <input type="text" id="expr" placeholder="Please enter expression, e.g. 5*3+8/2" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcExpr()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcExpr() {
+      const expr = document.getElementById('expr').value;
+      if (!expr.trim()) {
+        document.getElementById('result').textContent = 'Please enter an expression';
+        return;
+      }
+      try {
+        // 仅允许Number、+ - * / . ( ) 空格
+        if (!/^[-+*/().\d\s]+$/.test(expr)) throw new Error('Only Number and four arithmetic operators are supported');
+        // eslint-disable-next-line no-eval
+        const val = eval(expr);
+        if (typeof val !== 'number' || !isFinite(val)) throw new Error('Expression is invalid');
+        document.getElementById('result').innerHTML = `Result: <b>${val}</b>`;
+      } catch (e) {
+        document.getElementById('result').textContent = 'Expression is invalid, please check the input';
+      }
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decimal Degrees To Dms</title>
+  <meta name="description" content="A simple and mobile-friendly Decimal Degrees to DMS Calculator.">
+  <meta name="keywords" content="decimal degrees to dms calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Decimal Degrees to DMSCalculate器</div>
+    <div class="input-row">
+      <input type="number" id="deg" placeholder="Please enter decimal degrees (e.g. 123.4567)" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcDMS()" data-i18n="auto" data-i18n="auto">Convert</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcDMS() {
+      const deg = parseFloat(document.getElementById('deg').value);
+      if (isNaN(deg)) {
+        document.getElementById('result').textContent = 'Please enter valid decimal degrees';
+        return;
+      }
+      const d = Math.trunc(deg);
+      const mFloat = Math.abs((deg - d) * 60);
+      const m = Math.trunc(mFloat);
+      const s = ((mFloat - m) * 60).toFixed(6);
+      document.getElementById('result').innerHTML = `DMS:<b>${d}° ${m}′ ${s}″</b>`;
+    }
+  </script>
+</body>
+</html> 
+

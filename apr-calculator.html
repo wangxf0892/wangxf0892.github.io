@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apr Calculator</title>
+  <meta name="description" content="APRAdvancedCalculate,Supports entering Loan amount, fee, repayment per installment, number of installments, and automatically iterates to Calculate actual yearInterest Rate(APR)。">
+  <meta name="keywords" content="APR, yearInterest Rate, actual yearInterest Rate, Loan, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">APRAdvancedCalculate器</div>
+    <div class="input-row">
+      <input type="number" id="amount" placeholder="Loan amount" step="0.01" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="fee" placeholder="Fee" step="0.01" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="payment" placeholder="Repayment per installment" step="0.01" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="periods" placeholder="Number of installments(month)" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcAPRAdv()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div> 
+  <script src="recommend-calculators.js">  </script>
+     <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+    // 迭代法求解APR
+    function calcAPRAdv() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const fee = parseFloat(document.getElementById('fee').value);
+      const payment = parseFloat(document.getElementById('payment').value);
+      const periods = parseInt(document.getElementById('periods').value);
+      if ([amount, fee, payment, periods].some(x => isNaN(x)) || amount <= 0 || payment <= 0 || periods <= 0) {
+        document.getElementById('result').textContent = 'Please enter valid values';
+        return;
+      }
+      // cash flow:t=0为-(amount-fee),t=1~n为payment
+      // Target:NPV=0,求monthInterest Rater
+      let pv = amount - fee;
+      let low = 0, high = 1, r = 0;
+      let npv = 0;
+      for (let iter = 0; iter < 100; iter++) {
+        r = (low + high) / 2;
+        npv = 0;
+        for (let i = 1; i <= periods; i++) {
+          npv += payment / Math.pow(1 + r, i);
+        }
+        if (npv > pv) {
+          low = r;
+        } else {
+          high = r;
+        }
+        if (Math.abs(npv - pv) < 1e-8) break;
+      }
+      const apr = r * 12 * 100;
+      document.getElementById('result').textContent = `Actual yearInterest Rate(APR)approx:${apr.toFixed(4)}%`;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discrete Math Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Discrete Math Set Operations Calculator.">
+  <meta name="keywords" content="discrete math set operations calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Discrete Math Set Operations Calculator</div>
+    <div class="input-row">
+      <input type="text" id="setA" placeholder="Please enter set A (e.g. 1,2,3)" data-i18n="auto" data-i18n="auto">
+      <input type="text" id="setB" placeholder="Please enter set B (e.g. 2,3,4)" data-i18n="auto" data-i18n="auto">
+    </div>
+    <div class="btn-row">
+      <button class="calc-btn" onclick="calcSet('union')" data-i18n="auto" data-i18n="auto">Union</button>
+      <button class="calc-btn" onclick="calcSet('intersection')" data-i18n="auto" data-i18n="auto">Intersection</button>
+      <button class="calc-btn" onclick="calcSet('difference')" data-i18n="auto" data-i18n="auto">A - B</button>
+      <button class="calc-btn" onclick="calcSet('symdiff')" data-i18n="auto" data-i18n="auto">Symmetric Difference</button>
+    </div>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function parseSet(str) {
+      return new Set(str.split(',').map(s => s.trim()).filter(s => s !== ''));
+    }
+    function calcSet(type) {
+      const setA = parseSet(document.getElementById('setA').value);
+      const setB = parseSet(document.getElementById('setB').value);
+      if (setA.size === 0 || setB.size === 0) {
+        document.getElementById('result').textContent = 'Please enter two non-empty sets';
+        return;
+      }
+      let resultSet;
+      switch(type) {
+        case 'union':
+          resultSet = new Set([...setA, ...setB]);
+          showResult('A ∪ B = {' + Array.from(resultSet).join(', ') + '}');
+          break;
+        case 'intersection':
+          resultSet = new Set([...setA].filter(x => setB.has(x)));
+          showResult('A ∩ B = {' + Array.from(resultSet).join(', ') + '}');
+          break;
+        case 'difference':
+          resultSet = new Set([...setA].filter(x => !setB.has(x)));
+          showResult('A - B = {' + Array.from(resultSet).join(', ') + '}');
+          break;
+        case 'symdiff':
+          resultSet = new Set([...setA, ...setB]);
+          for (let x of setA) if (setB.has(x)) resultSet.delete(x);
+          for (let x of setB) if (setA.has(x)) resultSet.delete(x);
+          showResult('A △ B = {' + Array.from(resultSet).join(', ') + '}');
+          break;
+      }
+    }
+    function showResult(str) {
+      document.getElementById('result').textContent = str;
+    }
+  </script>
+</body>
+</html> 
+

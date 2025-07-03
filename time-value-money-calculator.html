@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Value Money Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Time Value Money Calculator.">
+  <meta name="keywords" content="time value money calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Time Value Money Calculator</div>
+    <div class="tab-row">
+      <button class="tab-btn active" id="tab-fv" onclick="switchTab('fv')" data-i18n="auto" data-i18n="auto">PV → FV</button>
+      <button class="tab-btn" id="tab-pv" onclick="switchTab('pv')" data-i18n="auto" data-i18n="auto">FV → PV</button>
+    </div>
+    <div id="panel-fv">
+      <div class="input-row">
+        <input type="number" id="pv" placeholder="PV" min="0" step="any" data-i18n="auto" data-i18n="auto">
+        <input type="number" id="rate-fv" placeholder="yearInterest Rate(%)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+        <input type="number" id="n-fv" placeholder="Period(year)" min="1" step="1" data-i18n="auto" data-i18n="auto">
+      </div>
+      <button class="calc-btn" onclick="calcFV()" data-i18n="auto" data-i18n="auto">Calculate FV</button>
+      <div class="result" id="result-fv"></div>
+    </div>
+    <div id="panel-pv" style="display:none;">
+      <div class="input-row">
+        <input type="number" id="fv" placeholder="FV" min="0" step="any" data-i18n="auto" data-i18n="auto">
+        <input type="number" id="rate-pv" placeholder="yearInterest Rate(%)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+        <input type="number" id="n-pv" placeholder="Period(year)" min="1" step="1" data-i18n="auto" data-i18n="auto">
+      </div>
+      <button class="calc-btn" onclick="calcPV()" data-i18n="auto" data-i18n="auto">Calculate PV</button>
+      <div class="result" id="result-pv"></div>
+    </div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function switchTab(tab) {
+      document.getElementById('panel-fv').style.display = tab === 'fv' ? '' : 'none';
+      document.getElementById('panel-pv').style.display = tab === 'pv' ? '' : 'none';
+      document.getElementById('tab-fv').classList.toggle('active', tab === 'fv');
+      document.getElementById('tab-pv').classList.toggle('active', tab === 'pv');
+    }
+    function calcFV() {
+      const pv = parseFloat(document.getElementById('pv').value);
+      const r = parseFloat(document.getElementById('rate-fv').value);
+      const n = parseInt(document.getElementById('n-fv').value);
+      const resultDiv = document.getElementById('result-fv');
+      if (isNaN(pv) || isNaN(r) || isNaN(n) || pv < 0 || r < 0 || n < 1) {
+        resultDiv.textContent = 'Please enter valid PV, yearInterest Rate and period';
+        return;
+      }
+      const fv = pv * Math.pow(1 + r / 100, n);
+      resultDiv.innerHTML = `FV:<b>${fv.toFixed(2)}</b>`;
+    }
+    function calcPV() {
+      const fv = parseFloat(document.getElementById('fv').value);
+      const r = parseFloat(document.getElementById('rate-pv').value);
+      const n = parseInt(document.getElementById('n-pv').value);
+      const resultDiv = document.getElementById('result-pv');
+      if (isNaN(fv) || isNaN(r) || isNaN(n) || fv < 0 || r < 0 || n < 1) {
+        resultDiv.textContent = 'Please enter valid FV, yearInterest Rate and period';
+        return;
+      }
+      const pv = fv / Math.pow(1 + r / 100, n);
+      resultDiv.innerHTML = `PV:<b>${pv.toFixed(2)}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

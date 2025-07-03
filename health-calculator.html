@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Health Calculator.">
+  <meta name="keywords" content="health calculator, bmi, bmr, tdee, body mass index, basal metabolic rate, daily calorie needs">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Health Calculator</div>
+    <div class="sub-title">BMI(体重指数)</div>
+    <div class="input-row">
+      <input type="number" id="bmi_weight" placeholder="Weight(kg)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="bmi_height" placeholder="Height(cm)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcBMI()" data-i18n="auto" data-i18n="auto">CalculateBMI</button>
+    <div class="result" id="result1"></div>
+    <div class="sub-title">基础代谢率 BMR</div>
+    <div class="input-row">
+      <input type="number" id="bmr_weight" placeholder="Weight(kg)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="bmr_height" placeholder="Height(cm)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="bmr_age" placeholder="Age" min="0" step="1" data-i18n="auto" data-i18n="auto">
+      <select id="bmr_gender">
+        <option value="male" data-i18n="auto" data-i18n="auto">Male</option>
+        <option value="female" data-i18n="auto" data-i18n="auto">Female</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calcBMR()" data-i18n="auto" data-i18n="auto">CalculateBMR</button>
+    <div class="result" id="result2"></div>
+    <div class="sub-title">Daily Caloric Requirements TDEE</div>
+    <div class="input-row">
+      <input type="number" id="tdee_bmr" placeholder="Basal Metabolic Rate BMR" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <select id="tdee_activity">
+        <option value="1.2" data-i18n="auto" data-i18n="auto">Sedentary/very rarely Sports(1.2)</option>
+        <option value="1.375" data-i18n="auto" data-i18n="auto">Light Activity/1-3day Sports(1.375)</option>
+        <option value="1.55" data-i18n="auto" data-i18n="auto">Moderate Activity/3-5day Sports(1.55)</option>
+        <option value="1.725" data-i18n="auto" data-i18n="auto">Heavy Activity/6-7day Sports(1.725)</option>
+        <option value="1.9" data-i18n="auto" data-i18n="auto">Very Active/Physical Labor or High Intensity Training(1.9)</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calcTDEE()" data-i18n="auto" data-i18n="auto">CalculateTDEE</button>
+    <div class="result" id="result3"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcBMI() {
+      const w = parseFloat(document.getElementById('bmi_weight').value);
+      const h = parseFloat(document.getElementById('bmi_height').value);
+      if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
+        document.getElementById('result1').textContent = 'Please enter valid weight and height';
+        return;
+      }
+      const bmi = w / Math.pow(h / 100, 2);
+      let level = '';
+      if (bmi < 18.5) level = 'Underweight';
+      else if (bmi < 24) level = 'Normal';
+      else if (bmi < 28) level = 'Overweight';
+      else level = 'Obesity';
+      document.getElementById('result1').innerHTML = `BMI:<b>${bmi.toFixed(2)}</b>(${level})`;
+    }
+    function calcBMR() {
+      const w = parseFloat(document.getElementById('bmr_weight').value);
+      const h = parseFloat(document.getElementById('bmr_height').value);
+      const age = parseInt(document.getElementById('bmr_age').value);
+      const gender = document.getElementById('bmr_gender').value;
+      if (isNaN(w) || isNaN(h) || isNaN(age) || w <= 0 || h <= 0 || age <= 0) {
+        document.getElementById('result2').textContent = 'Please enter valid weight, height and age';
+        return;
+      }
+      let bmr = 0;
+      if (gender === 'male') {
+        bmr = 88.36 + 13.4 * w + 4.8 * h - 5.7 * age;
+      } else {
+        bmr = 447.6 + 9.2 * w + 3.1 * h - 4.3 * age;
+      }
+      document.getElementById('result2').innerHTML = `Basal Metabolic Rate BMR:<b>${bmr.toFixed(2)}</b> kcal/day`;
+    }
+    function calcTDEE() {
+      const bmr = parseFloat(document.getElementById('tdee_bmr').value);
+      const act = parseFloat(document.getElementById('tdee_activity').value);
+      if (isNaN(bmr) || isNaN(act) || bmr <= 0) {
+        document.getElementById('result3').textContent = 'Please enter valid BMR and Activity Factor';
+        return;
+      }
+      const tdee = bmr * act;
+      document.getElementById('result3').innerHTML = `Daily Caloric Requirements TDEE:<b>${tdee.toFixed(2)}</b> kcal/day`;
+    }
+  </script>
+</body>
+</html> 
+

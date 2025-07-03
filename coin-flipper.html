@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coin Flipper</title>
+  <meta name="description" content="A simple and mobile-friendly Coin Flipper.">
+  <meta name="keywords" content="coin flipper, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Coin Flipper</div>
+    <div class="input-row">
+      <input type="number" id="flips" placeholder="Flip times" value="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="flipCoin()" data-i18n="auto" data-i18n="auto">Flip Coin</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function flipCoin() {
+      let flips = parseInt(document.getElementById('flips').value) || 1;
+      if (flips <= 0 || flips > 100) {
+        document.getElementById('result').textContent = 'Please enter1-100 between flips'; return;
+      }
+      let results = [];
+      let heads = 0, tails = 0;
+      for (let i = 0; i < flips; i++) {
+        let result = Math.random() < 0.5 ? 'front' : 'back';
+        results.push(result);
+        if (result === 'front') heads++; else tails++;
+      }
+      document.getElementById('result').innerHTML = `Result: ${results.join(', ')}<br>Front:${heads} times, Back:${tails} times`;
+    }
+  </script>
+</body>
+</html> 
+

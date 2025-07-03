@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physics Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Physics Calculator.">
+  <meta name="keywords" content="physics calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js"></script>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="physics.title" data-i18n="auto" data-i18n="auto">Physics Calculator</div>
+    <div class="input-row">
+      <select id="formula" onchange="renderInputs()">
+        <option value="speed" data-i18n="physics.speed" data-i18n="auto" data-i18n="auto">Speed = Distance / Time</option>
+        <option value="density" data-i18n="physics.density" data-i18n="auto" data-i18n="auto">Density = Mass / Volume</option>
+        <option value="work" data-i18n="physics.work" data-i18n="auto" data-i18n="auto">Work = Force × Distance</option>
+      </select>
+      <div id="inputs" class="input-group"></div>
+    </div>
+    <button class="calc-btn" onclick="calcPhysics()" data-i18n="physics.calc" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+    <div class="recommend-area"></div>
+  </div>
+  <script src="recommend-calculators.js"></script>
+  <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function renderInputs() {
+      const f = document.getElementById('formula').value;
+      let html = '';
+      const t = window.I18N ? window.I18N.t : (k, f) => f || k;
+      if (f === 'speed') {
+        html += `<input type="number" id="distance" placeholder="${t('physics.distance','Distance (m)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
+        html += `<input type="number" id="time" placeholder="${t('physics.time','Time (s)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
+      } else if (f === 'density') {
+        html += `<input type="number" id="mass" placeholder="${t('physics.mass','Mass (kg)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
+        html += `<input type="number" id="volume" placeholder="${t('physics.volume','Volume (m³)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
+      } else if (f === 'work') {
+        html += `<input type="number" id="force" placeholder="${t('physics.force','Force (N)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
+        html += `<input type="number" id="distance2" placeholder="${t('physics.distance2','Distance (m)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
+      }
+      document.getElementById('inputs').innerHTML = html;
+    }
+    renderInputs();
+    function calcPhysics() {
+      const f = document.getElementById('formula').value;
+      const t = window.I18N ? window.I18N.t : (k, f) => f || k;
+      let res = '';
+      if (f === 'speed') {
+        const d = parseFloat(document.getElementById('distance').value);
+        const tt = parseFloat(document.getElementById('time').value);
+        if (isNaN(d) || isNaN(tt) || tt === 0) {
+          document.getElementById('result').textContent = t('physics.err_speed','Please enter valid distance and time, and time ≠ 0');
+          return;
+        }
+        res = `${t('physics.speed','Speed')} = <b>${(d / tt).toFixed(6)}</b> ${t('physics.unit_speed','m/s')}`;
+      } else if (f === 'density') {
+        const m = parseFloat(document.getElementById('mass').value);
+        const v = parseFloat(document.getElementById('volume').value);
+        if (isNaN(m) || isNaN(v) || v === 0) {
+          document.getElementById('result').textContent = t('physics.err_density','Please enter valid mass and volume, and volume ≠ 0');
+          return;
+        }
+        res = `${t('physics.density','Density')} = <b>${(m / v).toFixed(6)}</b> ${t('physics.unit_density','kg/m³')}`;
+      } else if (f === 'work') {
+        const F = parseFloat(document.getElementById('force').value);
+        const s = parseFloat(document.getElementById('distance2').value);
+        if (isNaN(F) || isNaN(s)) {
+          document.getElementById('result').textContent = t('physics.err_work','Please enter valid force and distance');
+          return;
+        }
+        res = `${t('physics.work','Work')} = <b>${(F * s).toFixed(6)}</b> ${t('physics.unit_work','Joule')}`;
+      }
+      document.getElementById('result').innerHTML = res;
+    }
+    function renderPhysicsI18n() {
+      if (!window.I18N) return;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (key && window.I18N.t(key)) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = window.I18N.t(key);
+          } else if (el.tagName === 'BUTTON') {
+            el.textContent = window.I18N.t(key);
+          } else {
+            el.innerHTML = window.I18N.t(key);
+          }
+        }
+      });
+      const select = document.getElementById('formula');
+      if (select) {
+        select.options[0].textContent = window.I18N.t('physics.speed','Speed = Distance / Time');
+        select.options[1].textContent = window.I18N.t('physics.density','Density = Mass / Volume');
+        select.options[2].textContent = window.I18N.t('physics.work','Work = Force × Distance');
+      }
+      renderInputs();
+    }
+    document.addEventListener('DOMContentLoaded', renderPhysicsI18n);
+    if (window.I18N && typeof window.I18N.onLangChange === 'function') {
+      window.I18N.onLangChange(renderPhysicsI18n);
+    }
+  </script>
+</body>
+</html> 
+

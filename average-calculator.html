@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Average Calculator</title>
+  <meta name="description" content="Average Calculator,Supports entering a set of numbers, automatically Calculate average value, total and, number of numbers。">
+  <meta name="keywords" content="Average, Average Calculator, Calculate, Total, Number">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Average Calculator</div>
+    <div class="input-row">
+      <textarea id="numbers" placeholder="Please enter a set of numbers, separated by commas, spaces, or newlines"></textarea>
+    </div>
+    <button class="calc-btn" onclick="calcAverage()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   
+  <script src="recommend-calculators.js">  </script>
+  <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function parseNumbers(str) {
+      return str.split(/[,\s]+/).map(Number).filter(x => !isNaN(x));
+    }
+    function calcAverage() {
+      const arr = parseNumbers(document.getElementById('numbers').value);
+      const resultDiv = document.getElementById('result');
+      if (arr.length === 0) {
+        resultDiv.textContent = 'Please enter valid Number data';
+        return;
+      }
+      const sum = arr.reduce((a, b) => a + b, 0);
+      const avg = sum / arr.length;
+      resultDiv.innerHTML = `Average:<b>${avg.toFixed(8)}</b><br>Total:<b>${sum}</b><br>Number of numbers:<b>${arr.length}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angle Conversion Calculator</title>
+  <meta name="description" content="AngleConvertCalculate,Supports Angle and radian conversion。">
+  <meta name="keywords" content="AngleConvert, radian, Angle, Unit conversion">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">AngleConvertCalculate器</div>
+    <div class="input-row">
+      <input type="number" id="value" placeholder="Value" data-i18n="auto" data-i18n="auto">
+      <select id="type">
+        <option value="deg2rad" data-i18n="auto" data-i18n="auto">Angle to radian</option>
+        <option value="rad2deg" data-i18n="auto" data-i18n="auto">Radian to Angle</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calcAngle()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js"></script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcAngle() {
+      let v = parseFloat(document.getElementById('value').value);
+      let type = document.getElementById('type').value;
+      if (isNaN(v)) {
+        document.getElementById('result').textContent = 'Please enter数值'; return;
+      }
+      let res = 0;
+      if (type === 'deg2rad') res = v * Math.PI / 180;
+      else res = v * 180 / Math.PI;
+      document.getElementById('result').textContent = `Result: ${res}`;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Days Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Date Plus Days Calculator.">
+  <meta name="keywords" content="date plus days calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Date Plus Days Calculator</div>
+    <div class="input-row">
+      <input type="date" id="date" placeholder="Please select start date" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="days" placeholder="Please enter number of days" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcDateAdd()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcDateAdd() {
+      const dateStr = document.getElementById('date').value;
+      const days = parseInt(document.getElementById('days').value);
+      if (!dateStr || isNaN(days)) {
+        document.getElementById('result').textContent = 'Please enter valid start date and number of days';
+        return;
+      }
+      const date = new Date(dateStr);
+      date.setDate(date.getDate() + days);
+      const y = date.getFullYear();
+      const m = (date.getMonth() + 1).toString().padStart(2, '0');
+      const d = date.getDate().toString().padStart(2, '0');
+      document.getElementById('result').innerHTML = `ResultDate:<b>${y}-${m}-${d}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

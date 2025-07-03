@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annulus Calculator</title>
+  <meta name="description" content="Annulus AreaCalculate,Supports entering outer radius and inner radius, automatically Calculate annulus Area。">
+  <meta name="keywords" content="Annulus Area, Annulus, AreaCalculate, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo"></div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Annulus AreaCalculate</div>
+    <div class="input-row">
+      <input type="number" id="rOuter" placeholder="Outer radius" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="rInner" placeholder="Inner radius" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcAnnulus()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js"></script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcAnnulus() {
+      const rOuter = parseFloat(document.getElementById('rOuter').value);
+      const rInner = parseFloat(document.getElementById('rInner').value);
+      if (isNaN(rOuter) || isNaN(rInner) || rOuter <= 0 || rInner < 0 || rOuter <= rInner) {
+        document.getElementById('result').textContent = 'Please enter valid radius(Outer radius>Inner radius≥0)';
+        return;
+      }
+      const area = Math.PI * (rOuter * rOuter - rInner * rInner);
+      document.getElementById('result').textContent = `Annulus Area:${area.toFixed(6)}`;
+    }
+  </script>
+</body>
+</html> 
+

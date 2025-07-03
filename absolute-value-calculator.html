@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Absolute Value Calculator</title>
+  <meta name="description" content="Absolute ValueCalculate,Enter a number,Output its Absolute Value。">
+  <meta name="keywords" content="Absolute Value, Absolute ValueCalculate器, Online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Absolute ValueCalculate器</div>
+    <div class="input-row">
+      <input type="number" id="num" placeholder="Please enterNumber" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcAbs()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <!-- Load Footer -->
+  <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script src="recommend-calculators.js"></script>
+  <script>
+    function calcAbs() {
+      let num = parseFloat(document.getElementById('num').value);
+      if (isNaN(num)) {
+        document.getElementById('result').textContent = 'Please enter有效Number'; return;
+      }
+      document.getElementById('result').textContent = `Absolute Value:${Math.abs(num)}`;
+    }
+  </script>
+</body>
+</html> 

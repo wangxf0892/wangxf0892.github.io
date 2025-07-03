@@ -1,0 +1,27 @@
+/* 帮助页面专属样式 */
+.container {
+  max-width: 520px;
+  margin: 32px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 0 0 24px 0;
+}
+.content {
+  padding: 0 7% 0 7%;
+  font-size: 1.05em;
+  color: #333;
+}
+h2 {
+  color: #1976d2;
+  font-size: 1.08em;
+  margin-top: 1.5em;
+}
+ul, ol { margin-left: 1.2em; }
+li { margin-bottom: 0.5em; }
+.faq-q { color: #1565c0; font-weight: bold; }
+.faq-a { margin-bottom: 1em; }
+@media (max-width: 600px) {
+  .container { max-width: 99vw; margin: 0.5em auto; }
+  .content { padding: 0 3vw; }
+} 

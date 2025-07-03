@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centimeters To Inches</title>
+  <meta name="description" content="A simple and mobile-friendly Centimeters to Inches Calculator.">
+  <meta name="keywords" content="centimeters to inches calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Centimeters to Inches Calculator</div>
+    <div class="input-row">
+      <input type="number" id="cm" placeholder="Centimeters" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcInch()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcInch() {
+      const cm = parseFloat(document.getElementById('cm').value);
+      if (isNaN(cm)) {
+        document.getElementById('result').textContent = 'Please enter valid centimeters';
+        return;
+      }
+      const inch = cm / 2.54;
+      document.getElementById('result').textContent = `${cm} cm = ${inch.toFixed(6)} in`;
+    }
+  </script>
+</body>
+</html> 
+

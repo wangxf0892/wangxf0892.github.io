@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Common Factor Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Common Factor Calculator.">
+  <meta name="keywords" content="common factor calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Greatest Common Factor Calculator</div>
+    <div class="input-row">
+      <input type="text" id="nums" placeholder="Please enter two or more positive integers, separated by commas, e.g. 12,18,24" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcGCD()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function gcd(a, b) {
+      while (b !== 0) {
+        let t = b;
+        b = a % b;
+        a = t;
+      }
+      return a;
+    }
+    function calcGCD() {
+      const input = document.getElementById('nums').value;
+      const arr = input.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n) && n > 0);
+      if (arr.length < 2) {
+        document.getElementById('result').textContent = 'Please enter two or more positive integers, separated by commas';
+        return;
+      }
+      let res = arr[0];
+      for (let i = 1; i < arr.length; i++) {
+        res = gcd(res, arr[i]);
+      }
+      document.getElementById('result').innerHTML = `Greatest Common Divisor (GCD):<b>${res}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

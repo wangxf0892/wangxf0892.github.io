@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technology Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Technology Calculator.">
+  <meta name="keywords" content="technology calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Technology Calculator - Base Convert</div>
+    <div class="input-row">
+      <input type="text" id="inputNum" placeholder="Please enter Number" data-i18n="auto" data-i18n="auto">
+      <select id="fromBase">
+        <option value="2" data-i18n="auto" data-i18n="auto">Binary</option>
+        <option value="8" data-i18n="auto" data-i18n="auto">Octal</option>
+        <option value="10" selected data-i18n="auto" data-i18n="auto">Decimal</option>
+        <option value="16" data-i18n="auto" data-i18n="auto">Hexadecimal</option>
+      </select>
+      <select id="toBase">
+        <option value="2" data-i18n="auto" data-i18n="auto">Binary</option>
+        <option value="8" data-i18n="auto" data-i18n="auto">Octal</option>
+        <option value="10" data-i18n="auto" data-i18n="auto">Decimal</option>
+        <option value="16" data-i18n="auto" data-i18n="auto">Hexadecimal</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="convertBase()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function convertBase() {
+      const numStr = document.getElementById('inputNum').value.trim();
+      const fromBase = parseInt(document.getElementById('fromBase').value);
+      const toBase = parseInt(document.getElementById('toBase').value);
+      let resultDiv = document.getElementById('result');
+      if (!numStr) {
+        resultDiv.textContent = 'Please enter the number to convert';
+        return;
+      }
+      let num = parseInt(numStr, fromBase);
+      if (isNaN(num)) {
+        resultDiv.textContent = 'The number entered does not match the original base';
+        return;
+      }
+      let out = num.toString(toBase).toUpperCase();
+      resultDiv.innerHTML = `ConvertResult: <b>${out}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circular Permutation Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Circular Permutation Calculator.">
+  <meta name="keywords" content="circular permutation calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Circular Permutation Calculator</div>
+    <div class="input-row">
+      <input type="number" id="n" placeholder="n" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="r" placeholder="r" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcPermutation()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcPermutation() {
+      let n = parseInt(document.getElementById('n').value);
+      let r = parseInt(document.getElementById('r').value);
+      if (isNaN(n) || isNaN(r) || n < 0 || r < 0 || r > n) {
+        document.getElementById('result').textContent = 'Please enter valid values'; return;
+      }
+      let permutation = factorial(n) / factorial(n - r);
+      document.getElementById('result').textContent = `P(${n},${r}) = ${permutation}`;
+    }
+    function factorial(n) {
+      if (n <= 1) return 1;
+      return n * factorial(n - 1);
+    }
+  </script>
+</body>
+</html> 
+

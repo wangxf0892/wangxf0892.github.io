@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avoirdupois Weight Conversion Calculator</title>
+  <meta name="description" content="Avoirdupois Weight Converter,Supports converting between ounces, pounds, stones, US tons, and UK tons.">
+  <meta name="keywords" content="Avoirdupois Weight, Weight Conversion, Ounce, Pound, Stone, US Ton, UK Ton, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Avoirdupois Weight Converter</div>
+    <div class="input-row">
+      <input type="number" id="inputValue" placeholder="Please enter valid value" step="any" data-i18n="auto" data-i18n="auto">
+      <div class="row-flex">
+        <select id="fromUnit">
+          <option value="oz" data-i18n="auto" data-i18n="auto">Ounce (oz)</option>
+          <option value="lb" data-i18n="auto" data-i18n="auto">Pound (lb)</option>
+          <option value="st" data-i18n="auto" data-i18n="auto">Stone (st)</option>
+          <option value="uston" data-i18n="auto" data-i18n="auto">US Ton (US ton)</option>
+          <option value="ukton" data-i18n="auto" data-i18n="auto">UK Ton (UK ton)</option>
+        </select>
+        <select id="toUnit">
+          <option value="oz" data-i18n="auto" data-i18n="auto">Ounce (oz)</option>
+          <option value="lb" data-i18n="auto" data-i18n="auto">Pound (lb)</option>
+          <option value="st" data-i18n="auto" data-i18n="auto">Stone (st)</option>
+          <option value="uston" data-i18n="auto" data-i18n="auto">US Ton (US ton)</option>
+          <option value="ukton" data-i18n="auto" data-i18n="auto">UK Ton (UK ton)</option>
+        </select>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="convertWeight()" data-i18n="auto" data-i18n="auto">换算</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script><!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    const factors = {
+      oz: 1,
+      lb: 16,
+      st: 224,
+      uston: 32000,
+      ukton: 35840
+    };
+    function convertWeight() {
+      const val = parseFloat(document.getElementById('inputValue').value);
+      const from = document.getElementById('fromUnit').value;
+      const to = document.getElementById('toUnit').value;
+      if (isNaN(val)) {
+        document.getElementById('result').textContent = 'Please enter valid value';
+        return;
+      }
+      const oz = val * factors[from];
+      const result = oz / factors[to];
+      document.getElementById('result').textContent = `${val} ${getUnitName(from)} = ${result} ${getUnitName(to)}`;
+    }
+    function getUnitName(val) {
+      switch(val) {
+        case 'oz': return 'Ounce (oz)';
+        case 'lb': return 'Pound (lb)';
+        case 'st': return 'Stone (st)';
+        case 'uston': return 'US Ton (US ton)';
+        case 'ukton': return 'UK Ton (UK ton)';
+        default: return val;
+      }
+    }
+  </script>
+</body>
+</html> 
+

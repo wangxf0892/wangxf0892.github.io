@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saving Investing Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Saving Investing Calculator.">
+  <meta name="keywords" content="saving investing calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Investment Return Calculator</div>
+    <div class="input-row">
+      <input type="number" id="principal" placeholder="Principal(yuan)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="rate" placeholder="Yearly Interest Rate(%)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="years" placeholder="Investment Year Limit" min="1" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcInvest()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcInvest() {
+      const p = parseFloat(document.getElementById('principal').value);
+      const r = parseFloat(document.getElementById('rate').value);
+      const y = parseInt(document.getElementById('years').value);
+      if (isNaN(p) || isNaN(r) || isNaN(y) || p < 0 || r < 0 || y < 1) {
+        document.getElementById('result').textContent = 'Please enter valid principal, yearly interest rate and investment year limit';
+        return;
+      }
+      const total = p * Math.pow(1 + r / 100, y);
+      const profit = total - p;
+      document.getElementById('result').innerHTML = `Final Amount:<b>${total.toFixed(2)}</b> yuan<br>Total Profit:<b>${profit.toFixed(2)}</b> yuan`;
+    }
+  </script>
+</body>
+</html> 
+

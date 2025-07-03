@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <meta name="description" content="A simple and mobile-friendly Countdown Timer.">
+  <meta name="keywords" content="countdown timer, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Countdown Timer</div>
+    <div class="input-row">
+      <input type="number" id="min" placeholder="分钟" min="0" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="sec" placeholder="秒" min="0" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <div class="timer" id="timer">00:00</div>
+    <div class="btn-row">
+      <button onclick="startTimer()" data-i18n="auto" data-i18n="auto">开始</button>
+      <button onclick="pauseTimer()" data-i18n="auto" data-i18n="auto">暂停</button>
+      <button onclick="resetTimer()" data-i18n="auto" data-i18n="auto">Reset</button>
+    </div>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    let total = 0, remain = 0, timerId = null, running = false;
+    function updateDisplay() {
+      const m = Math.floor(remain / 60);
+      const s = remain % 60;
+      document.getElementById('timer').textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    }
+    function startTimer() {
+      if (running) return;
+      if (remain <= 0) {
+        const min = parseInt(document.getElementById('min').value) || 0;
+        const sec = parseInt(document.getElementById('sec').value) || 0;
+        total = remain = min * 60 + sec;
+        if (remain <= 0) {
+          document.getElementById('result').textContent = 'Please enter a duration greater than 0';
+          return;
+        }
+      }
+      document.getElementById('result').textContent = '';
+      running = true;
+      timerId = setInterval(() => {
+        if (remain > 0) {
+          remain--;
+          updateDisplay();
+        } else {
+          clearInterval(timerId);
+          running = false;
+          document.getElementById('result').textContent = 'Countdown finished!';
+          // 可选:声音或震动提示
+        }
+      }, 1000);
+    }
+    function pauseTimer() {
+      if (timerId) clearInterval(timerId);
+      running = false;
+    }
+    function resetTimer() {
+      pauseTimer();
+      remain = total;
+      updateDisplay();
+      document.getElementById('result').textContent = '';
+    }
+    // 初始化显示
+    updateDisplay();
+  </script>
+</body>
+</html> 
+

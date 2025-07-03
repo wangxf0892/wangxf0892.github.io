@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Basic Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="basic.title">Basic Calculator</title>
+  <meta name="description" content="Basic calculator supporting addition, subtraction, multiplication, division and other basic operations. Mobile-friendly.">
+  <meta name="keywords" content="basic calculator, addition, subtraction, multiplication, division, calculator">
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js"></script>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="basic.back" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="basic.title" data-i18n="auto" data-i18n="auto">Basic Calculator</div>
+    <div class="display" id="display">0</div>
+    <div class="result" id="result"></div>
+    <div class="btns">
+      <button class="btn" onclick="press('7')" data-i18n="auto" data-i18n="auto">7</button>
+      <button class="btn" onclick="press('8')" data-i18n="auto" data-i18n="auto">8</button>
+      <button class="btn" onclick="press('9')" data-i18n="auto" data-i18n="auto">9</button>
+      <button class="btn op" onclick="press('/')" data-i18n="auto" data-i18n="auto">÷</button>
+      <button class="btn" onclick="press('4')" data-i18n="auto" data-i18n="auto">4</button>
+      <button class="btn" onclick="press('5')" data-i18n="auto" data-i18n="auto">5</button>
+      <button class="btn" onclick="press('6')" data-i18n="auto" data-i18n="auto">6</button>
+      <button class="btn op" onclick="press('*')" data-i18n="auto" data-i18n="auto">×</button>
+      <button class="btn" onclick="press('1')" data-i18n="auto" data-i18n="auto">1</button>
+      <button class="btn" onclick="press('2')" data-i18n="auto" data-i18n="auto">2</button>
+      <button class="btn" onclick="press('3')" data-i18n="auto" data-i18n="auto">3</button>
+      <button class="btn op" onclick="press('-')" data-i18n="auto" data-i18n="auto">−</button>
+      <button class="btn" onclick="press('0')" data-i18n="auto" data-i18n="auto">0</button>
+      <button class="btn" onclick="press('.')" data-i18n="auto" data-i18n="auto">.</button>
+      <button class="btn clear" onclick="clearAll()" data-i18n="basic.clear" data-i18n="auto" data-i18n="auto">C</button>
+      <button class="btn op" onclick="press('+')" data-i18n="auto" data-i18n="auto">＋</button>
+      <button class="btn equal" onclick="calc()" data-i18n="basic.equal" data-i18n="auto" data-i18n="auto">=</button>
+    </div>
+    <!-- Recommendation Area --> 
+     <div class="recommend-area"></div>   </div>   
+     <!-- Load Footer -->
+  <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script src="recommend-calculators.js"></script>
+  <script>
+    let expr = '';
+    function press(val) {
+      if (expr === '' && (val === '+' || val === '-' || val === '*' || val === '/')) return;
+      if (expr === '0' && val !== '.') expr = '';
+      expr += val;
+      document.getElementById('display').textContent = expr;
+      document.getElementById('result').textContent = '';
+    }
+    function clearAll() {
+      expr = '';
+      document.getElementById('display').textContent = '0';
+      document.getElementById('result').textContent = '';
+    }
+    function calc() {
+      try {
+        let res = eval(expr.replace(/[^0-9+\-*/.]/g, ''));
+        if (typeof res === 'number' && isFinite(res)) {
+          document.getElementById('result').textContent = res;
+        } else {
+          document.getElementById('result').textContent = window.I18N ? window.I18N.t('basic.error','Error') : 'Error';
+        }
+      } catch {
+        document.getElementById('result').textContent = window.I18N ? window.I18N.t('basic.error','Error') : 'Error';
+      }
+    }
+    // 多语言渲染
+    function renderBasicCalcI18n() {
+      if (!window.I18N) return;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (key && window.I18N.t(key)) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = window.I18N.t(key);
+          } else if (el.tagName === 'BUTTON') {
+            el.textContent = window.I18N.t(key);
+          } else {
+            el.innerHTML = window.I18N.t(key);
+          }
+        }
+      });
+    }
+    document.addEventListener('DOMContentLoaded', renderBasicCalcI18n);
+  </script>
+</body>
+</html> 
+

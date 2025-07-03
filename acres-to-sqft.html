@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acres To Sqft</title>
+  <meta name="description" content="Acre转Square FeetCalculate,enter Acre,outputSquare Feet。">
+  <meta name="keywords" content="Acre, Square Feet, Unit conversion, Acre转Square Feet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Acres to Square Feet</div>
+    <div class="input-row">
+      <input type="number" id="acre" placeholder="Acre" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcAcre()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- 推荐区 --> <div class="recommend-area"></div>   </div>   
+  <script src="recommend-calculators.js"></script>
+  <!-- 加载页脚 --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcAcre() {
+      let acre = parseFloat(document.getElementById('acre').value);
+      if (isNaN(acre)) {
+        document.getElementById('result').textContent = window.I18N ? window.I18N.t('auto', 'Please enter acres') : 'Please enter acres'; return;
+      }
+      let sqft = acre * 43560;
+      document.getElementById('result').textContent = `Square Feet:${sqft}`;
+    }
+  </script>
+</body>
+</html> 
+

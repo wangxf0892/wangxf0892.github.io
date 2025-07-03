@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interest Apr Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Interest Apr Calculator.">
+  <meta name="keywords" content="interest apr calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Interest and Year Interest Rate (APR) Calculator</div>
+    <div class="input-row">
+      <input type="number" id="principal" placeholder="Principal" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="rate" placeholder="Year Interest Rate(%)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="periods" placeholder="Number of Periods (year)" min="1" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcAPR()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcAPR() {
+      const p = parseFloat(document.getElementById('principal').value);
+      const r = parseFloat(document.getElementById('rate').value);
+      const n = parseInt(document.getElementById('periods').value);
+      if (isNaN(p) || isNaN(r) || isNaN(n) || p <= 0 || r < 0 || n < 1) {
+        document.getElementById('result').textContent = 'Please enter valid principal, year interest rate and number of periods';
+        return;
+      }
+      // 等额本息repayment公式
+      const monthlyRate = r / 100 / 12;
+      const totalMonths = n * 12;
+      let monthlyPay = 0, totalPay = 0, totalInterest = 0;
+      if (monthlyRate === 0) {
+        monthlyPay = p / totalMonths;
+        totalPay = p;
+        totalInterest = 0;
+      } else {
+        monthlyPay = p * monthlyRate * Math.pow(1 + monthlyRate, totalMonths) / (Math.pow(1 + monthlyRate, totalMonths) - 1);
+        totalPay = monthlyPay * totalMonths;
+        totalInterest = totalPay - p;
+      }
+      document.getElementById('result').innerHTML = `Monthly repayment:<b>${monthlyPay.toFixed(2)}</b><br>Total interest:<b>${totalInterest.toFixed(2)}</b><br>Total repayment:<b>${totalPay.toFixed(2)}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

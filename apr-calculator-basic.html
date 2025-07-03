@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apr Calculator Basic</title>
+  <meta name="description" content="Basic APRCalculate,Supports entering Loan amount, fee, interest, number of installments, and automatically Calculate yearInterest Rate(APR)。">
+  <meta name="keywords" content="APR, yearInterest Rate, Loan, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Basic APRCalculate</div>
+    <div class="input-row">
+      <input type="number" id="amount" placeholder="Loan amount" step="0.01" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="fee" placeholder="Fee" step="0.01" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="interest" placeholder="Total Interest" step="0.01" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="periods" placeholder="Number of installments(month)" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcAPR()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+ <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js"></script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+
+  <script>
+    function calcAPR() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const fee = parseFloat(document.getElementById('fee').value);
+      const interest = parseFloat(document.getElementById('interest').value);
+      const periods = parseInt(document.getElementById('periods').value);
+      if ([amount, fee, interest, periods].some(x => isNaN(x)) || amount <= 0 || periods <= 0) {
+        document.getElementById('result').textContent = 'Please enter valid values';
+        return;
+      }
+      // APR近似=(total interest+手续费)/Loan金额/期数*12*100%
+      const apr = ((interest + fee) / amount / periods) * 12 * 100;
+      document.getElementById('result').textContent = `yearInterest Rate(APR)approx:${apr.toFixed(4)}%`;
+    }
+  </script>
+</body>
+</html> 

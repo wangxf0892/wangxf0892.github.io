@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bmi Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="bmi.title">BMI Calculator</title>
+  <meta name="description" content="BMI calculator for adults. Supports metric and imperial units. Mobile-friendly.">
+  <meta name="keywords" content="BMI, body mass index, calculator, health, metric, imperial">
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js"></script>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="bmi.back" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="bmi.title" data-i18n="auto" data-i18n="auto">BMI Calculator</div>
+    <form id="bmi-form">
+      <div class="input-row">
+        <label for="height" data-i18n="bmi.height">Height (cm)</label>
+        <input type="number" id="height" step="any" data-i18n="bmi.height_ph" placeholder="Enter height in cm" data-i18n="auto" data-i18n="auto">
+      </div>
+      <div class="input-row">
+        <label for="weight" data-i18n="bmi.weight">Weight (kg)</label>
+        <input type="number" id="weight" step="any" data-i18n="bmi.weight_ph" placeholder="Enter weight in kg" data-i18n="auto" data-i18n="auto">
+      </div>
+      <button type="button" class="calc-btn" onclick="calcBMI()" data-i18n="bmi.calc" data-i18n="auto" data-i18n="auto">Calculate</button>
+    </form>
+    <div class="result" id="result"></div>
+    <!-- Recommendation Area --> <div class="recommend-area"></div>
+  </div>
+  <script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script src="recommend-calculators.js"></script>
+  <script>
+    function calcBMI() {
+      const h = parseFloat(document.getElementById('height').value);
+      const w = parseFloat(document.getElementById('weight').value);
+      if (!h || !w || h <= 0 || w <= 0) {
+        document.getElementById('result').textContent = window.I18N ? window.I18N.t('bmi.invalid','Please enter valid height and weight') : 'Please enter valid height and weight';
+        return;
+      }
+      const bmi = w / ((h / 100) * (h / 100));
+      let category = '';
+      if (bmi < 18.5) category = window.I18N ? window.I18N.t('bmi.underweight','Underweight') : 'Underweight';
+      else if (bmi < 24.9) category = window.I18N ? window.I18N.t('bmi.normal','Normal weight') : 'Normal weight';
+      else if (bmi < 29.9) category = window.I18N ? window.I18N.t('bmi.overweight','Overweight') : 'Overweight';
+      else category = window.I18N ? window.I18N.t('bmi.obese','Obese') : 'Obese';
+      document.getElementById('result').innerHTML = `${window.I18N ? window.I18N.t('bmi.result','Result:') : 'Result:'} <b>${bmi.toFixed(2)}</b> <br>${window.I18N ? window.I18N.t('bmi.category','Category:') : 'Category:'} <b>${category}</b>`;
+    }
+    // 多语言渲染
+    function renderBMICalcI18n() {
+      if (!window.I18N) return;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (key && window.I18N.t(key)) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = window.I18N.t(key);
+          } else if (el.tagName === 'BUTTON') {
+            el.textContent = window.I18N.t(key);
+          } else {
+            el.innerHTML = window.I18N.t(key);
+          }
+        }
+      });
+    }
+    document.addEventListener('DOMContentLoaded', renderBMICalcI18n);
+  </script>
+</body>
+</html> 
+

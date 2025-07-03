@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games Sports Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Game and Sports Calculator.">
+  <meta name="keywords" content="game and sports calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Game and Sports Calculator</div>
+    <div class="sub-title">胜率Calculate</div>
+    <div class="input-row">
+      <input type="number" id="win" placeholder="Wins" min="0" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="total" placeholder="Total Games" min="1" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcWinRate()" data-i18n="auto" data-i18n="auto">Calculate Win Rate</button>
+    <div class="result" id="result1"></div>
+    <div class="sub-title">Fraction Conversion (e.g. Basketball/Football)</div>
+    <div class="input-row">
+      <input type="number" id="score1" placeholder="Fraction1" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="score2" placeholder="Fraction2" min="0" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcScore()" data-i18n="auto" data-i18n="auto">Calculate分差</button>
+    <div class="result" id="result2"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>  <script src="recommend-calculators.js">  </script>
+    <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcWinRate() {
+      const win = parseInt(document.getElementById('win').value);
+      const total = parseInt(document.getElementById('total').value);
+      if (isNaN(win) || isNaN(total) || total < 1 || win < 0 || win > total) {
+        document.getElementById('result1').textContent = 'Please enter valid number of wins and total games (wins ≤ total games and total games ≥ 1)';
+        return;
+      }
+      const rate = ((win / total) * 100).toFixed(2);
+      document.getElementById('result1').innerHTML = `Win Rate:<b>${rate}%</b>`;
+    }
+    function calcScore() {
+      const s1 = parseFloat(document.getElementById('score1').value);
+      const s2 = parseFloat(document.getElementById('score2').value);
+      if (isNaN(s1) || isNaN(s2)) {
+        document.getElementById('result2').textContent = 'Please enter two fractions';
+        return;
+      }
+      const diff = Math.abs(s1 - s2);
+      let winner = '';
+      if (s1 > s2) winner = 'Fraction1 leads';
+      else if (s2 > s1) winner = 'Fraction2 leads';
+      else winner = 'Draw';
+      document.getElementById('result2').innerHTML = `Difference:<b>${diff}</b>,${winner}`;
+    }
+  </script>
+</body>
+</html> 
+

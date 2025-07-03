@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Declining Balance Depreciation Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Declining Balance Depreciation Calculator.">
+  <meta name="keywords" content="declining balance depreciation calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Declining Balance Depreciation Calculator</div>
+    <div class="input-row">
+      <input type="number" id="cost" placeholder="Please enter original value" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="salvage" placeholder="Please enter residual value" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="years" placeholder="Please enter number of years" min="1" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcDepreciation()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcDepreciation() {
+      const cost = parseFloat(document.getElementById('cost').value);
+      const salvage = parseFloat(document.getElementById('salvage').value);
+      const years = parseInt(document.getElementById('years').value);
+      if (isNaN(cost) || cost < 0 || isNaN(salvage) || salvage < 0 || isNaN(years) || years < 1 || salvage >= cost) {
+        document.getElementById('result').textContent = 'Please enter valid original value, residual value(<原值)和year限(≥1)';
+        return;
+      }
+      const rate = 1 - Math.pow(salvage / cost, 1 / years);
+      let book = cost;
+      let html = `<table><tr><th>year份</th><th>Book value at the beginning of the year</th><th>Depreciation</th><th>Book value at the end of the year</th></tr>`;
+      for (let i = 1; i <= years; i++) {
+        const dep = (book * rate > book - salvage) ? (book - salvage) : book * rate;
+        const end = book - dep;
+        html += `<tr><td>${i}</td><td>${book.toFixed(6)}</td><td>${dep.toFixed(6)}</td><td>${end.toFixed(6)}</td></tr>`;
+        book = end;
+      }
+      html += '</table>';
+      document.getElementById('result').innerHTML = html;
+    }
+  </script>
+</body>
+</html> 
+

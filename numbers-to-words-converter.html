@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Numbers To Words Converter</title>
+  <meta name="description" content="A simple and mobile-friendly Numbers to Words Converter.">
+  <meta name="keywords" content="numbers to words converter, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Numbers to Words Converter</div>
+    <div class="input-row">
+      <input type="text" id="num" placeholder="Please enter Arabic Number,如123456.78" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="convertNum()" data-i18n="auto" data-i18n="auto">Convert</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    // 中文大写金额
+    function numToChinese(num) {
+      if (isNaN(num)) return '';
+      const CN_NUM = ['zero','one','two','three','four','five','six','seven','eight','nine'];
+      const CN_UNIT = ['','ten','hundred','thousand'];
+      const CN_GROUP = ['','ten thousand','million','billion'];
+      const CN_DEC = ['ten','cent'];
+      let [int, dec] = num.toString().split('.');
+      int = int.replace(/^0+/, '');
+      if (int.length === 0) int = '0';
+      let res = '', zero = false;
+      for (let i = 0, group = 0; int.length > 0; group++) {
+        let part = int.slice(-4);
+        int = int.slice(0, -4);
+        let str = '';
+        for (let j = 0; j < part.length; j++) {
+          const n = parseInt(part[part.length - 1 - j]);
+          if (n === 0) {
+            if (!zero && str.length > 0) str = CN_NUM[0] + str;
+            zero = true;
+          } else {
+            str = CN_NUM[n] + CN_UNIT[j] + str;
+            zero = false;
+          }
+        }
+        if (str.length > 0) res = str + CN_GROUP[group] + res;
+      }
+      res = res.replace(/zero+/g, 'zero').replace(/zero$/,'');
+      if (res === '') res = CN_NUM[0];
+      res += 'yuan';
+      if (dec) {
+        dec = dec.substr(0,2);
+        for (let i = 0; i < dec.length; i++) {
+          const n = parseInt(dec[i]);
+          if (n !== 0) res += CN_NUM[n] + CN_DEC[i];
+        }
+      }
+      if (!dec || /^0+$/.test(dec)) res += 'all';
+      return res;
+    }
+    // 英文单词
+    function numToEnglish(num) {
+      if (isNaN(num)) return '';
+      const ones = ['','one','two','three','four','five','six','seven','eight','nine'];
+      const teens = ['ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+      const tens = ['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+      const thousands = ['','thousand','million','billion','trillion'];
+      function chunk(n) {
+        let s = '';
+        if (n >= 100) {
+          s += ones[Math.floor(n/100)] + ' hundred';
+          n %= 100;
+          if (n > 0) s += ' ';
+        }
+        if (n >= 20) {
+          s += tens[Math.floor(n/10)];
+          if (n % 10 > 0) s += '-' + ones[n%10];
+        } else if (n >= 10) {
+          s += teens[n-10];
+        } else if (n > 0) {
+          s += ones[n];
+        }
+        return s;
+      }
+      let [int, dec] = num.toString().split('.');
+      int = int.replace(/^0+/, '');
+      if (int.length === 0) int = '0';
+      let res = '', group = 0;
+      while (int.length > 0) {
+        let part = parseInt(int.slice(-3));
+        int = int.slice(0, -3);
+        if (part > 0) {
+          let str = chunk(part);
+          if (thousands[group]) str += ' ' + thousands[group];
+          res = str + (res ? ' ' : '') + res;
+        }
+        group++;
+      }
+      if (res === '') res = 'zero';
+      if (dec) {
+        res += ' point';
+        for (let i = 0; i < dec.length; i++) {
+          res += ' ' + ones[parseInt(dec[i])];
+        }
+      }
+      return res;
+    }
+    function convertNum() {
+      const val = document.getElementById('num').value.trim();
+      if (!/^\d+(\.\d+)?$/.test(val)) {
+        document.getElementById('result').textContent = 'Please enter Valid Arabic Number';
+        return;
+      }
+      const num = parseFloat(val);
+      const cn = numToChinese(num);
+      const en = numToEnglish(num);
+      document.getElementById('result').innerHTML = `<div class='result-title'>Amount in capital letters:</div>${cn}<div class='result-title'>English words:</div>${en}`;
+    }
+  </script>
+</body>
+</html> 
+

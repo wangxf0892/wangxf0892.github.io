@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celsius To Kelvin</title>
+  <meta name="description" content="A simple and mobile-friendly Celsius to Kelvin Calculator.">
+  <meta name="keywords" content="celsius to kelvin calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Celsius to Kelvin Calculator</div>
+    <div class="input-row">
+      <input type="number" id="celsius" placeholder="Celsius" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcK()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcK() {
+      const c = parseFloat(document.getElementById('celsius').value);
+      if (isNaN(c)) {
+        document.getElementById('result').textContent = 'Please enter valid Celsius';
+        return;
+      }
+      const k = c + 273.15;
+      document.getElementById('result').textContent = `${c} ℃ = ${k.toFixed(2)} K`;
+    }
+  </script>
+</body>
+</html> 
+

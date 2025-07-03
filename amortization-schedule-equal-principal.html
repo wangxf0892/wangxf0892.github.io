@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amortization Schedule Equal Principal</title>
+  <meta name="description" content="Equal Principal Amortization ScheduleGenerate,Supports entering LoanTotal amount, yearInterest Rate, number of installments, and automatically generates a detailed repayment schedule。">
+  <meta name="keywords" content="Equal Principal, Loan, repayment table, repayment schedule, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Equal Principal Amortization ScheduleGenerate</div>
+    <div class="input-row">
+      <input type="number" id="principal" placeholder="Loan total amount" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="rate" placeholder="yearInterest Rate(%)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="months" placeholder="Number of installments(month)" min="1" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcLoanTable()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+    <div class="table-wrap" id="table-wrap"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js"></script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcLoanTable() {
+      const p = parseFloat(document.getElementById('principal').value);
+      const r = parseFloat(document.getElementById('rate').value);
+      const n = parseInt(document.getElementById('months').value);
+      const resultDiv = document.getElementById('result');
+      const tableWrap = document.getElementById('table-wrap');
+      if (isNaN(p) || isNaN(r) || isNaN(n) || p <= 0 || r < 0 || n < 1) {
+        resultDiv.textContent = 'Please enter valid Loan total amount, yearInterest Rate and number of installments';
+        tableWrap.innerHTML = '';
+        return;
+      }
+      const mRate = r / 100 / 12;
+      const principalPay = p / n;
+      let totalPay = 0, totalInterest = 0, remain = p;
+      let rows = '';
+      for (let i = 1; i <= n; i++) {
+        const interest = remain * mRate;
+        const pay = principalPay + interest;
+        remain -= principalPay;
+        totalPay += pay;
+        totalInterest += interest;
+        rows += `<tr><td>${i}</td><td>${principalPay.toFixed(2)}</td><td>${interest.toFixed(2)}</td><td>${pay.toFixed(2)}</td><td>${remain > 0 ? remain.toFixed(2) : '0.00'}</td></tr>`;
+      }
+      resultDiv.innerHTML = `First repayment:<b>${(principalPay + p * mRate).toFixed(2)}</b> yuan<br>total repayment:<b>${totalPay.toFixed(2)}</b> yuan<br>total interest:<b>${totalInterest.toFixed(2)}</b> yuan`;
+      tableWrap.innerHTML = `<table><tr><th>Months</th><th>Principal</th><th>Interest</th><th>Repayment</th><th>Remaining Principal</th></tr>${rows}</table>`;
+    }
+  </script>
+</body>
+</html> 
+

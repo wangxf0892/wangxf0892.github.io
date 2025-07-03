@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Difference Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Date Difference Calculator.">
+  <meta name="keywords" content="date difference calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Date Difference Calculator</div>
+    <div class="input-row">
+      <input type="date" id="date1" placeholder="Please select start date" data-i18n="auto" data-i18n="auto">
+      <input type="date" id="date2" placeholder="Please select end date" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcDateDiff()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcDateDiff() {
+      const d1 = document.getElementById('date1').value;
+      const d2 = document.getElementById('date2').value;
+      if (!d1 || !d2) {
+        document.getElementById('result').textContent = 'Please enter起始Date和结束Date';
+        return;
+      }
+      const date1 = new Date(d1);
+      const date2 = new Date(d2);
+      const diff = Math.abs((date2 - date1) / (1000 * 60 * 60 * 24));
+      document.getElementById('result').innerHTML = `day difference:<b>${diff}</b> day`;
+    }
+  </script>
+</body>
+</html> 
+

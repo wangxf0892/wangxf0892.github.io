@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bmi Calculator Women</title>
+  <meta name="description" content="Women's BMI Calculator,enter height and weight,Calculate BMI and give Health range hint.">
+  <meta name="keywords" content="BMI, Women, Body Mass Index, Weight, Height, Calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Women's BMI Calculator</div>
+    <div class="input-row">
+      <input type="number" id="weight" placeholder="Weight(kg)" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="height" placeholder="Height(cm)" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcBMI()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+    <div class="tip">Women's Health BMI range:18.5 ~ 24</div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcBMI() {
+      let w = parseFloat(document.getElementById('weight').value);
+      let h = parseFloat(document.getElementById('height').value);
+      if (isNaN(w) || isNaN(h) || h <= 0) {
+        document.getElementById('result').textContent = 'Please enter valid weight and height'; return;
+      }
+      let bmi = w / Math.pow(h/100, 2);
+      let level = '';
+      if (bmi < 18.5) level = 'Underweight';
+      else if (bmi < 24) level = 'Normal';
+      else if (bmi < 28) level = 'Overweight';
+      else level = 'Obesity';
+      document.getElementById('result').textContent = `BMI:${bmi.toFixed(2)}(${level})`;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversions Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Universal Unit Converter.">
+  <meta name="keywords" content="unit conversion, length, area, volume, temperature, weight, storage, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Universal Unit Converter</div>
+    <div class="input-row">
+      <input type="number" id="value" placeholder="Please enter value" step="any" data-i18n="auto" data-i18n="auto">
+      <select id="fromUnit"></select>
+      <select id="toUnit"></select>
+    </div>
+    <button class="calc-btn" onclick="convertUnit()" data-i18n="auto" data-i18n="auto">Convert</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    // 单位定义
+    const unitGroups = {
+      Length: [
+        {name:'Millimeters(mm)', value:'mm', factor:0.001},
+        {name:'Centimeters(cm)', value:'cm', factor:0.01},
+        {name:'Meters(m)', value:'m', factor:1},
+        {name:'Kilometers(km)', value:'km', factor:1000},
+        {name:'Inches(in)', value:'in', factor:0.0254},
+        {name:'Feet(ft)', value:'ft', factor:0.3048},
+        {name:'Yards(yd)', value:'yd', factor:0.9144},
+        {name:'Miles(mi)', value:'mi', factor:1609.344}
+      ],
+      Area: [
+        {name:'Square Centimeters(cm²)', value:'cm2', factor:0.0001},
+        {name:'Square Meters(m²)', value:'m2', factor:1},
+        {name:'Square Kilometers(km²)', value:'km2', factor:1000000},
+        {name:'Square Feet(ft²)', value:'ft2', factor:0.09290304},
+        {name:'Square Yards(yd²)', value:'yd2', factor:0.83612736},
+        {name:'Acre(ac)', value:'ac', factor:4046.8564224},
+        {name:'Hectare(ha)', value:'ha', factor:10000}
+      ],
+      Volume: [
+        {name:'Cubic Centimeters(cm³)', value:'cm3', factor:0.000001},
+        {name:'Liters(L)', value:'L', factor:0.001},
+        {name:'Cubic Meters(m³)', value:'m3', factor:1},
+        {name:'Cubic Feet(ft³)', value:'ft3', factor:0.0283168466},
+        {name:'cubic yards(yd³)', value:'yd3', factor:0.764554858},
+        {name:'Gallon (US)(gal)', value:'gal', factor:0.00378541178}
+      ],
+      Weight: [
+        {name:'Grams(g)', value:'g', factor:0.001},
+        {name:'Kilograms(kg)', value:'kg', factor:1},
+        {name:'Tons(t)', value:'t', factor:1000},
+        {name:'Pounds(lb)', value:'lb', factor:0.45359237},
+        {name:'Ounces(oz)', value:'oz', factor:0.0283495231}
+      ],
+      Time: [
+        {name:'Seconds(s)', value:'s', factor:1},
+        {name:'Minutes(min)', value:'min', factor:60},
+        {name:'Hours(h)', value:'h', factor:3600},
+        {name:'Day(d)', value:'d', factor:86400}
+      ],
+      Speed: [
+        {name:'Meters per second(m/s)', value:'mps', factor:1},
+        {name:'Kilometers per hour(km/h)', value:'kmph', factor:0.277777778},
+        {name:'Miles per hour(mph)', value:'mph', factor:0.44704}
+      ],
+      Temperature: [
+        {name:'Celsius(°C)', value:'C'},
+        {name:'Fahrenheit(°F)', value:'F'},
+        {name:'Kelvin(K)', value:'K'}
+      ]
+    };
+    // 填充单位下拉
+    const fromUnit = document.getElementById('fromUnit');
+    const toUnit = document.getElementById('toUnit');
+    let allUnits = [];
+    for (const group in unitGroups) {
+      unitGroups[group].forEach(u => {
+        allUnits.push({group, ...u});
+      });
+    }
+    function fillUnitSelect(sel) {
+      sel.innerHTML = '';
+      allUnits.forEach(u => {
+        const opt = document.createElement('option');
+        opt.value = u.value;
+        opt.textContent = `[${u.group}] ${u.name}`;
+        sel.appendChild(opt);
+      });
+    }
+    fillUnitSelect(fromUnit);
+    fillUnitSelect(toUnit);
+    // 换算
+    function convertUnit() {
+      const v = parseFloat(document.getElementById('value').value);
+      const from = fromUnit.value;
+      const to = toUnit.value;
+      if (isNaN(v)) {
+        document.getElementById('result').textContent = 'Please enter valid value';
+        return;
+      }
+      const fromU = allUnits.find(u => u.value === from);
+      const toU = allUnits.find(u => u.value === to);
+      if (!fromU || !toU) {
+        document.getElementById('result').textContent = 'Please select valid units';
+        return;
+      }
+      if (fromU.group !== toU.group) {
+        // 温度单独处理
+        if (fromU.group === 'Temperature' && toU.group === 'Temperature') {
+          document.getElementById('result').textContent = convertTemp(v, from, to);
+          return;
+        }
+        document.getElementById('result').textContent = 'Please select units of the same category';
+        return;
+      }
+      // 温度特殊处理
+      if (fromU.group === 'Temperature') {
+        document.getElementById('result').textContent = convertTemp(v, from, to);
+        return;
+      }
+      // 其他单位
+      const base = v * fromU.factor;
+      const res = base / toU.factor;
+      document.getElementById('result').innerHTML = `${v} ${fromU.name} = <b>${res}</b> ${toU.name}`;
+    }
+    // 温度换算
+    function convertTemp(val, from, to) {
+      let c;
+      if (from === to) return `${val}`;
+      if (from === 'C') c = val;
+      else if (from === 'F') c = (val - 32) * 5 / 9;
+      else if (from === 'K') c = val - 273.15;
+      let res;
+      if (to === 'C') res = c;
+      else if (to === 'F') res = c * 9 / 5 + 32;
+      else if (to === 'K') res = c + 273.15;
+      return `${val} ${from} = <b>${res}</b> ${to}`;
+    }
+  </script>
+</body>
+</html> 
+

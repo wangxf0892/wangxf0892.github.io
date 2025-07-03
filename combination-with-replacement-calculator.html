@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combination With Replacement Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Combination With Replacement Calculator.">
+  <meta name="keywords" content="combination with replacement calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Combination With Replacement Calculator</div>
+    <div class="input-row">
+      <input type="number" id="n" placeholder="Number of types of elements n" min="1" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="r" placeholder="Number of elements per group r" min="0" step="1" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcCombRep()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="formula">公式:C(n+r-1, r) = (n+r-1)! / [r! × (n-1)!]</div>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function factorial(x) {
+      if (x < 0) return NaN;
+      let res = 1;
+      for (let i = 2; i <= x; i++) res *= i;
+      return res;
+    }
+    function calcCombRep() {
+      const n = parseInt(document.getElementById('n').value);
+      const r = parseInt(document.getElementById('r').value);
+      if (isNaN(n) || n < 1 || isNaN(r) || r < 0) {
+        document.getElementById('result').textContent = 'Please enter valid n(≥1) and r(≥0)';
+        return;
+      }
+      const top = factorial(n + r - 1);
+      const bottom = factorial(r) * factorial(n - 1);
+      const comb = top / bottom;
+      document.getElementById('result').innerHTML =
+        `C(${n}+${r}-1, ${r}) = <b>${comb}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cube Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Cube Calculator.">
+  <meta name="keywords" content="cube calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Cube Calculator</div>
+    <div class="input-row">
+      <input type="number" id="a" placeholder="Please enter edge length (e.g. 5)" step="any" min="0" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcCube()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function calcCube() {
+      const a = parseFloat(document.getElementById('a').value);
+      if (isNaN(a) || a < 0) {
+        document.getElementById('result').textContent = 'Please enter valid edge length (≥0)';
+        return;
+      }
+      const volume = Math.pow(a, 3);
+      const surface = 6 * a * a;
+      document.getElementById('result').innerHTML =
+        `Volume:<b>${volume.toFixed(6)}</b> <br>Surface Area:<b>${surface.toFixed(6)}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

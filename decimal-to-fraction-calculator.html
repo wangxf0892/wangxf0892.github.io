@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decimal To Fraction Calculator</title>
+  <meta name="description" content="A simple and mobile-friendly Decimal to Fraction Calculator.">
+  <meta name="keywords" content="decimal to fraction calculator, online calculator">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div class="container">
+    <div class="section-title" data-i18n="auto" data-i18n="auto">Decimal to FractionCalculate器</div>
+    <div class="input-row">
+      <input type="number" id="decimal" placeholder="Please enter decimal (e.g. 0.75)" step="any" data-i18n="auto" data-i18n="auto">
+    </div>
+    <button class="calc-btn" onclick="calcFraction()" data-i18n="auto" data-i18n="auto">Convert</button>
+    <div class="result" id="result"></div>
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>  <script src="recommend-calculators.js">  </script>
+    <!-- Load Footer --><script src="footer-loader.js"></script>
+  <script src="footer-i18n.js"></script>
+  <script>
+    function gcd(a, b) {
+      return b === 0 ? a : gcd(b, a % b);
+    }
+    function calcFraction() {
+      const dec = parseFloat(document.getElementById('decimal').value);
+      if (isNaN(dec)) {
+        document.getElementById('result').textContent = 'Please enter valid decimal';
+        return;
+      }
+      let str = dec.toString();
+      if (str.indexOf('e') !== -1) {
+        // 科学计数法转普通小数
+        str = dec.toFixed(16).replace(/0+$/, '');
+      }
+      const parts = str.split('.');
+      let numerator, denominator;
+      if (parts.length === 1) {
+        numerator = dec;
+        denominator = 1;
+      } else {
+        const len = parts[1].length;
+        denominator = Math.pow(10, len);
+        numerator = Math.round(dec * denominator);
+      }
+      const g = gcd(Math.abs(numerator), denominator);
+      numerator /= g;
+      denominator /= g;
+      document.getElementById('result').innerHTML = `Simplest Fraction:<b>${numerator}/${denominator}</b>`;
+    }
+  </script>
+</body>
+</html> 
+

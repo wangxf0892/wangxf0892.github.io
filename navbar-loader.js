@@ -4,7 +4,7 @@ function loadNavbar() {
     .then(response => response.text())
     .then(data => {
       document.getElementById('navbar').innerHTML = data;
-      // 语言切换事件（预留1，可根据实际需求实现）
+      // 语言切换事件（预留11，可根据实际需求实现）
       const langSelect = document.getElementById('language-select');
       if (langSelect) {
         langSelect.addEventListener('change', function() {

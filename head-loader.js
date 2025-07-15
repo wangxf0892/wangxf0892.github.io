@@ -9,7 +9,25 @@ function loadHead(options = {}) {
                  .replace('{{keywords}}', options.keywords || '在线计算器, CalculatorSoup, 数学, 金融, 健康, 科学, Unit conversion, 复刻');
       // 创建临时容器解析
       const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = '<head>' + html + '</head>';
+      tempDiv.innerHTML = '<head>' + html + '<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>';
       const headContent = tempDiv.querySelector('head');
       // 将head内容插入到当前文档head
       Array.from(headContent.children).forEach(node => {

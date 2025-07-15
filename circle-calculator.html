@@ -7,7 +7,25 @@
   <meta name="description" content="A simple and mobile-friendly Circle Calculator.">
   <meta name="keywords" content="circle calculator, online calculator">
   <link rel="stylesheet" href="style.css">
-</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
 <body>
   <header>
     <div class="nav">
@@ -16,7 +34,7 @@
       <div></div>
     </div>
   </header>
-  <div class="container">
+  <div id="navbar"></div><div class="container">
     <div class="section-title" data-i18n="auto" data-i18n="auto">Circle Calculator</div>
     <div class="input-row">
       <input type="number" id="radius" placeholder="Please enter radius (e.g. 5)" step="any" min="0" data-i18n="auto" data-i18n="auto">
@@ -39,6 +57,6 @@
         `Area:<b>${area.toFixed(6)}</b> <br>Perimeter:<b>${perimeter.toFixed(6)}</b>`;
     }
   </script>
-</body>
+<script src="navbar-loader.js"></script></body>
 </html> 
 

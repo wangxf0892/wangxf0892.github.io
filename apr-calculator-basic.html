@@ -7,7 +7,25 @@
   <meta name="description" content="Basic APRCalculate,Supports entering Loan amount, fee, interest, number of installments, and automatically Calculate yearInterest Rate(APR)。">
   <meta name="keywords" content="APR, yearInterest Rate, Loan, Calculator">
   <link rel="stylesheet" href="style.css">
-</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
 <body>
   <header>
     <div class="nav">
@@ -16,7 +34,7 @@
       <div></div>
     </div>
   </header>
-  <div class="container">
+  <div id="navbar"></div><div class="container">
     <div class="section-title" data-i18n="auto" data-i18n="auto">Basic APRCalculate</div>
     <div class="input-row">
       <input type="number" id="amount" placeholder="Loan amount" step="0.01" data-i18n="auto" data-i18n="auto">
@@ -45,5 +63,5 @@
       document.getElementById('result').textContent = `yearInterest Rate(APR)approx:${apr.toFixed(4)}%`;
     }
   </script>
-</body>
+<script src="navbar-loader.js"></script></body>
 </html> 

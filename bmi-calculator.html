@@ -9,7 +9,25 @@
   <meta name="keywords" content="BMI, body mass index, calculator, health, metric, imperial">
   <link rel="stylesheet" href="style.css">
   <script src="i18n.js"></script>
-</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
 <body>
   <header>
     <div class="nav">
@@ -18,7 +36,7 @@
       <div></div>
     </div>
   </header>
-  <div class="container">
+  <div id="navbar"></div><div class="container">
     <div class="section-title" data-i18n="bmi.title" data-i18n="auto" data-i18n="auto">BMI Calculator</div>
     <form id="bmi-form">
       <div class="input-row">
@@ -71,6 +89,6 @@
     }
     document.addEventListener('DOMContentLoaded', renderBMICalcI18n);
   </script>
-</body>
+<script src="navbar-loader.js"></script></body>
 </html> 
 

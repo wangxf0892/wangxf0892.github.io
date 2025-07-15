@@ -7,7 +7,25 @@
   <meta name="description" content="General repayment table generator, support equal payment and equal principal, automatically generate detailed repayment schedule.">
   <meta name="keywords" content="repayment table, repayment schedule, equal payment, equal principal, Loan, Calculator">
   <link rel="stylesheet" href="style.css">
-</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
 <body>
   <header>
     <div class="nav">
@@ -16,7 +34,7 @@
       <div></div>
     </div>
   </header>
-  <div class="container">
+  <div id="navbar"></div><div class="container">
     <div class="section-title" data-i18n="auto" data-i18n="auto">General Repayment Table Generator</div>
     <div class="input-row">
       <input type="number" id="principal" placeholder="Loan total amount" min="0" step="any" data-i18n="auto" data-i18n="auto">
@@ -77,6 +95,6 @@
       tableWrap.innerHTML = `<table><tr><th>Months</th><th>Principal</th><th>Interest</th><th>Repayment</th><th>Remaining Principal</th></tr>${rows}</table>`;
     }
   </script>
-</body>
+<script src="navbar-loader.js"></script></body>
 </html> 
 

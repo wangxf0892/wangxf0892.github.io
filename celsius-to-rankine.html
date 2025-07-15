@@ -7,7 +7,25 @@
   <meta name="description" content="A simple and mobile-friendly Celsius to Rankine Calculator.">
   <meta name="keywords" content="celsius to rankine calculator, online calculator">
   <link rel="stylesheet" href="style.css">
-</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
 <body>
   <header>
     <div class="nav">
@@ -16,7 +34,7 @@
       <div></div>
     </div>
   </header>
-  <div class="container">
+  <div id="navbar"></div><div class="container">
     <div class="section-title" data-i18n="auto" data-i18n="auto">Celsius to Rankine Calculator</div>
     <div class="input-row">
       <input type="number" id="celsius" placeholder="Celsius" step="any" data-i18n="auto" data-i18n="auto">
@@ -38,6 +56,6 @@
       document.getElementById('result').textContent = `${c} ℃ = ${r.toFixed(2)} °R`;
     }
   </script>
-</body>
+<script src="navbar-loader.js"></script></body>
 </html> 
 

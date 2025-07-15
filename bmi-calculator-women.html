@@ -7,7 +7,25 @@
   <meta name="description" content="Women's BMI Calculator,enter height and weight,Calculate BMI and give Health range hint.">
   <meta name="keywords" content="BMI, Women, Body Mass Index, Weight, Height, Calculator">
   <link rel="stylesheet" href="style.css">
-</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
 <body>
   <header>
     <div class="nav">
@@ -16,7 +34,7 @@
       <div></div>
     </div>
   </header>
-  <div class="container">
+  <div id="navbar"></div><div class="container">
     <div class="section-title" data-i18n="auto" data-i18n="auto">Women's BMI Calculator</div>
     <div class="input-row">
       <input type="number" id="weight" placeholder="Weight(kg)" data-i18n="auto" data-i18n="auto">
@@ -44,6 +62,6 @@
       document.getElementById('result').textContent = `BMI:${bmi.toFixed(2)}(${level})`;
     }
   </script>
-</body>
+<script src="navbar-loader.js"></script></body>
 </html> 
 

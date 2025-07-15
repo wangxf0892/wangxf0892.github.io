@@ -39,14 +39,14 @@ function updateFile(filePath) {
       fs.writeFileSync(filePath, content, 'utf8');
       console.log(`✓ 更新 ${path.basename(filePath)}`);
     } else {
-      // 如果没有找到空的footer标签,在</body>前添加
+      // 如果没有找到空的footer标签,在<script src="navbar-loader.js"></script></body>前添加
       const bodyEndPattern = /<\/body>/;
       if (bodyEndPattern.test(content)) {
-        content = content.replace(bodyEndPattern, '  <!-- 加载页脚 -->\n  <script src="footer-loader.js"></script>\n</body>');
+        content = content.replace(bodyEndPattern, '  <!-- 加载页脚 -->\n  <script src="footer-loader.js"></script>\n<script src="navbar-loader.js"></script></body>');
         fs.writeFileSync(filePath, content, 'utf8');
         console.log(`✓ 更新 ${path.basename(filePath)} (添加页脚)`);
       } else {
-        console.log(`⚠ 跳过 ${path.basename(filePath)} - 未找到</body>标签`);
+        console.log(`⚠ 跳过 ${path.basename(filePath)} - 未找到<script src="navbar-loader.js"></script></body>标签`);
       }
     }
   } catch (error) {

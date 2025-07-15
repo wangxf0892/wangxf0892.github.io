@@ -7,7 +7,25 @@
   <meta name="description" content="Average Calculator,Supports entering a set of numbers, automatically Calculate average value, total and, number of numbers。">
   <meta name="keywords" content="Average, Average Calculator, Calculate, Total, Number">
   <link rel="stylesheet" href="style.css">
-</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
 <body>
   <header>
     <div class="nav">
@@ -16,7 +34,7 @@
       <div></div>
     </div>
   </header>
-  <div class="container">
+  <div id="navbar"></div><div class="container">
     <div class="section-title" data-i18n="auto" data-i18n="auto">Average Calculator</div>
     <div class="input-row">
       <textarea id="numbers" placeholder="Please enter a set of numbers, separated by commas, spaces, or newlines"></textarea>
@@ -43,6 +61,6 @@
       resultDiv.innerHTML = `Average:<b>${avg.toFixed(8)}</b><br>Total:<b>${sum}</b><br>Number of numbers:<b>${arr.length}</b>`;
     }
   </script>
-</body>
+<script src="navbar-loader.js"></script></body>
 </html> 
 

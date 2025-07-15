@@ -7,7 +7,25 @@
   <meta name="description" content="前1000个Prime,支持一键复制。">
   <meta name="keywords" content="Prime, 1000个Prime, 素数, Prime Numbers">
   <link rel="stylesheet" href="style.css">
-</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+
+</head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
 <body>
   <header>
     <div class="nav">
@@ -16,7 +34,7 @@
       <div></div>
     </div>
   </header>
-  <div class="container">
+  <div id="navbar"></div><div class="container">
     <div class="section-title" data-i18n="auto" data-i18n="auto">First 1000 Primes</div>
     <button class="copy-btn" onclick="copyPrimes()" data-i18n="auto" data-i18n="auto">One-click copy</button>
     <div class="prime-box" id="primeBox"></div>
@@ -46,5 +64,5 @@
       setTimeout(()=>{document.getElementById('result').textContent='';}, 1500);
     }
   </script>
-</body>
+<script src="navbar-loader.js"></script></body>
 </html> 

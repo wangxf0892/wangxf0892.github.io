@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Solar Hat/Fan Runtime Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .solar-calc-container { max-width: 400px; margin: 32px auto; background: #fff; border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); padding: 24px; }
+    .solar-calc-container label { display: block; margin: 12px 0 4px 0; }
+    .solar-calc-container input { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #b0bec5; }
+    .solar-calc-result { margin: 18px 0 0 0; color: #1976d2; font-weight: bold; }
+  </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+<body>
+    <header>
+        <div class="nav">
+          <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+          <div class="logo">Calculator</div>
+          <div></div>
+        </div>
+      </header>
+      <div id="navbar"></div>
+  <div class="solar-calc-container">
+    <h2>Solar Hat/Fan Runtime Calculator</h2>
+    <div id="location-info">Getting your location...</div>
+    <form id="solarForm">
+      <label>Solar Panel Area (cm²):</label>
+      <input type="number" id="area" value="100" min="1" required>
+      <label>Solar Panel Efficiency (%):</label>
+      <input type="number" id="efficiency" value="20" min="1" max="100" required>
+      <label>Fan Power (W):</label>
+      <input type="number" id="fanPower" value="2" min="0.1" step="0.1" required>
+      <label>Battery Capacity (mAh):</label>
+      <input type="number" id="battery" value="2000" min="1" required>
+      <label>Battery Voltage (V):</label>
+      <input type="number" id="voltage" value="3.7" min="1" step="0.1" required>
+      <label>Local Solar Irradiance (W/m²):</label>
+      <input type="number" id="irradiance" value="800" min="0" max="1200" step="1" required>
+      <button type="button" onclick="calcSolar()">Calculate Runtime</button>
+    </form>
+    <div class="solar-calc-result" id="result"></div>
+  </div>
+  <script>
+    // Get user location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(pos) {
+        const lat = pos.coords.latitude.toFixed(4);
+        const lon = pos.coords.longitude.toFixed(4);
+        document.getElementById('location-info').textContent = `Current location: ${lat}, ${lon}`;
+        // You can connect to a weather API here for real-time solar irradiance
+      }, function() {
+        document.getElementById('location-info').textContent = 'Unable to get location, using default solar irradiance.';
+      });
+    } else {
+      document.getElementById('location-info').textContent = 'Geolocation not supported, using default solar irradiance.';
+    }
+
+    function calcSolar() {
+      // Get input values
+      const area = Number(document.getElementById('area').value) / 10000; // cm² to m²
+      const eff = Number(document.getElementById('efficiency').value) / 100;
+      const fanPower = Number(document.getElementById('fanPower').value);
+      const battery = Number(document.getElementById('battery').value);
+      const voltage = Number(document.getElementById('voltage').value);
+      const irradiance = Number(document.getElementById('irradiance').value);
+
+      // Solar panel theoretical output power
+      const solarPower = area * eff * irradiance; // W
+      // Battery total energy (Wh)
+      const batteryWh = (battery * voltage) / 1000;
+      // Time to fully charge battery (hours)
+      const chargeTime = batteryWh / solarPower;
+      // Fan runtime on full battery (hours)
+      const fanTime = batteryWh / fanPower;
+
+      document.getElementById('result').innerHTML =
+        `Solar panel output power: <b>${solarPower.toFixed(2)} W</b><br>` +
+        `Battery energy: <b>${batteryWh.toFixed(2)} Wh</b><br>` +
+        `Time to fully charge: <b>${chargeTime > 0 ? chargeTime.toFixed(2) : '--'} hours</b><br>` +
+        `Fan runtime on full charge: <b>${fanTime > 0 ? fanTime.toFixed(2) : '--'} hours</b>`;
+    }
+  </script>
+  
+  <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+   <script src="footer-i18n.js"></script>
+   <script>
+     function gcd(a, b) {
+       return b === 0 ? Math.abs(a) : gcd(b, a % b);
+     }
+     function simplifyFraction() {
+       const n = parseInt(document.getElementById('numerator').value);
+       const d = parseInt(document.getElementById('denominator').value);
+       const resultDiv = document.getElementById('result');
+       if (isNaN(n) || isNaN(d) || d === 0) {
+         resultDiv.textContent = 'Please enter valid numerator and denominator(denominator cannot be 0)';
+         return;
+       }
+       let sign = (n * d < 0) ? '-' : '';
+       let num = Math.abs(n);
+       let den = Math.abs(d);
+       const g = gcd(num, den);
+       num = num / g;
+       den = den / g;
+       // 带Fraction
+       let mixed = '';
+       if (num >= den) {
+         const integer = Math.floor(num / den);
+         const remain = num % den;
+         if (remain === 0) {
+           mixed = sign + integer;
+         } else {
+           mixed = sign + integer + ' <sup>' + remain + '</sup>&frasl;<sub>' + den + '</sub>';
+         }
+       } else {
+         mixed = sign + '<sup>' + num + '</sup>&frasl;<sub>' + den + '</sub>';
+       }
+       // 真Fraction
+       const proper = sign + '<sup>' + num + '</sup>&frasl;<sub>' + den + '</sub>';
+       resultDiv.innerHTML = `Simplified Fraction:<br>${proper}<br>Mixed Fraction:<br>${mixed}`;
+     }
+   </script>
+ <script src="navbar-loader.js"></script>
+</body>
+</html>

@@ -17,56 +17,48 @@
   gtag('config', 'G-PDDQ55B8QR');
 </script>
 
-</head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-  gtag('config', 'G-PDDQ55B8QR');
-</script>
+</head>
 <body>
   <header>
     <div class="nav">
-      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" >← Back to Home</span>
       <div class="logo">Calculator</div>
       <div></div>
     </div>
   </header>
   <div id="navbar"></div><div class="container">
-    <div class="section-title" data-i18n="auto" data-i18n="auto">Health Calculator</div>
+    <div class="section-title" data-i18n="auto" >Health Calculator</div>
     <div class="sub-title">BMI(体重指数)</div>
     <div class="input-row">
-      <input type="number" id="bmi_weight" placeholder="Weight(kg)" min="0" step="any" data-i18n="auto" data-i18n="auto">
-      <input type="number" id="bmi_height" placeholder="Height(cm)" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="bmi_weight" placeholder="Weight(kg)" min="0" step="any" data-i18n="auto" >
+      <input type="number" id="bmi_height" placeholder="Height(cm)" min="0" step="any" data-i18n="auto" >
     </div>
-    <button class="calc-btn" onclick="calcBMI()" data-i18n="auto" data-i18n="auto">CalculateBMI</button>
+    <button class="calc-btn" onclick="calcBMI()" data-i18n="auto" >CalculateBMI</button>
     <div class="result" id="result1"></div>
     <div class="sub-title">基础代谢率 BMR</div>
     <div class="input-row">
-      <input type="number" id="bmr_weight" placeholder="Weight(kg)" min="0" step="any" data-i18n="auto" data-i18n="auto">
-      <input type="number" id="bmr_height" placeholder="Height(cm)" min="0" step="any" data-i18n="auto" data-i18n="auto">
-      <input type="number" id="bmr_age" placeholder="Age" min="0" step="1" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="bmr_weight" placeholder="Weight(kg)" min="0" step="any" data-i18n="auto" >
+      <input type="number" id="bmr_height" placeholder="Height(cm)" min="0" step="any" data-i18n="auto" >
+      <input type="number" id="bmr_age" placeholder="Age" min="0" step="1" data-i18n="auto" >
       <select id="bmr_gender">
-        <option value="male" data-i18n="auto" data-i18n="auto">Male</option>
-        <option value="female" data-i18n="auto" data-i18n="auto">Female</option>
+        <option value="male" data-i18n="auto" >Male</option>
+        <option value="female" data-i18n="auto" >Female</option>
       </select>
     </div>
-    <button class="calc-btn" onclick="calcBMR()" data-i18n="auto" data-i18n="auto">CalculateBMR</button>
+    <button class="calc-btn" onclick="calcBMR()" data-i18n="auto" >CalculateBMR</button>
     <div class="result" id="result2"></div>
     <div class="sub-title">Daily Caloric Requirements TDEE</div>
     <div class="input-row">
-      <input type="number" id="tdee_bmr" placeholder="Basal Metabolic Rate BMR" min="0" step="any" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="tdee_bmr" placeholder="Basal Metabolic Rate BMR" min="0" step="any" data-i18n="auto" >
       <select id="tdee_activity">
-        <option value="1.2" data-i18n="auto" data-i18n="auto">Sedentary/very rarely Sports(1.2)</option>
-        <option value="1.375" data-i18n="auto" data-i18n="auto">Light Activity/1-3day Sports(1.375)</option>
-        <option value="1.55" data-i18n="auto" data-i18n="auto">Moderate Activity/3-5day Sports(1.55)</option>
-        <option value="1.725" data-i18n="auto" data-i18n="auto">Heavy Activity/6-7day Sports(1.725)</option>
-        <option value="1.9" data-i18n="auto" data-i18n="auto">Very Active/Physical Labor or High Intensity Training(1.9)</option>
+        <option value="1.2" data-i18n="auto" >Sedentary/very rarely Sports(1.2)</option>
+        <option value="1.375" data-i18n="auto" >Light Activity/1-3day Sports(1.375)</option>
+        <option value="1.55" data-i18n="auto" >Moderate Activity/3-5day Sports(1.55)</option>
+        <option value="1.725" data-i18n="auto" >Heavy Activity/6-7day Sports(1.725)</option>
+        <option value="1.9" data-i18n="auto" >Very Active/Physical Labor or High Intensity Training(1.9)</option>
       </select>
     </div>
-    <button class="calc-btn" onclick="calcTDEE()" data-i18n="auto" data-i18n="auto">CalculateTDEE</button>
+    <button class="calc-btn" onclick="calcTDEE()" data-i18n="auto" >CalculateTDEE</button>
     <div class="result" id="result3"></div>
   <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
    <!-- Load Footer --><script src="footer-loader.js"></script>

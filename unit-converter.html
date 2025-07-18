@@ -19,39 +19,31 @@
   gtag('config', 'G-PDDQ55B8QR');
 </script>
 
-</head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-  gtag('config', 'G-PDDQ55B8QR');
-</script>
+</head>
 <body>
   <header>
     <div class="nav">
-      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="unit.back" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="unit.back" data-i18n="auto" >← Back to Home</span>
       <div class="logo">Calculator</div>
       <div></div>
     </div>
   </header>
   <div id="navbar"></div><div class="container">
-    <div class="section-title" data-i18n="unit.title" data-i18n="auto" data-i18n="auto">Unit Converter</div>
+    <div class="section-title" data-i18n="unit.title" data-i18n="auto" >Unit Converter</div>
     <div class="input-row">
       <select id="category" onchange="renderUnits()">
-        <option value="length" data-i18n="auto" data-i18n="auto">Length</option>
-        <option value="mass" data-i18n="auto" data-i18n="auto">Mass</option>
-        <option value="volume" data-i18n="auto" data-i18n="auto">Volume</option>
-        <option value="area" data-i18n="auto" data-i18n="auto">Area</option>
-        <option value="temperature" data-i18n="auto" data-i18n="auto">Temperature</option>
-        <option value="speed" data-i18n="auto" data-i18n="auto">Speed</option>
+        <option value="length" data-i18n="auto" >Length</option>
+        <option value="mass" data-i18n="auto" >Mass</option>
+        <option value="volume" data-i18n="auto" >Volume</option>
+        <option value="area" data-i18n="auto" >Area</option>
+        <option value="temperature" data-i18n="auto" >Temperature</option>
+        <option value="speed" data-i18n="auto" >Speed</option>
       </select>
-      <input type="number" id="inputValue" placeholder="enter value" step="any" data-i18n="unit.input" data-i18n="auto" data-i18n="auto">
+      <input type="number" id="inputValue" placeholder="enter value" step="any" data-i18n="unit.input" data-i18n="auto" >
       <select id="fromUnit"></select>
       <select id="toUnit"></select>
     </div>
-    <button class="calc-btn" onclick="convertUnit()" data-i18n="unit.convert" data-i18n="auto" data-i18n="auto">换算</button>
+    <button class="calc-btn" onclick="convertUnit()" data-i18n="unit.convert" data-i18n="auto" >换算</button>
     <div class="result" id="result"></div>
     <!-- Recommendation Area --> <div class="recommend-area"></div>
   </div>
@@ -166,8 +158,8 @@ gtag('js', new Date());
       const inputUnit = document.getElementById('fromUnit');
       const outputUnit = document.getElementById('toUnit');
       // 以length为例
-      inputUnit.innerHTML = units.length.map(u => `<option value="${u.value}" data-i18n="auto" data-i18n="auto">${u[lang] || u.name}</option>`).join('');
-      outputUnit.innerHTML = units.length.map(u => `<option value="${u.value}" data-i18n="auto" data-i18n="auto">${u[lang] || u.name}</option>`).join('');
+      inputUnit.innerHTML = units.length.map(u => `<option value="${u.value}" data-i18n="auto" >${u[lang] || u.name}</option>`).join('');
+      outputUnit.innerHTML = units.length.map(u => `<option value="${u.value}" data-i18n="auto" >${u[lang] || u.name}</option>`).join('');
     }
     document.addEventListener('DOMContentLoaded', renderUnitConverterI18n);
   </script>

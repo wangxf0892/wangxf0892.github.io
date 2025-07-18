@@ -17,35 +17,27 @@
   gtag('config', 'G-PDDQ55B8QR');
 </script>
 
-</head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-  gtag('config', 'G-PDDQ55B8QR');
-</script>
+</head>
 <body>
   <header>
     <div class="nav">
-      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" >← Back to Home</span>
       <div class="logo">Calculator</div>
       <div></div>
     </div>
   </header>
   <div id="navbar"></div><div class="container">
-    <div class="section-title" data-i18n="auto" data-i18n="auto">Plane Geometry Calculator</div>
+    <div class="section-title" data-i18n="auto" >Plane Geometry Calculator</div>
     <div class="input-row">
       <select id="shape" onchange="renderInputs()">
-        <option value="square" data-i18n="auto" data-i18n="auto">Square</option>
-        <option value="parallelogram" data-i18n="auto" data-i18n="auto">Parallelogram</option>
-        <option value="trapezoid" data-i18n="auto" data-i18n="auto">Trapezoid</option>
-        <option value="ellipse" data-i18n="auto" data-i18n="auto">Ellipse</option>
+        <option value="square" data-i18n="auto" >Square</option>
+        <option value="parallelogram" data-i18n="auto" >Parallelogram</option>
+        <option value="trapezoid" data-i18n="auto" >Trapezoid</option>
+        <option value="ellipse" data-i18n="auto" >Ellipse</option>
       </select>
       <div id="inputs" class="input-group"></div>
     </div>
-    <button class="calc-btn" onclick="calcPlaneGeometry()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <button class="calc-btn" onclick="calcPlaneGeometry()" data-i18n="auto" >Calculate</button>
     <div class="result" id="result"></div>
   <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
    <!-- Load Footer --><script src="footer-loader.js"></script>
@@ -55,20 +47,20 @@ gtag('js', new Date());
       const shape = document.getElementById('shape').value;
       let html = '';
       if (shape === 'square') {
-        html += '<input type="number" id="square_a" placeholder="Side Length a" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="square_a" placeholder="Side Length a" min="0" step="any" data-i18n="auto" >';
       } else if (shape === 'parallelogram') {
-        html += '<input type="number" id="para_a" placeholder="Base a" min="0" step="any" data-i18n="auto" data-i18n="auto">';
-        html += '<input type="number" id="para_h" placeholder="Height h" min="0" step="any" data-i18n="auto" data-i18n="auto">';
-        html += '<input type="number" id="para_b" placeholder="Another side b(Optional)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="para_a" placeholder="Base a" min="0" step="any" data-i18n="auto" >';
+        html += '<input type="number" id="para_h" placeholder="Height h" min="0" step="any" data-i18n="auto" >';
+        html += '<input type="number" id="para_b" placeholder="Another side b(Optional)" min="0" step="any" data-i18n="auto" >';
       } else if (shape === 'trapezoid') {
-        html += '<input type="number" id="trap_a" placeholder="Top Base a" min="0" step="any" data-i18n="auto" data-i18n="auto">';
-        html += '<input type="number" id="trap_b" placeholder="Bottom Base b" min="0" step="any" data-i18n="auto" data-i18n="auto">';
-        html += '<input type="number" id="trap_h" placeholder="Height h" min="0" step="any" data-i18n="auto" data-i18n="auto">';
-        html += '<input type="number" id="trap_c" placeholder="Slant Side c(Optional)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
-        html += '<input type="number" id="trap_d" placeholder="Slant Side d(Optional)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="trap_a" placeholder="Top Base a" min="0" step="any" data-i18n="auto" >';
+        html += '<input type="number" id="trap_b" placeholder="Bottom Base b" min="0" step="any" data-i18n="auto" >';
+        html += '<input type="number" id="trap_h" placeholder="Height h" min="0" step="any" data-i18n="auto" >';
+        html += '<input type="number" id="trap_c" placeholder="Slant Side c(Optional)" min="0" step="any" data-i18n="auto" >';
+        html += '<input type="number" id="trap_d" placeholder="Slant Side d(Optional)" min="0" step="any" data-i18n="auto" >';
       } else if (shape === 'ellipse') {
-        html += '<input type="number" id="ell_a" placeholder="Long Semi-Axis a" min="0" step="any" data-i18n="auto" data-i18n="auto">';
-        html += '<input type="number" id="ell_b" placeholder="Short Semi-Axis b" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html += '<input type="number" id="ell_a" placeholder="Long Semi-Axis a" min="0" step="any" data-i18n="auto" >';
+        html += '<input type="number" id="ell_b" placeholder="Short Semi-Axis b" min="0" step="any" data-i18n="auto" >';
       }
       document.getElementById('inputs').innerHTML = html;
     }

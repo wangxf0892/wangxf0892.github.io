@@ -17,47 +17,39 @@
   gtag('config', 'G-PDDQ55B8QR');
 </script>
 
-</head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-  gtag('config', 'G-PDDQ55B8QR');
-</script>
+</head>
 <body>
   <header>
     <div class="nav">
-      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" >← Back to Home</span>
       <div class="logo">Calculator</div>
       <div></div>
     </div>
   </header>
   <div id="navbar"></div><div class="container">
-    <div class="section-title" data-i18n="auto" data-i18n="auto">Time Date Calculator</div>
+    <div class="section-title" data-i18n="auto" >Time Date Calculator</div>
     <div class="tab-row">
-      <button class="tab-btn active" id="tab-diff" onclick="switchTab('diff')" data-i18n="auto" data-i18n="auto">Date Difference Calculate</button>
-      <button class="tab-btn" id="tab-addsub" onclick="switchTab('addsub')" data-i18n="auto" data-i18n="auto">Date Add/Subtract</button>
+      <button class="tab-btn active" id="tab-diff" onclick="switchTab('diff')" data-i18n="auto" >Date Difference Calculate</button>
+      <button class="tab-btn" id="tab-addsub" onclick="switchTab('addsub')" data-i18n="auto" >Date Add/Subtract</button>
     </div>
     <div id="panel-diff">
       <div class="input-row">
-        <input type="date" id="startDate" data-i18n="auto" data-i18n="auto">
-        <input type="date" id="endDate" data-i18n="auto" data-i18n="auto">
+        <input type="date" id="startDate" data-i18n="auto" >
+        <input type="date" id="endDate" data-i18n="auto" >
       </div>
-      <button class="calc-btn" onclick="calcDateDiff()" data-i18n="auto" data-i18n="auto">Calculate Day Difference</button>
+      <button class="calc-btn" onclick="calcDateDiff()" data-i18n="auto" >Calculate Day Difference</button>
       <div class="result" id="result-diff"></div>
     </div>
     <div id="panel-addsub" style="display:none;">
       <div class="input-row">
-        <input type="date" id="baseDate" data-i18n="auto" data-i18n="auto">
-        <input type="number" id="days" placeholder="Days" step="1" data-i18n="auto" data-i18n="auto">
+        <input type="date" id="baseDate" data-i18n="auto" >
+        <input type="number" id="days" placeholder="Days" step="1" data-i18n="auto" >
         <select id="addOrSub">
-          <option value="add" data-i18n="auto" data-i18n="auto">Add</option>
-          <option value="sub" data-i18n="auto" data-i18n="auto">Subtract</option>
+          <option value="add" data-i18n="auto" >Add</option>
+          <option value="sub" data-i18n="auto" >Subtract</option>
         </select>
       </div>
-      <button class="calc-btn" onclick="calcDateAddSub()" data-i18n="auto" data-i18n="auto">CalculateResultDate</button>
+      <button class="calc-btn" onclick="calcDateAddSub()" data-i18n="auto" >CalculateResultDate</button>
       <div class="result" id="result-addsub"></div>
     </div>
   <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>

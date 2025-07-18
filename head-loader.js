@@ -19,15 +19,7 @@ function loadHead(options = {}) {
   gtag('config', 'G-PDDQ55B8QR');
 </script>
 
-</head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-  gtag('config', 'G-PDDQ55B8QR');
-</script>';
+</head>';
       const headContent = tempDiv.querySelector('head');
       // 将head内容插入到当前文档head
       Array.from(headContent.children).forEach(node => {

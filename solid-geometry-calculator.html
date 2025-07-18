@@ -17,36 +17,28 @@
   gtag('config', 'G-PDDQ55B8QR');
 </script>
 
-</head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-  gtag('config', 'G-PDDQ55B8QR');
-</script>
+</head>
 <body>
   <header>
     <div class="nav">
-      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" >← Back to Home</span>
       <div class="logo">Calculator</div>
       <div></div>
     </div>
   </header>
   <div id="navbar"></div><div class="container">
-    <div class="section-title" data-i18n="auto" data-i18n="auto">Solid Geometry Calculator</div>
+    <div class="section-title" data-i18n="auto" >Solid Geometry Calculator</div>
     <div class="input-row">
       <select id="solidType" onchange="renderInputs()">
-        <option value="cuboid" data-i18n="auto" data-i18n="auto">Cuboid</option>
-        <option value="cube" data-i18n="auto" data-i18n="auto">Cube</option>
-        <option value="sphere" data-i18n="auto" data-i18n="auto">Sphere</option>
-        <option value="cylinder" data-i18n="auto" data-i18n="auto">Cylinder</option>
-        <option value="cone" data-i18n="auto" data-i18n="auto">Cone</option>
+        <option value="cuboid" data-i18n="auto" >Cuboid</option>
+        <option value="cube" data-i18n="auto" >Cube</option>
+        <option value="sphere" data-i18n="auto" >Sphere</option>
+        <option value="cylinder" data-i18n="auto" >Cylinder</option>
+        <option value="cone" data-i18n="auto" >Cone</option>
       </select>
       <div id="inputsArea"></div>
     </div>
-    <button class="calc-btn" onclick="calcSolid()" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <button class="calc-btn" onclick="calcSolid()" data-i18n="auto" >Calculate</button>
     <div class="result" id="result"></div>
   <!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
    <!-- Load Footer --><script src="footer-loader.js"></script>
@@ -56,19 +48,19 @@ gtag('js', new Date());
       const type = document.getElementById('solidType').value;
       let html = '';
       if (type === 'cuboid') {
-        html = '<input type="number" id="cuboid_l" placeholder="长(l)" min="0" step="any" data-i18n="auto" data-i18n="auto">' +
-               '<input type="number" id="cuboid_w" placeholder="宽(w)" min="0" step="any" data-i18n="auto" data-i18n="auto">' +
-               '<input type="number" id="cuboid_h" placeholder="高(h)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html = '<input type="number" id="cuboid_l" placeholder="长(l)" min="0" step="any" data-i18n="auto" >' +
+               '<input type="number" id="cuboid_w" placeholder="宽(w)" min="0" step="any" data-i18n="auto" >' +
+               '<input type="number" id="cuboid_h" placeholder="高(h)" min="0" step="any" data-i18n="auto" >';
       } else if (type === 'cube') {
-        html = '<input type="number" id="cube_a" placeholder="棱长(a)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html = '<input type="number" id="cube_a" placeholder="棱长(a)" min="0" step="any" data-i18n="auto" >';
       } else if (type === 'sphere') {
-        html = '<input type="number" id="sphere_r" placeholder="半径(r)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html = '<input type="number" id="sphere_r" placeholder="半径(r)" min="0" step="any" data-i18n="auto" >';
       } else if (type === 'cylinder') {
-        html = '<input type="number" id="cylinder_r" placeholder="底面半径(r)" min="0" step="any" data-i18n="auto" data-i18n="auto">' +
-               '<input type="number" id="cylinder_h" placeholder="高(h)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html = '<input type="number" id="cylinder_r" placeholder="底面半径(r)" min="0" step="any" data-i18n="auto" >' +
+               '<input type="number" id="cylinder_h" placeholder="高(h)" min="0" step="any" data-i18n="auto" >';
       } else if (type === 'cone') {
-        html = '<input type="number" id="cone_r" placeholder="底面半径(r)" min="0" step="any" data-i18n="auto" data-i18n="auto">' +
-               '<input type="number" id="cone_h" placeholder="高(h)" min="0" step="any" data-i18n="auto" data-i18n="auto">';
+        html = '<input type="number" id="cone_r" placeholder="底面半径(r)" min="0" step="any" data-i18n="auto" >' +
+               '<input type="number" id="cone_h" placeholder="高(h)" min="0" step="any" data-i18n="auto" >';
       }
       document.getElementById('inputsArea').innerHTML = html;
     }

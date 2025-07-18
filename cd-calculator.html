@@ -18,15 +18,7 @@
   gtag('config', 'G-PDDQ55B8QR');
 </script>
 
-</head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-  gtag('config', 'G-PDDQ55B8QR');
-</script>
+</head>
 <body>
   <div class="container">
     <header>
@@ -40,31 +32,31 @@ gtag('js', new Date());
           <h2>Deposit information</h2>
           <div class="input-group">
             <label for="principal">Principal (yuan):</label>
-            <input type="number" id="principal" placeholder="For example: 100000" step="1000" min="0" data-i18n="auto" data-i18n="auto">
+            <input type="number" id="principal" placeholder="For example: 100000" step="1000" min="0" data-i18n="auto" >
           </div>
           <div class="input-group">
             <label for="interestRate">yearInterest Rate (%):</label>
-            <input type="number" id="interestRate" placeholder="For example: 2.5" step="0.01" min="0" max="10" data-i18n="auto" data-i18n="auto">
+            <input type="number" id="interestRate" placeholder="For example: 2.5" step="0.01" min="0" max="10" data-i18n="auto" >
           </div>
           <div class="input-group">
             <label for="term">Deposit term:</label>
             <select id="term">
-              <option value="3" data-i18n="auto" data-i18n="auto">3 months</option>
-              <option value="6" data-i18n="auto" data-i18n="auto">6 months</option>
-              <option value="12" selected data-i18n="auto" data-i18n="auto">12 months</option>
-              <option value="24" data-i18n="auto" data-i18n="auto">24 months</option>
-              <option value="36" data-i18n="auto" data-i18n="auto">36 months</option>
-              <option value="60" data-i18n="auto" data-i18n="auto">60 months</option>
+              <option value="3" data-i18n="auto" >3 months</option>
+              <option value="6" data-i18n="auto" >6 months</option>
+              <option value="12" selected data-i18n="auto" >12 months</option>
+              <option value="24" data-i18n="auto" >24 months</option>
+              <option value="36" data-i18n="auto" >36 months</option>
+              <option value="60" data-i18n="auto" >60 months</option>
             </select>
           </div>
           <div class="input-group">
             <label for="interestType">Interest type:</label>
             <select id="interestType">
-              <option value="simple" data-i18n="auto" data-i18n="auto">Simple Interest</option>
-              <option value="compound" selected data-i18n="auto" data-i18n="auto">Compound Interest</option>
+              <option value="simple" data-i18n="auto" >Simple Interest</option>
+              <option value="compound" selected data-i18n="auto" >Compound Interest</option>
             </select>
           </div>
-          <button onclick="calculateCD()" class="calculate-btn" data-i18n="auto" data-i18n="auto">Calculate interest</button>
+          <button onclick="calculateCD()" class="calculate-btn" data-i18n="auto" >Calculate interest</button>
         </div>
 
         <div class="result-section" id="resultSection" style="display: none;">

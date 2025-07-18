@@ -18,34 +18,26 @@
   gtag('config', 'G-PDDQ55B8QR');
 </script>
 
-</head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-  gtag('config', 'G-PDDQ55B8QR');
-</script>
+</head>
 <body>
   <header>
     <div class="nav">
-      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" data-i18n="auto">← Back to Home</span>
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" >← Back to Home</span>
       <div class="logo">Calculator</div>
       <div></div>
     </div>
   </header>
   <div id="navbar"></div><div class="container">
-    <div class="section-title" data-i18n="physics.title" data-i18n="auto" data-i18n="auto">Physics Calculator</div>
+    <div class="section-title" data-i18n="physics.title" data-i18n="auto" >Physics Calculator</div>
     <div class="input-row">
       <select id="formula" onchange="renderInputs()">
-        <option value="speed" data-i18n="physics.speed" data-i18n="auto" data-i18n="auto">Speed = Distance / Time</option>
-        <option value="density" data-i18n="physics.density" data-i18n="auto" data-i18n="auto">Density = Mass / Volume</option>
-        <option value="work" data-i18n="physics.work" data-i18n="auto" data-i18n="auto">Work = Force × Distance</option>
+        <option value="speed" data-i18n="physics.speed" data-i18n="auto" >Speed = Distance / Time</option>
+        <option value="density" data-i18n="physics.density" data-i18n="auto" >Density = Mass / Volume</option>
+        <option value="work" data-i18n="physics.work" data-i18n="auto" >Work = Force × Distance</option>
       </select>
       <div id="inputs" class="input-group"></div>
     </div>
-    <button class="calc-btn" onclick="calcPhysics()" data-i18n="physics.calc" data-i18n="auto" data-i18n="auto">Calculate</button>
+    <button class="calc-btn" onclick="calcPhysics()" data-i18n="physics.calc" data-i18n="auto" >Calculate</button>
     <div class="result" id="result"></div>
     <div class="recommend-area"></div>
   </div>
@@ -58,14 +50,14 @@ gtag('js', new Date());
       let html = '';
       const t = window.I18N ? window.I18N.t : (k, f) => f || k;
       if (f === 'speed') {
-        html += `<input type="number" id="distance" placeholder="${t('physics.distance','Distance (m)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
-        html += `<input type="number" id="time" placeholder="${t('physics.time','Time (s)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
+        html += `<input type="number" id="distance" placeholder="${t('physics.distance','Distance (m)')}" min="0" step="any" data-i18n="auto" >`;
+        html += `<input type="number" id="time" placeholder="${t('physics.time','Time (s)')}" min="0" step="any" data-i18n="auto" >`;
       } else if (f === 'density') {
-        html += `<input type="number" id="mass" placeholder="${t('physics.mass','Mass (kg)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
-        html += `<input type="number" id="volume" placeholder="${t('physics.volume','Volume (m³)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
+        html += `<input type="number" id="mass" placeholder="${t('physics.mass','Mass (kg)')}" min="0" step="any" data-i18n="auto" >`;
+        html += `<input type="number" id="volume" placeholder="${t('physics.volume','Volume (m³)')}" min="0" step="any" data-i18n="auto" >`;
       } else if (f === 'work') {
-        html += `<input type="number" id="force" placeholder="${t('physics.force','Force (N)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
-        html += `<input type="number" id="distance2" placeholder="${t('physics.distance2','Distance (m)')}" min="0" step="any" data-i18n="auto" data-i18n="auto">`;
+        html += `<input type="number" id="force" placeholder="${t('physics.force','Force (N)')}" min="0" step="any" data-i18n="auto" >`;
+        html += `<input type="number" id="distance2" placeholder="${t('physics.distance2','Distance (m)')}" min="0" step="any" data-i18n="auto" >`;
       }
       document.getElementById('inputs').innerHTML = html;
     }

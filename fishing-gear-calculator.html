@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fishing Gear Value Calculator - Best Fishing Equipment for Your Budget</title>
+    <meta name="description" content="Calculate the best fishing gear value for your budget. Get personalized recommendations for fishing hats, chairs, rods, and accessories for lake fishing and deep sea fishing. Perfect for anglers and fishing enthusiasts.">
+    <meta name="keywords" content="fishing gear calculator, fishing equipment, fishing budget, fishing hat, fishing chair, lake fishing, deep sea fishing, fishing accessories, angler gear, fishing value">
+    <meta name="author" content="Fishing Gear Calculator">
+    <meta property="og:title" content="Fishing Gear Value Calculator - Best Equipment for Your Budget">
+    <meta property="og:description" content="Get personalized fishing gear recommendations based on your budget and fishing location. Perfect for lake and deep sea fishing.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PDDQ55B8QR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PDDQ55B8QR');
+</script>
+
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <span class="back-link" onclick="window.location.href='index.html'" data-i18n="auto" >← Back to Home</span>
+      <div class="logo">Calculator</div>
+      <div></div>
+    </div>
+  </header>
+  <div id="navbar"></div>
+    <div class="fishing-calc-container">
+        <h1>🎣 Fishing Gear Value Calculator</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 24px;">
+            Get the best fishing equipment recommendations for your budget and fishing location
+        </p>
+        
+        <form id="fishingForm">
+            <div class="input-group">
+                <label for="budget">Your Budget (USD):</label>
+                <input type="range" id="budgetSlider" class="budget-slider" min="50" max="1000" value="200" step="10">
+                <div class="budget-display" id="budgetDisplay">$200</div>
+            </div>
+            
+            <div class="input-group">
+                <label for="fishingType">Fishing Location:</label>
+                <select id="fishingType" required>
+                    <option value="lake">Lake Fishing</option>
+                    <option value="deepsea">Deep Sea Fishing</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="experience">Experience Level:</label>
+                <select id="experience" required>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+            </div>
+            
+            <button type="button" class="calculate-btn" onclick="calculateGear()">
+                🎯 Get Gear Recommendations
+            </button>
+        </form>
+        
+        <div id="recommendations" class="gear-recommendations" style="display: none;">
+            <h2>🎣 Recommended Fishing Gear</h2>
+            <div id="gearList"></div>
+            
+            <div class="total-section">
+                <div class="total-price" id="totalPrice"></div>
+                <div class="budget-status" id="budgetStatus"></div>
+            </div>
+            
+            <div class="fishing-tips">
+                <h4>💡 Pro Fishing Tips</h4>
+                <ul id="fishingTips"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Budget slider functionality
+        document.getElementById('budgetSlider').addEventListener('input', function() {
+            document.getElementById('budgetDisplay').textContent = '$' + this.value;
+        });
+
+        // Fishing gear database
+        const gearDatabase = {
+            lake: {
+                beginner: {
+                    hat: [
+                        { name: "Basic Fishing Cap", price: 15, description: "UV protection, adjustable fit" },
+                        { name: "Wide Brim Fishing Hat", price: 25, description: "Full sun protection" },
+                        { name: "Premium Fishing Hat", price: 45, description: "Moisture-wicking, UPF 50+" }
+                    ],
+                    chair: [
+                        { name: "Portable Fishing Chair", price: 30, description: "Lightweight, foldable" },
+                        { name: "Comfort Fishing Chair", price: 60, description: "Padded seat, backrest" },
+                        { name: "Premium Fishing Chair", price: 120, description: "Swivel, cup holder, storage" }
+                    ],
+                    rod: [
+                        { name: "Starter Fishing Rod", price: 25, description: "6ft, medium action" },
+                        { name: "Quality Fishing Rod", price: 50, description: "7ft, sensitive tip" },
+                        { name: "Professional Rod", price: 100, description: "Carbon fiber, premium guides" }
+                    ],
+                    accessories: [
+                        { name: "Basic Tackle Box", price: 20, description: "Essential lures and hooks" },
+                        { name: "Complete Tackle Set", price: 40, description: "Variety of baits and tools" },
+                        { name: "Premium Tackle Kit", price: 80, description: "Professional grade equipment" }
+                    ]
+                },
+                intermediate: {
+                    hat: [
+                        { name: "Performance Fishing Hat", price: 35, description: "Moisture-wicking, breathable" },
+                        { name: "Premium UV Hat", price: 55, description: "UPF 50+, quick-dry" }
+                    ],
+                    chair: [
+                        { name: "Comfort Plus Chair", price: 80, description: "Padded, adjustable height" },
+                        { name: "Premium Fishing Chair", price: 150, description: "Swivel, storage, cup holder" }
+                    ],
+                    rod: [
+                        { name: "Performance Rod", price: 75, description: "Sensitive, durable" },
+                        { name: "Professional Rod", price: 150, description: "Carbon fiber, premium components" }
+                    ],
+                    accessories: [
+                        { name: "Advanced Tackle Kit", price: 60, description: "Professional lures and tools" },
+                        { name: "Premium Accessories", price: 120, description: "High-end fishing gear" }
+                    ]
+                },
+                advanced: {
+                    hat: [
+                        { name: "Elite Fishing Hat", price: 65, description: "Premium materials, perfect fit" },
+                        { name: "Professional UV Hat", price: 85, description: "Maximum protection, comfort" }
+                    ],
+                    chair: [
+                        { name: "Elite Fishing Chair", price: 200, description: "Premium comfort, features" },
+                        { name: "Professional Chair", price: 300, description: "Top-tier fishing chair" }
+                    ],
+                    rod: [
+                        { name: "Elite Fishing Rod", price: 200, description: "Premium carbon fiber" },
+                        { name: "Professional Rod", price: 350, description: "Tournament-grade equipment" }
+                    ],
+                    accessories: [
+                        { name: "Elite Tackle System", price: 150, description: "Professional grade everything" },
+                        { name: "Tournament Kit", price: 250, description: "Competition-ready equipment" }
+                    ]
+                }
+            },
+            deepsea: {
+                beginner: {
+                    hat: [
+                        { name: "Marine Fishing Hat", price: 25, description: "Saltwater resistant" },
+                        { name: "Offshore Cap", price: 40, description: "Wind-resistant, UV protection" }
+                    ],
+                    chair: [
+                        { name: "Boat Fishing Chair", price: 80, description: "Marine-grade, stable" },
+                        { name: "Offshore Chair", price: 150, description: "Heavy-duty, comfortable" }
+                    ],
+                    rod: [
+                        { name: "Offshore Rod", price: 80, description: "Heavy action, saltwater ready" },
+                        { name: "Deep Sea Rod", price: 150, description: "Professional offshore rod" }
+                    ],
+                    accessories: [
+                        { name: "Marine Tackle Kit", price: 60, description: "Saltwater lures and tools" },
+                        { name: "Offshore Accessories", price: 120, description: "Professional marine gear" }
+                    ]
+                },
+                intermediate: {
+                    hat: [
+                        { name: "Professional Marine Hat", price: 55, description: "Premium saltwater protection" },
+                        { name: "Offshore Elite Hat", price: 75, description: "Maximum marine protection" }
+                    ],
+                    chair: [
+                        { name: "Professional Boat Chair", price: 200, description: "Marine-grade comfort" },
+                        { name: "Offshore Elite Chair", price: 350, description: "Premium offshore chair" }
+                    ],
+                    rod: [
+                        { name: "Professional Offshore Rod", price: 200, description: "Heavy-duty, sensitive" },
+                        { name: "Elite Deep Sea Rod", price: 400, description: "Tournament offshore rod" }
+                    ],
+                    accessories: [
+                        { name: "Professional Marine Kit", price: 150, description: "High-end saltwater gear" },
+                        { name: "Offshore Elite Kit", price: 300, description: "Premium marine equipment" }
+                    ]
+                },
+                advanced: {
+                    hat: [
+                        { name: "Elite Marine Hat", price: 95, description: "Ultimate saltwater protection" },
+                        { name: "Professional Offshore Hat", price: 125, description: "Tournament-grade marine hat" }
+                    ],
+                    chair: [
+                        { name: "Elite Boat Chair", price: 450, description: "Ultimate marine comfort" },
+                        { name: "Professional Offshore Chair", price: 600, description: "Tournament-grade chair" }
+                    ],
+                    rod: [
+                        { name: "Elite Offshore Rod", price: 500, description: "Ultimate deep sea rod" },
+                        { name: "Professional Deep Sea Rod", price: 800, description: "Tournament offshore rod" }
+                    ],
+                    accessories: [
+                        { name: "Elite Marine System", price: 400, description: "Ultimate saltwater gear" },
+                        { name: "Professional Offshore Kit", price: 600, description: "Tournament marine equipment" }
+                    ]
+                }
+            }
+        };
+
+        // Fishing tips database
+        const fishingTips = {
+            lake: [
+                "Early morning and late evening are the best times for lake fishing",
+                "Use live bait like worms or minnows for better results",
+                "Check local fishing regulations and get proper licenses",
+                "Look for structure like rocks, logs, or weed beds where fish hide",
+                "Keep your fishing line clean and replace it regularly"
+            ],
+            deepsea: [
+                "Always check weather conditions before offshore fishing",
+                "Use heavier tackle and stronger lines for deep sea fishing",
+                "Bring plenty of water and sun protection",
+                "Consider hiring a guide for your first deep sea trip",
+                "Learn proper fish handling and release techniques"
+            ]
+        };
+
+        function calculateGear() {
+            const budget = parseInt(document.getElementById('budgetSlider').value);
+            const fishingType = document.getElementById('fishingType').value;
+            const experience = document.getElementById('experience').value;
+            
+            const gearData = gearDatabase[fishingType][experience];
+            let totalCost = 0;
+            let recommendations = [];
+            
+            // Select gear for each category
+            Object.keys(gearData).forEach(category => {
+                const items = gearData[category];
+                // Select the best item that fits within remaining budget
+                let selectedItem = null;
+                for (let item of items) {
+                    if (totalCost + item.price <= budget) {
+                        selectedItem = item;
+                    }
+                }
+                if (selectedItem) {
+                    recommendations.push({
+                        category: category,
+                        item: selectedItem
+                    });
+                    totalCost += selectedItem.price;
+                }
+            });
+            
+            // Display recommendations
+            displayRecommendations(recommendations, totalCost, budget, fishingType);
+        }
+
+        function displayRecommendations(recommendations, totalCost, budget, fishingType) {
+            const gearList = document.getElementById('gearList');
+            const totalPrice = document.getElementById('totalPrice');
+            const budgetStatus = document.getElementById('budgetStatus');
+            const fishingTipsList = document.getElementById('fishingTips');
+            
+            // Clear previous content
+            gearList.innerHTML = '';
+            
+            // Display each category
+            const categories = {
+                hat: '🎩 Fishing Hat',
+                chair: '🪑 Fishing Chair',
+                rod: '🎣 Fishing Rod',
+                accessories: '🛠️ Accessories'
+            };
+            
+            recommendations.forEach(rec => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'gear-category';
+                categoryDiv.innerHTML = `
+                    <h3>${categories[rec.category]}</h3>
+                    <div class="gear-item">
+                        <span class="gear-name">${rec.item.name}</span>
+                        <span class="gear-price">$${rec.item.price}</span>
+                    </div>
+                    <p style="color: #666; font-size: 14px; margin: 8px 0 0 0;">${rec.item.description}</p>
+                `;
+                gearList.appendChild(categoryDiv);
+            });
+            
+            // Display total
+            totalPrice.textContent = `Total: $${totalCost}`;
+            
+            // Budget status
+            if (totalCost <= budget) {
+                budgetStatus.textContent = `✅ Within budget ($${budget - totalCost} remaining)`;
+                budgetStatus.className = 'budget-status budget-ok';
+            } else {
+                budgetStatus.textContent = `⚠️ Over budget by $${totalCost - budget}`;
+                budgetStatus.className = 'budget-status budget-over';
+            }
+            
+            // Display fishing tips
+            const tips = fishingTips[fishingType];
+            fishingTipsList.innerHTML = '';
+            tips.forEach(tip => {
+                const li = document.createElement('li');
+                li.textContent = tip;
+                fishingTipsList.appendChild(li);
+            });
+            
+            // Show recommendations
+            document.getElementById('recommendations').style.display = 'block';
+        }
+    </script>
+<!-- Recommendation Area --> <div class="recommend-area"></div>   </div>   <script src="recommend-calculators.js">  </script>
+   <!-- Load Footer --><script src="footer-loader.js"></script>
+   <script src="footer-i18n.js"></script>
+   <script>
+     function parseSet(str) {
+       return new Set(str.split(',').map(s => s.trim()).filter(s => s !== ''));
+     }
+     function calcSet(type) {
+       const setA = parseSet(document.getElementById('setA').value);
+       const setB = parseSet(document.getElementById('setB').value);
+       if (setA.size === 0 || setB.size === 0) {
+         document.getElementById('result').textContent = 'Please enter two non-empty sets';
+         return;
+       }
+       let resultSet;
+       switch(type) {
+         case 'union':
+           resultSet = new Set([...setA, ...setB]);
+           showResult('A ∪ B = {' + Array.from(resultSet).join(', ') + '}');
+           break;
+         case 'intersection':
+           resultSet = new Set([...setA].filter(x => setB.has(x)));
+           showResult('A ∩ B = {' + Array.from(resultSet).join(', ') + '}');
+           break;
+         case 'difference':
+           resultSet = new Set([...setA].filter(x => !setB.has(x)));
+           showResult('A - B = {' + Array.from(resultSet).join(', ') + '}');
+           break;
+         case 'symdiff':
+           resultSet = new Set([...setA, ...setB]);
+           for (let x of setA) if (setB.has(x)) resultSet.delete(x);
+           for (let x of setB) if (setA.has(x)) resultSet.delete(x);
+           showResult('A △ B = {' + Array.from(resultSet).join(', ') + '}');
+           break;
+       }
+     }
+     function showResult(str) {
+       document.getElementById('result').textContent = str;
+     }
+   </script>
+ <script src="navbar-loader.js"></script></body>
+</html> 
